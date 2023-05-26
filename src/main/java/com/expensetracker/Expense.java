@@ -1,3 +1,5 @@
+package com.expensetracker;
+
 import java.util.Date;
 import java.io.Serializable;
 
