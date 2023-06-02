@@ -1,5 +1,3 @@
-com\expensetracker\models\ToastContainer.class
-com\expensetracker\models\MetricsContainer.class
 com\expensetracker\controllers\MainViewController.class
 com\expensetracker\Main.class
 com\expensetracker\controllers\MainViewController$1.class

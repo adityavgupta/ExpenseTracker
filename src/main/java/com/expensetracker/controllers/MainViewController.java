@@ -39,7 +39,7 @@ public class MainViewController implements Initializable {
             @Override
             public void start(Stage stage) {
             }
-        }.getHostServices().showDocument("https://github.com/edencoding/javafx-ui/");
+        }.getHostServices().showDocument("https://github.com/adityavgupta/ExpenseTracker");
         event.consume();
     }
 

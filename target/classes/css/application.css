@@ -10,8 +10,8 @@
 
 .background-pane {
     -fx-background-color: -bg-gradient;
-    -fx-padding: 10px 15px;
-    -fx-background-radius: 10px;
+    /* -fx-padding: 10px 15px; */
+    /* -fx-background-radius: 10px; */
 }
 
 .shadow-pane {
@@ -21,7 +21,7 @@
 
 .content-pane {
     -fx-background-color: #ffffff22;
-    -fx-background-radius: 10px;
+    /* -fx-background-radius: 10px; */
     -fx-spacing: 35px;
     -fx-padding: 25px;
     -fx-alignment: center;
@@ -33,7 +33,7 @@
 
 .highlight-rectangle {
     -fx-background-color: derive(-primary, 50%);
-    -fx-background-radius: 5px;
+    /* -fx-background-radius: 5px; */
 }
 
 .label {
@@ -50,7 +50,7 @@
 
 .drag-allowed {
     -fx-background-color: linear-gradient(from 25px 25px to 500px 300px, #0052D4, #4364F7);
-    -fx-background-radius: 10px;
+    /* -fx-background-radius: 10px; */
 }
 
 .title-text {
@@ -70,7 +70,7 @@
     -fx-font-weight: bold;
     -fx-font-size: 14;
     -fx-background-color: linear-gradient(to right, #0f0c2977, #302b6377, #24243e77);
-    -fx-background-radius: 10px;
+    /* -fx-background-radius: 10px; */
     -fx-padding: 10px;
     -fx-alignment: center;
 
@@ -113,7 +113,7 @@
 .background-pane {
     -fx-background-color: -bg-gradient;
     -fx-padding: 10px 15px;
-    -fx-background-radius: 10px;
+    /* -fx-background-radius: 10px; */
 }
 
 .shadow-pane {
@@ -123,7 +123,7 @@
 
 .content-pane {
     -fx-background-color: #ffffff22;
-    -fx-background-radius: 10px;
+    /* -fx-background-radius: 10px; */
     -fx-spacing: 35px;
     -fx-padding: 25px;
     -fx-alignment: center;
@@ -143,7 +143,7 @@
 
 .drag-allowed {
     -fx-background-color: linear-gradient(from 25px 25px to 500px 300px, #0052D4, #4364F7);
-    -fx-background-radius: 10px;
+    /* -fx-background-radius: 10px; */
 }
 
 .title-text {
@@ -163,7 +163,7 @@
     -fx-font-weight: bold;
     -fx-font-size: 14;
     -fx-background-color: linear-gradient(to right, #0f0c2977, #302b6377, #24243e77);
-    -fx-background-radius: 10px;
+    /* -fx-background-radius: 10px; */
     -fx-padding: 10px;
     -fx-alignment: center;
 

@@ -42,9 +42,9 @@ public class ExpenseTrackerApp extends Application {
         scene.setFill(Color.TRANSPARENT);
 
         primaryStage.setScene(scene);
-        primaryStage.initStyle(StageStyle.TRANSPARENT);
+//        primaryStage.initStyle(StageStyle.TRANSPARENT);
 
-        primaryStage.getIcons().add(new Image(getClass().getResourceAsStream("/img/EdenCodingIcon.png")));
+        primaryStage.getIcons().add(new Image(getClass().getResourceAsStream("/img/logo.png")));
 
         primaryStage.setScene(scene);
         primaryStage.show();
