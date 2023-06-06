@@ -24,22 +24,6 @@ import java.util.regex.Pattern;
 public class MainViewController implements Initializable {
 
     @FXML
-    private void handleExitButtonClicked(ActionEvent event) {
-        Platform.exit();
-        event.consume();
-    }
-
-    @FXML
-    private void handleGitButtonClicked(ActionEvent event) {
-        new Application() {
-            @Override
-            public void start(Stage stage) {
-            }
-        }.getHostServices().showDocument("https://github.com/adityavgupta/ExpenseTracker");
-        event.consume();
-    }
-
-    @FXML
     private ChoiceBox<String> creditDebitDropdown;
 
     private String[] CreditDebit = {"Credit","Debit"};
@@ -61,6 +45,21 @@ public class MainViewController implements Initializable {
 
         TextFormatter<String> numFormatter = new TextFormatter<>(numFilter);
         inputAmount.setTextFormatter(numFormatter);
+    }
+
+    @FXML
+    private void handleGitButtonClicked(ActionEvent event) {
+        new Application() {
+            @Override
+            public void start(Stage stage) {
+            }
+        }.getHostServices().showDocument("https://github.com/adityavgupta/ExpenseTracker");
+        event.consume();
+    }
+
+    @FXML
+    private void submit(ActionEvent event) {
+        System.out.println("Button Clicked");
     }
 
 }

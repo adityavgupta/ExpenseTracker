@@ -120,7 +120,14 @@
                         </TextField>
                      </children>
                   </AnchorPane>
-                  <AnchorPane VBox.vgrow="ALWAYS" />
+                  <AnchorPane fx:id="submitPane" VBox.vgrow="ALWAYS">
+                     <children>
+                        <Button fx:id="submitButton" layoutX="267.0" layoutY="10.0" mnemonicParsing="false" onAction="#submit" text="Submit" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="267.0" AnchorPane.rightAnchor="267.0" AnchorPane.topAnchor="20.0">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Button>
+                     </children></AnchorPane>
                </children>
             </VBox>
             <VBox HBox.hgrow="ALWAYS" />

@@ -3,7 +3,7 @@
     -hlight-gradient: linear-gradient(to bottom, #1dbbdd44, #93f9b944);
 
     -primary: #81c48355;
-    -secondary: #375FCB;
+    -secondary: #5dbea3;
     -tertiary: #fcc200;
     -tertiary-armed: #FDDD71;
 }
@@ -82,7 +82,7 @@
 .button {
     -height: 20;
     -width: 20;
-    -fill: white;
+    -fill: -secondary;
 
     -fx-background-color: -fill;
     -fx-min-height: -height;
