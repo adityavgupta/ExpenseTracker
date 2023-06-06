@@ -12,7 +12,7 @@ import java.util.Date;
 public class ExpenseMap {
     
     //Fields
-    public static TreeMap<Long, Expense> expenseMap;
+    private static TreeMap<Long, Expense> expenseMap;
     private static final String filePath = System.getProperty("user.dir") + "\\data.bin";
 
     //Constructor

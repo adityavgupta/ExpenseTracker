@@ -9,23 +9,19 @@ import javafx.beans.property.StringProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
 import javafx.stage.Stage;
+import javafx.scene.input.KeyCode;
+import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.TextField;
+import javafx.scene.control.TextFormatter;
+import javafx.scene.control.TextFormatter.Change;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.function.UnaryOperator;
+import java.util.regex.Pattern;
 
 public class MainViewController implements Initializable {
-    public TableView<Order> exampleTable;
-    public TableColumn<Order, Integer> orderIdColumn;
-    public TableColumn<Order, String> stateColumn;
-    public TableColumn<Order, String> cityColumn;
-
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
-
-    }
 
     @FXML
     private void handleExitButtonClicked(ActionEvent event) {
@@ -43,51 +39,28 @@ public class MainViewController implements Initializable {
         event.consume();
     }
 
-    public static class Order {
-        IntegerProperty id;
-        StringProperty state;
-        StringProperty city;
+    @FXML
+    private ChoiceBox<String> creditDebitDropdown;
 
-        public Order(Integer id, String state, String city) {
-            this.id = new SimpleIntegerProperty(id);
-            this.state = new SimpleStringProperty(state);
-            this.city = new SimpleStringProperty(city);
-        }
+    private String[] CreditDebit = {"Credit","Debit"};
 
-        public int getId() {
-            return id.get();
-        }
+    @FXML
+    private TextField inputAmount;
 
-        public void setId(int id) {
-            this.id.set(id);
-        }
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        creditDebitDropdown.getItems().addAll(CreditDebit);
+        UnaryOperator<Change> numFilter = change -> {
+            String newText = change.getControlNewText();
+            Boolean b = Pattern.matches("[\\d\\.]*", newText);
+            if(b) {
+                return change;
+            }
+            return null;
+        };
 
-        public IntegerProperty idProperty() {
-            return id;
-        }
-
-        public String getState() {
-            return state.get();
-        }
-
-        public void setState(String state) {
-            this.state.set(state);
-        }
-
-        public StringProperty stateProperty() {
-            return state;
-        }
-
-        public String getCity() {
-            return city.get();
-        }
-
-        public void setCity(String city) {
-            this.city.set(city);
-        }
-
-        public StringProperty cityProperty() {
-            return city;
-        }
+        TextFormatter<String> numFormatter = new TextFormatter<>(numFilter);
+        inputAmount.setTextFormatter(numFormatter);
     }
+
 }

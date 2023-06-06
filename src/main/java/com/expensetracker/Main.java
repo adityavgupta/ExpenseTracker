@@ -5,7 +5,7 @@ import java.util.Map;
 
 public class Main {
     public static void main(String[] args) throws Exception {
-        int f = 0;
+       /* int f = 0;
         Expense item = new Expense(123.00, Expense.expenseType.CREDIT, new Date(), f, "bitcoin");
         Expense item2 = new Expense(13.00, Expense.expenseType.CREDIT, new Date(), f, "USD");
 
@@ -31,7 +31,7 @@ public class Main {
         map.removeExpense(1672560000001L);
         //map.saveBinary();
         System.out.println(e.getAmount());
-        System.out.println(map.expenseMap);
+        System.out.println(map.expenseMap);*/
 
     }
 }
