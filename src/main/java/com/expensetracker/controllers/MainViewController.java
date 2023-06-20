@@ -52,10 +52,12 @@ public class MainViewController implements Initializable {
         TextFormatter<String> numFormatter = new TextFormatter<>(numFilter);
         inputAmount.setTextFormatter(numFormatter);
         
-        inputDate.getEditor().setOnAction(this::dateCheck);
+        inputDate.valueProperty().addListener((ov, oldValue, newValue) -> {
+            dateCheck();
+        });
     }
 
-    private void dateCheck(ActionEvent event) {
+    private void dateCheck() {
         System.out.println("testing");
         try {
             inputDate.getValue();
