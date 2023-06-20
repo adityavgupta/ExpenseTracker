@@ -85,7 +85,7 @@ public class MainViewController implements Initializable {
 
         String paymentMethod = paymentMethodText.getText();
         String comment = commentText.getText();
-
+        System.out.println("ok");
     }
 
 }
