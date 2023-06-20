@@ -36,7 +36,7 @@ public class MainViewController implements Initializable {
         creditDebitDropdown.getItems().addAll(CreditDebit);
         UnaryOperator<Change> numFilter = change -> {
             String newText = change.getControlNewText();
-            Boolean b = Pattern.matches("[\\d\\.]*", newText);
+            Boolean b = Pattern.matches("\\d*\\.?\\d*", newText);
             if(b) {
                 return change;
             }
