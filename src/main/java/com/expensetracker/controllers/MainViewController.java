@@ -9,12 +9,14 @@ import javafx.beans.property.StringProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Label;
 import javafx.stage.Stage;
 import javafx.scene.input.KeyCode;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TextFormatter;
 import javafx.scene.control.TextFormatter.Change;
+import org.w3c.dom.Text;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -25,15 +27,24 @@ public class MainViewController implements Initializable {
 
     @FXML
     private ChoiceBox<String> creditDebitDropdown;
-
     private String[] CreditDebit = {"Credit","Debit"};
 
     @FXML
     private TextField inputAmount;
+    @FXML
+    private Label amtLabel;
+    private Integer amount;
+
+    @FXML
+    private TextField paymentMethodText;
+
+    @FXML
+    private TextField commentText;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         creditDebitDropdown.getItems().addAll(CreditDebit);
+
         UnaryOperator<Change> numFilter = change -> {
             String newText = change.getControlNewText();
             Boolean b = Pattern.matches("\\d*\\.?\\d*", newText);
@@ -59,7 +70,22 @@ public class MainViewController implements Initializable {
 
     @FXML
     private void submit(ActionEvent event) {
-        System.out.println("Button Clicked");
+        try{
+            amtLabel.setText("Amount");
+            amount = Integer.parseInt(inputAmount.getText());
+        }
+        catch (NumberFormatException e)
+        {
+            amtLabel.setText("Invalid number");
+        }
+        catch (Exception e)
+        {
+            amtLabel.setText("Error!");
+        }
+
+        String paymentMethod = paymentMethodText.getText();
+        String comment = commentText.getText();
+
     }
 
 }
