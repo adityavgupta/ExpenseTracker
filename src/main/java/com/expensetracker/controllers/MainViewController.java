@@ -10,7 +10,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.stage.Stage;
-import javafx.scene.input.KeyCode;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TextFormatter;
@@ -31,12 +31,18 @@ public class MainViewController implements Initializable {
     @FXML
     private TextField inputAmount;
 
+    @FXML
+    private DatePicker inputDate;
+
+    private Boolean dateFlag = false;
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         creditDebitDropdown.getItems().addAll(CreditDebit);
+
         UnaryOperator<Change> numFilter = change -> {
             String newText = change.getControlNewText();
-            Boolean b = Pattern.matches("\\d*\\.?\\d*", newText);
+            Boolean b = Pattern.matches("\\d*\\.?\\d{0,2}", newText);
             if(b) {
                 return change;
             }
@@ -45,6 +51,25 @@ public class MainViewController implements Initializable {
 
         TextFormatter<String> numFormatter = new TextFormatter<>(numFilter);
         inputAmount.setTextFormatter(numFormatter);
+        
+        inputDate.getEditor().setOnAction(this::dateCheck);
+    }
+
+    private void dateCheck(ActionEvent event) {
+        System.out.println("testing");
+        try {
+            inputDate.getValue();
+            dateFlag = false;
+            inputDate.setStyle("-fx-background-color: #00ff00");
+        }
+        catch(Exception e) {
+            dateFlag = true;
+            inputDate.setStyle("-fx-background-color: #ff0000");
+        }
+    }
+
+    public Boolean getDateFlag() {
+        return dateFlag;
     }
 
     @FXML
