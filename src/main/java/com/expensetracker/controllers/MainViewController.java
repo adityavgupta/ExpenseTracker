@@ -127,9 +127,11 @@ public class MainViewController implements Initializable {
 
     @FXML
     private void submit(ActionEvent event) {
+        boolean executeSubmit = false;
         try{
             amtLabel.setText("Amount");
             amount = Float.parseFloat(inputAmount.getText());
+            executeSubmit = true;
         }
         catch (NumberFormatException e)
         {
