@@ -14,6 +14,8 @@ import javafx.stage.StageStyle;
 import javafx.util.Duration;
 import java.util.Objects;
 
+import com.expensetracker.controllers.MainViewController;
+
 public class ExpenseTrackerApp extends Application {
 
     private double xOffset;
@@ -21,13 +23,7 @@ public class ExpenseTrackerApp extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-        // this can be a threaded process of loading the expense map binary, will look into this later
-        expenseMap = new ExpenseMap();
-
-        // load the binary. If it already exists then this will load the previously stored data.
-        // otherwise internally it will throw an exception, but we don't need a binary anyway till
-        // we save an expense map
-        expenseMap.loadBinary();
+        MainViewController.initializeExpenseMap();
 
         Parent root = FXMLLoader.load(getClass().getResource("/fxml/MainView.fxml"));
 

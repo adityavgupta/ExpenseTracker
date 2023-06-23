@@ -1,11 +1,9 @@
 package com.expensetracker.controllers;
 
+import com.expensetracker.ExpenseMap;
+import com.expensetracker.Expense;
+
 import javafx.application.Application;
-import javafx.application.Platform;
-import javafx.beans.property.IntegerProperty;
-import javafx.beans.property.SimpleIntegerProperty;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
@@ -13,7 +11,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
-import javafx.scene.input.KeyCode;
 
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.ChoiceBox;
@@ -21,7 +18,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.TextFormatter;
 
 import javafx.scene.control.TextFormatter.Change;
-import org.w3c.dom.Text;
 
 import java.net.URL;
 import java.time.LocalDate;
@@ -29,9 +25,9 @@ import java.util.ResourceBundle;
 import java.util.function.UnaryOperator;
 import java.util.regex.Pattern;
 
-//import javax.swing.event.ChangeListener;
-
 public class MainViewController implements Initializable {
+
+    private ExpenseMap expenseMap = new ExpenseMap();
 
     @FXML
     private ChoiceBox<String> creditDebitDropdown;
@@ -140,16 +136,11 @@ public class MainViewController implements Initializable {
         String creditOrDebitSelection = creditDebitDropdown.getValue();
         LocalDate date = inputDate.getValue();
 
-        if (creditOrDebitSelection != null && date != null)
-        {
-            executeSubmit = true;
-        }
+        // add the above values
+    }
 
-        // construct the expense map and add the above values
-        if (executeSubmit)
-        {
-
-        }
+    public static void initializeExpenseMap() {
+        ExpenseMap.loadBinary();
     }
 
 }
