@@ -21,7 +21,7 @@ public class ExpenseMap {
     }
 
     //Load Binary
-    public void loadBinary()
+    public static void loadBinary()
     {
         try {
             FileInputStream fileInput = new FileInputStream(filePath);

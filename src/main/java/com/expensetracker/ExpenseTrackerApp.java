@@ -15,6 +15,8 @@ import javafx.util.Duration;
 
 import java.util.Objects;
 
+import com.expensetracker.controllers.MainViewController;
+
 public class ExpenseTrackerApp extends Application {
 
     private double xOffset;
@@ -22,6 +24,8 @@ public class ExpenseTrackerApp extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
+        MainViewController.initializeExpenseMap();
+
         Parent root = FXMLLoader.load(getClass().getResource("/fxml/MainView.fxml"));
 
         root.setOnMousePressed(event ->
