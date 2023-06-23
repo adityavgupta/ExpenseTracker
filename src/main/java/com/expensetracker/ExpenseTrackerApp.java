@@ -12,7 +12,6 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Duration;
-
 import java.util.Objects;
 
 public class ExpenseTrackerApp extends Application {
@@ -22,6 +21,14 @@ public class ExpenseTrackerApp extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
+        // this can be a threaded process of loading the expense map binary, will look into this later
+        expenseMap = new ExpenseMap();
+
+        // load the binary. If it already exists then this will load the previously stored data.
+        // otherwise internally it will throw an exception, but we don't need a binary anyway till
+        // we save an expense map
+        expenseMap.loadBinary();
+
         Parent root = FXMLLoader.load(getClass().getResource("/fxml/MainView.fxml"));
 
         root.setOnMousePressed(event ->
@@ -53,5 +60,6 @@ public class ExpenseTrackerApp extends Application {
     public static void main(String[] args) {
         launch(args);
     }
+
 }
 

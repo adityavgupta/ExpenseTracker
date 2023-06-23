@@ -90,10 +90,6 @@ public class MainViewController implements Initializable {
                 }
             }
         });
-
-        //inputDate.valueProperty().addListener((ov, oldValue, newValue) -> {
-        //    dateCheck();
-        //});
     }
 
     private void dateCheck() {
@@ -144,7 +140,16 @@ public class MainViewController implements Initializable {
         String creditOrDebitSelection = creditDebitDropdown.getValue();
         LocalDate date = inputDate.getValue();
 
+        if (creditOrDebitSelection != null && date != null)
+        {
+            executeSubmit = true;
+        }
+
         // construct the expense map and add the above values
+        if (executeSubmit)
+        {
+
+        }
     }
 
 }
