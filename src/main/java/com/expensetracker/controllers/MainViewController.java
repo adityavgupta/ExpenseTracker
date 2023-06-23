@@ -9,16 +9,14 @@ import javafx.beans.property.StringProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Label;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 import javafx.scene.input.KeyCode;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.TextField;
-import javafx.scene.control.TextFormatter;
 import javafx.scene.control.TextFormatter.Change;
 import org.w3c.dom.Text;
 
 import java.net.URL;
+import java.time.LocalDate;
 import java.util.ResourceBundle;
 import java.util.function.UnaryOperator;
 import java.util.regex.Pattern;
@@ -33,13 +31,16 @@ public class MainViewController implements Initializable {
     private TextField inputAmount;
     @FXML
     private Label amtLabel;
-    private Integer amount;
+    private Float amount;
 
     @FXML
     private TextField paymentMethodText;
 
     @FXML
     private TextField commentText;
+
+    @FXML
+    private DatePicker inputDate;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -72,7 +73,7 @@ public class MainViewController implements Initializable {
     private void submit(ActionEvent event) {
         try{
             amtLabel.setText("Amount");
-            amount = Integer.parseInt(inputAmount.getText());
+            amount = Float.parseFloat(inputAmount.getText());
         }
         catch (NumberFormatException e)
         {
@@ -85,7 +86,10 @@ public class MainViewController implements Initializable {
 
         String paymentMethod = paymentMethodText.getText();
         String comment = commentText.getText();
-        System.out.println("ok");
+        String creditOrDebitSelection = creditDebitDropdown.getValue();
+        LocalDate date = inputDate.getValue();
+
+        // construct the expense map and add the above values
     }
 
 }
