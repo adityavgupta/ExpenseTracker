@@ -52,9 +52,6 @@ public class MainViewController implements Initializable {
     @FXML
     private DatePicker inputDate;
 
-    @FXML
-    private DatePicker inputDate;
-
     private Boolean dateFlag = false;
 
     @Override
