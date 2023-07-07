@@ -81,22 +81,42 @@ public class MainViewController implements Initializable {
         inputDate.focusedProperty().addListener(new ChangeListener<Boolean>() {
             @Override
             public void changed(ObservableValue<? extends Boolean> ov, Boolean onHidden, Boolean onShown) {
-                if(onShown == false) {
-                    dateCheck();
+                if(onShown == true) {
+                    unRed("date");
+                }
+            }
+        });
+
+        inputAmount.focusedProperty().addListener(new ChangeListener<Boolean>() {
+            @Override
+            public void changed(ObservableValue<? extends Boolean> ov, Boolean onHidden, Boolean onShown) {
+                if(onShown == true) {
+                    unRed("amount");
+                }
+            }
+        });
+
+        creditDebitDropdown.focusedProperty().addListener(new ChangeListener<Boolean>() {
+            @Override
+            public void changed(ObservableValue<? extends Boolean> ov, Boolean onHidden, Boolean onShown) {
+                if(onShown == true) {
+                    unRed("creditOrDebit");
                 }
             }
         });
     }
 
-    private void dateCheck() {
-        //System.out.println(inputDate.getValue());
-        if(inputDate.getValue() != null) {
-            dateFlag = false;
-            inputDate.setStyle("-fx-background-color: #00ff00");
-        }
-        else {
-            dateFlag = true;
-            inputDate.setStyle("-fx-background-color: #ff0000");
+    private void unRed(String option) {
+        switch(option) {
+            case "date":
+                inputDate.setStyle("-fx-border-color: transparent");
+                break;
+            case "amount":
+                inputAmount.setStyle("-fx-border-color: transparent");
+                break;
+            case "creditOrDebit":
+                creditDebitDropdown.setStyle("-fx-border-color: transparent");
+                break;
         }
     }
 
@@ -116,17 +136,15 @@ public class MainViewController implements Initializable {
         try{
             amtLabel.setText("Amount");
             amount = Float.parseFloat(inputAmount.getText());
-
         }
         catch (NumberFormatException e)
         {
-            // maybe replace this with amount box becoming red
-            amtLabel.setText("Invalid number");
+            inputAmount.setStyle("-fx-border-color: #FF0000");
             executeSubmit = false;
         }
         catch (Exception e)
         {
-            // maybe replace this with amount box becoming red
+            inputAmount.setStyle("-fx-border-color: #FF0000");
             amtLabel.setText("Error!");
             executeSubmit = false;
         }
@@ -136,16 +154,17 @@ public class MainViewController implements Initializable {
         String creditOrDebitSelection = creditDebitDropdown.getValue();
         if (creditOrDebitSelection == null)
         {
-            // maybe replace this with credit box becoming red
+            creditDebitDropdown.setStyle("-fx-border-color: #FF0000");
             executeSubmit = false;
         }
 
-        Date date = java.sql.Date.valueOf(inputDate.getValue());
+        Date date = null;
 
-        if (dateFlag)
-        {
-            // maybe replace this with date box becoming red
+        if(inputDate.getValue() == null) {
+            inputDate.setStyle("-fx-border-color: #FF0000");
             executeSubmit = false;
+        } else {
+            date = java.sql.Date.valueOf(inputDate.getValue());
         }
 
         if (executeSubmit)
@@ -161,3 +180,8 @@ public class MainViewController implements Initializable {
     }
 
 }
+
+
+// Notes
+// 1. If a correct date is input into the date box and then an incorrect date is input after it seems to use the previous correct date
+// 2. Using background color to set the border around the input boxes doesn't quite seem to put them back to defualt
