@@ -10,6 +10,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
 import javafx.scene.control.DatePicker;
@@ -47,6 +48,21 @@ public class MainViewController implements Initializable {
 
     @FXML
     private DatePicker inputDate;
+
+    @FXML
+    private TableView<Expense> mainTable;
+
+    @FXML
+    private TableColumn<Expense, Date> dateColumn;
+
+    @FXML
+    private TableColumn<Expense, Double> amountColumn;
+
+    @FXML
+    private TableColumn<Expense, String> commentsColumn;
+
+    @FXML
+    private TableColumn<Expense, String> paymentMethodColumn;
 
     private Boolean dateFlag = false;
 
@@ -86,6 +102,11 @@ public class MainViewController implements Initializable {
                 }
             }
         });
+
+        dateColumn.setCellValueFactory(new PropertyValueFactory<Expense, Date>("dateColumn"));
+        amountColumn.setCellValueFactory(new PropertyValueFactory<Expense, Double>("amountColumn"));
+        commentsColumn.setCellValueFactory(new PropertyValueFactory<Expense, String>("commentsColumn"));
+        paymentMethodColumn.setCellValueFactory(new PropertyValueFactory<Expense, String>("paymentMethodColumn"));
     }
 
     private void dateCheck() {
