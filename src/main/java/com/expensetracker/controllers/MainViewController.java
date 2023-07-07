@@ -20,14 +20,14 @@ import javafx.scene.control.TextFormatter;
 import javafx.scene.control.TextFormatter.Change;
 
 import java.net.URL;
-import java.time.LocalDate;
+import java.util.Date;
 import java.util.ResourceBundle;
 import java.util.function.UnaryOperator;
 import java.util.regex.Pattern;
 
 public class MainViewController implements Initializable {
 
-    private ExpenseMap expenseMap = new ExpenseMap();
+    private ExpenseMap expenseTable = new ExpenseMap();
 
     @FXML
     private ChoiceBox<String> creditDebitDropdown;
@@ -89,7 +89,7 @@ public class MainViewController implements Initializable {
     }
 
     private void dateCheck() {
-        System.out.println(inputDate.getValue());
+        //System.out.println(inputDate.getValue());
         if(inputDate.getValue() != null) {
             dateFlag = false;
             inputDate.setStyle("-fx-background-color: #00ff00");
@@ -98,10 +98,6 @@ public class MainViewController implements Initializable {
             dateFlag = true;
             inputDate.setStyle("-fx-background-color: #ff0000");
         }
-    }
-
-    public Boolean getDateFlag() {
-        return dateFlag;
     }
 
     @FXML
@@ -116,27 +112,48 @@ public class MainViewController implements Initializable {
 
     @FXML
     private void submit(ActionEvent event) {
-        boolean executeSubmit = false;
+        boolean executeSubmit = true;
         try{
             amtLabel.setText("Amount");
             amount = Float.parseFloat(inputAmount.getText());
-            executeSubmit = true;
+
         }
         catch (NumberFormatException e)
         {
+            // maybe replace this with amount box becoming red
             amtLabel.setText("Invalid number");
+            executeSubmit = false;
         }
         catch (Exception e)
         {
+            // maybe replace this with amount box becoming red
             amtLabel.setText("Error!");
+            executeSubmit = false;
         }
 
         String paymentMethod = paymentMethodText.getText();
         String comment = commentText.getText();
         String creditOrDebitSelection = creditDebitDropdown.getValue();
-        LocalDate date = inputDate.getValue();
+        if (creditOrDebitSelection == null)
+        {
+            // maybe replace this with credit box becoming red
+            executeSubmit = false;
+        }
 
-        // add the above values
+        Date date = java.sql.Date.valueOf(inputDate.getValue());
+
+        if (dateFlag)
+        {
+            // maybe replace this with date box becoming red
+            executeSubmit = false;
+        }
+
+        if (executeSubmit)
+        {
+            Expense expense = new Expense(amount, Expense.expenseType.valueOf(creditOrDebitSelection), date, paymentMethod, comment);
+            expenseTable.addExpense(expense);
+            Expense e = expenseTable.expenseMap.get(date.getTime());
+        }
     }
 
     public static void initializeExpenseMap() {
