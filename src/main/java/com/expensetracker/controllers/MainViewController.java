@@ -183,5 +183,3 @@ public class MainViewController implements Initializable {
 
 
 // Notes
-// 1. If a correct date is input into the date box and then an incorrect date is input after it seems to use the previous correct date
-// 2. Using background color to set the border around the input boxes doesn't quite seem to put them back to defualt
