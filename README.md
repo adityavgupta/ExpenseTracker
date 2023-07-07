@@ -11,3 +11,8 @@ Expoense Tracker made by Aditya and Brandon
 ### As of 6/2/2023
 - Basic gui is done. We have options we want to see. Gui is resizable
 - Need to add the connect the backend to the front button events
+
+### As of 7/6/2023
+- Buttons and backend are connected
+- Application buttons and highlights are working properly with highlights
+- Gui has a table as well now which can show all expenses.
