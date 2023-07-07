@@ -9,7 +9,7 @@ public class Expense implements Serializable {
     private double amount;
 
     // Expense Type, Credit is negative, Debit is positive
-    public enum expenseType {
+    public static enum expenseType {
         Credit,
         Debit
     }
