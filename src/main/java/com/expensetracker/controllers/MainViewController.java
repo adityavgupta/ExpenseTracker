@@ -12,6 +12,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
+import javafx.collections.ObservableList;
 
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.ChoiceBox;
@@ -121,10 +122,10 @@ public class MainViewController implements Initializable {
             }
         });
 
-        dateColumn.setCellValueFactory(new PropertyValueFactory<Expense, Date>("dateColumn"));
-        amountColumn.setCellValueFactory(new PropertyValueFactory<Expense, Double>("amountColumn"));
-        commentsColumn.setCellValueFactory(new PropertyValueFactory<Expense, String>("commentsColumn"));
-        paymentMethodColumn.setCellValueFactory(new PropertyValueFactory<Expense, String>("paymentMethodColumn"));
+        dateColumn.setCellValueFactory(new PropertyValueFactory<Expense, Date>("date"));
+        amountColumn.setCellValueFactory(new PropertyValueFactory<Expense, Double>("amount"));
+        commentsColumn.setCellValueFactory(new PropertyValueFactory<Expense, String>("comment"));
+        paymentMethodColumn.setCellValueFactory(new PropertyValueFactory<Expense, String>("paymentMethod"));
     }
 
     private void unRed(String option) {
@@ -192,7 +193,10 @@ public class MainViewController implements Initializable {
         {
             Expense expense = new Expense(amount, Expense.expenseType.valueOf(creditOrDebitSelection), date, paymentMethod, comment);
             expenseTable.addExpense(expense);
-            Expense e = expenseTable.expenseMap.get(date.getTime());
+            Expense e = ExpenseMap.expenseMap.get(date.getTime());
+            ObservableList<Expense> tableElements = mainTable.getItems();
+            tableElements.add(e);
+            mainTable.setItems(tableElements);
         }
     }
 
@@ -204,3 +208,6 @@ public class MainViewController implements Initializable {
 
 
 // Notes
+// 1. Fix table column resizability
+// 2. Add way to unselect row
+// 
