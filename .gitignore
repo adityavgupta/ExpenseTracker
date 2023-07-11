@@ -30,3 +30,10 @@ bin/
 *.class
 *.class
 *.class
+target/classes/com/expensetracker/controllers/MainViewController$1.class
+*.class
+target/classes/com/expensetracker/controllers/MainViewController$1.class
+target/classes/com/expensetracker/controllers/MainViewController.class
+target/classes/com/expensetracker/Expense$expenseType.class
+target/classes/com/expensetracker/Expense.class
+target/classes/com/expensetracker/ExpenseMap.class
