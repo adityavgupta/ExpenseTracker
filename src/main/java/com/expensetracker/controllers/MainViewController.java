@@ -193,9 +193,8 @@ public class MainViewController implements Initializable {
         {
             Expense expense = new Expense(amount, Expense.expenseType.valueOf(creditOrDebitSelection), date, paymentMethod, comment);
             expenseTable.addExpense(expense);
-            Expense e = ExpenseMap.expenseMap.get(date.getTime());
             ObservableList<Expense> tableElements = mainTable.getItems();
-            tableElements.add(e);
+            tableElements.add(expense);
             mainTable.setItems(tableElements);
         }
     }
