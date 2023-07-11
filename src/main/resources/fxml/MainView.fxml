@@ -135,11 +135,11 @@
                </children>
             </VBox>
             <VBox prefHeight="200.0" prefWidth="300.0" HBox.hgrow="ALWAYS" />
-            <ScrollPane prefHeight="511.0" prefWidth="710.0">
+            <ScrollPane maxHeight="-Infinity" minWidth="600.0" prefHeight="511.0" prefWidth="615.0">
               <content>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="574.0" prefWidth="571.0">
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="588.0" prefWidth="581.0">
                      <children>
-                        <TableView fx:id="mainTable" prefHeight="574.0" prefWidth="571.0">
+                        <TableView fx:id="mainTable" prefHeight="574.0" prefWidth="600.0">
                           <columns>
                             <TableColumn fx:id="dateColumn" prefWidth="75.0" text="Date" />
                             <TableColumn fx:id="amountColumn" prefWidth="75.0" text="Amount" />
@@ -151,7 +151,7 @@
                   </AnchorPane>
               </content>
             </ScrollPane>
-            <VBox prefHeight="200.0" prefWidth="300.0" />
+            <VBox prefHeight="200.0" prefWidth="250.0" />
          </children>
       </HBox>
       <HBox maxHeight="100.0" VBox.vgrow="ALWAYS" />
