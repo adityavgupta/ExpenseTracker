@@ -13,15 +13,10 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import javafx.collections.ObservableList;
-
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.TextField;
-import javafx.scene.control.TextFormatter;
-
 import javafx.scene.control.TextFormatter.Change;
 
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.ResourceBundle;
 import java.util.function.UnaryOperator;
@@ -65,10 +60,15 @@ public class MainViewController implements Initializable {
     @FXML
     private TableColumn<Expense, String> paymentMethodColumn;
 
-    private Boolean dateFlag = false;
-
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        mainTable.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+
+        //deleteButton.setOnAction(e -> {
+        //    ObservableList<Expense> selectedRows = mainTable.getSelectionModel().getSelectedItems();
+        //    mainTable.getItems().removeAll(selectedRows);
+        //});
+
         creditDebitDropdown.getItems().addAll(CreditDebit);
 
         UnaryOperator<Change> numFilter = change -> {
@@ -118,6 +118,16 @@ public class MainViewController implements Initializable {
             public void changed(ObservableValue<? extends Boolean> ov, Boolean onHidden, Boolean onShown) {
                 if(onShown == true) {
                     unRed("creditOrDebit");
+                }
+            }
+        });
+
+
+        mainTable.focusedProperty().addListener(new ChangeListener<Boolean>() {
+            @Override
+            public void changed(ObservableValue<? extends Boolean> ov, Boolean onHidden, Boolean onShown) {
+                if(onHidden == true) {
+                    mainTable.getSelectionModel().select(-1);
                 }
             }
         });
@@ -207,6 +217,5 @@ public class MainViewController implements Initializable {
 
 
 // Notes
-// 1. Fix table column resizability
-// 2. Add way to unselect row
-// 
+// 1. Add way to unselect row
+// 2. Finish delete row
