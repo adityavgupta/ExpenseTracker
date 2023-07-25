@@ -139,7 +139,7 @@
               <content>
                 <AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" prefHeight="574.0" prefWidth="585.0">
                      <children>
-                        <TableView fx:id="mainTable" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="676.0" prefWidth="613.0">
+                        <TableView fx:id="mainTable" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="511.0" prefWidth="586.0">
                           <columns>
                             <TableColumn fx:id="dateColumn" prefWidth="75.0" text="Date" />
                             <TableColumn fx:id="amountColumn" prefWidth="75.0" text="Amount" />
