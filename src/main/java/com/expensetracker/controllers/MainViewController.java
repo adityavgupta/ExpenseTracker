@@ -70,6 +70,7 @@ public class MainViewController implements Initializable {
         mainTable.setOnKeyReleased(event -> {
             if (event.getCode() == KeyCode.DELETE){
                 ObservableList<Expense> selectedRows = mainTable.getSelectionModel().getSelectedItems();
+
                 for(Expense e : selectedRows) {
                     expenseTable.removeExpense(e.getUID());
                 }
@@ -156,7 +157,10 @@ public class MainViewController implements Initializable {
 
                 if (item == null || empty)
                 {
-                    setGraphic(null);
+                    for (int i = 0; i<getChildren().size(); i++)
+                    {
+                        ((Labeled)getChildren().get(i)).setStyle("-fx-background-color: transparent");
+                    }
                 }
                 else {
                     if (item.getExpType().equals(Expense.expenseType.Credit))
@@ -276,3 +280,4 @@ public class MainViewController implements Initializable {
 
 // Notes
 // 1. add save (button, ctrl+s, on exit)
+// 2. on submit immediately select and deselect item to get table into focus and for color to update
