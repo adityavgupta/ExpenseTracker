@@ -22,6 +22,7 @@ import java.util.Date;
 import java.util.ResourceBundle;
 import java.util.function.UnaryOperator;
 import java.util.regex.Pattern;
+import java.util.Map;
 
 public class MainViewController implements Initializable {
 
@@ -63,13 +64,14 @@ public class MainViewController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        initializeTable();
         mainTable.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 
         mainTable.setOnKeyReleased(event -> {
             if (event.getCode() == KeyCode.DELETE){
                 ObservableList<Expense> selectedRows = mainTable.getSelectionModel().getSelectedItems();
-                for (int i=0; i<selectedRows.size(); i++) {
-
+                for(Expense e : selectedRows) {
+                    expenseTable.removeExpense(e.getUID());
                 }
                 mainTable.getItems().removeAll(selectedRows);
             }
@@ -259,9 +261,18 @@ public class MainViewController implements Initializable {
         ExpenseMap.loadBinary();
     }
 
+    private void initializeTable() {
+        if(!(ExpenseMap.expenseMap == null || ExpenseMap.expenseMap.isEmpty())){
+            for(Map.Entry<Long,Expense> entry : ExpenseMap.expenseMap.entrySet()) {
+                ObservableList<Expense> tableElements = mainTable.getItems();
+                tableElements.add(entry.getValue());
+                mainTable.setItems(tableElements);
+            }
+        }
+    }
+
 }
 
 
 // Notes
-// 1. Add way to unselect row
-// 2. Finish delete row
+// 1. add save (button, ctrl+s, on exit)

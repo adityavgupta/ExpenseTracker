@@ -35,7 +35,7 @@ public class Expense implements Serializable {
         this(amount, creditOrDebit, date, "NA", "NA");
     }
 
-    public Expense(double amount, expenseType creditOrDebit, Date date, int flag, String paymentMethodOrComment) throws Exception
+    public Expense(double amount, expenseType creditOrDebit, Date date, int flag, String paymentMethodOrComment)
     {
         this.amount = amount;
         this.date = date;
@@ -52,7 +52,7 @@ public class Expense implements Serializable {
                 break;
             default:
                 System.out.println("here");
-                throw new Exception("Expense constructor for payment/comment flag invalid");
+                //throw new Exception("Expense constructor for payment/comment flag invalid");
         }
     }
 
