@@ -63,11 +63,15 @@ public class ExpenseMap {
         if(expenseMap == null || expenseMap.isEmpty())
         {
             expenseMap = new TreeMap<Long, Expense>();
-            expenseMap.put(expense.getDate().getTime(),expense);
+            long UID = expense.getDate().getTime();
+            expense.setUID(UID);
+            expenseMap.put(UID,expense);
         }
         else
         {
-            expenseMap.put(ExpenseMap.generateUID(expense.getDate()),expense);
+            long UID = ExpenseMap.generateUID(expense.getDate());
+            expense.setUID(UID);
+            expenseMap.put(UID,expense);
         }
     }
 

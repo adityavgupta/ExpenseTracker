@@ -5,6 +5,9 @@ import java.io.Serializable;
 
 public class Expense implements Serializable {
 
+    // UID
+    private long UID;
+
     // Amount you spent
     private double amount;
 
@@ -62,6 +65,14 @@ public class Expense implements Serializable {
         this.paymentMethod = paymentMethod;
         this.comment = comment;
 
+    }
+
+    public long getUID() {
+        return UID;
+    }
+
+    public void setUID(long UID) {
+        this.UID = UID;
     }
 
     public double getAmount() {
