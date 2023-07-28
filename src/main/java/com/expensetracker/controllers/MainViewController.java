@@ -142,6 +142,35 @@ public class MainViewController implements Initializable {
         amountColumn.setCellValueFactory(new PropertyValueFactory<Expense, Double>("amount"));
         commentsColumn.setCellValueFactory(new PropertyValueFactory<Expense, String>("comment"));
         paymentMethodColumn.setCellValueFactory(new PropertyValueFactory<Expense, String>("paymentMethod"));
+
+        mainTable.setRowFactory(row->new TableRow<Expense>() {
+            @Override
+            public void updateItem(Expense item, boolean empty)
+            {
+                super.updateItem(item, empty);
+
+                if (item == null || empty)
+                {
+                    setStyle("");
+                }
+                else {
+                    if (item.getExpType().equals(Expense.expenseType.Credit))
+                    {
+                        for (int i = 0; i<getChildren().size(); i++)
+                        {
+                            ((Labeled)getChildren().get(i)).setStyle("-fx-background-color: #FF9090");
+                        }
+                    }
+                    else {
+                        for (int i = 0; i<getChildren().size(); i++)
+                        {
+                            ((Labeled)getChildren().get(i)).setStyle("-fx-background-color: #B5E981");
+
+                        }
+                    }
+                }
+            }
+        });
     }
 
     private void unRed(String option) {
