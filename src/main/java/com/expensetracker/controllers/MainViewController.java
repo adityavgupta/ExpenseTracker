@@ -11,6 +11,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.KeyCode;
 import javafx.stage.Stage;
 import javafx.collections.ObservableList;
 import javafx.scene.control.TextFormatter.Change;
@@ -64,10 +65,15 @@ public class MainViewController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         mainTable.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 
-        //deleteButton.setOnAction(e -> {
-        //    ObservableList<Expense> selectedRows = mainTable.getSelectionModel().getSelectedItems();
-        //    mainTable.getItems().removeAll(selectedRows);
-        //});
+        mainTable.setOnKeyReleased(event -> {
+            if (event.getCode() == KeyCode.DELETE){
+                ObservableList<Expense> selectedRows = mainTable.getSelectionModel().getSelectedItems();
+                mainTable.getItems().removeAll(selectedRows);
+            }
+            if (event.getCode() == KeyCode.ESCAPE){
+                mainTable.getSelectionModel().clearSelection();
+            }
+        });
 
         creditDebitDropdown.getItems().addAll(CreditDebit);
 
