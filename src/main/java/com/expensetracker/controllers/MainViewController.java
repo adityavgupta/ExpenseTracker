@@ -68,6 +68,9 @@ public class MainViewController implements Initializable {
         mainTable.setOnKeyReleased(event -> {
             if (event.getCode() == KeyCode.DELETE){
                 ObservableList<Expense> selectedRows = mainTable.getSelectionModel().getSelectedItems();
+                for (int i=0; i<selectedRows.size(); i++) {
+
+                }
                 mainTable.getItems().removeAll(selectedRows);
             }
             if (event.getCode() == KeyCode.ESCAPE){
@@ -151,7 +154,7 @@ public class MainViewController implements Initializable {
 
                 if (item == null || empty)
                 {
-                    setStyle("");
+                    setGraphic(null);
                 }
                 else {
                     if (item.getExpType().equals(Expense.expenseType.Credit))
@@ -161,10 +164,18 @@ public class MainViewController implements Initializable {
                             ((Labeled)getChildren().get(i)).setStyle("-fx-background-color: #FF9090");
                         }
                     }
-                    else {
+                    else if (item.getExpType().equals(Expense.expenseType.Debit)){
                         for (int i = 0; i<getChildren().size(); i++)
                         {
                             ((Labeled)getChildren().get(i)).setStyle("-fx-background-color: #B5E981");
+
+                        }
+                    }
+                    else
+                    {
+                        for (int i = 0; i<getChildren().size(); i++)
+                        {
+                            ((Labeled)getChildren().get(i)).setStyle("-fx-background-color: transparent");
 
                         }
                     }
