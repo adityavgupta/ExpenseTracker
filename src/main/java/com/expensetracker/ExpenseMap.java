@@ -43,7 +43,7 @@ public class ExpenseMap {
     }
 
     //Save Binary
-    public void saveBinary()
+    public static void saveBinary()
     {
         try {
             FileOutputStream myFileOutStream = new FileOutputStream(filePath);

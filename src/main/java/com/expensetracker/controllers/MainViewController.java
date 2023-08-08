@@ -15,6 +15,7 @@ import javafx.scene.input.KeyCode;
 import javafx.stage.Stage;
 import javafx.collections.ObservableList;
 import javafx.scene.control.TextFormatter.Change;
+import javafx.scene.layout.VBox;
 
 import java.net.URL;
 import java.util.ArrayList;
@@ -23,6 +24,7 @@ import java.util.ResourceBundle;
 import java.util.function.UnaryOperator;
 import java.util.regex.Pattern;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 public class MainViewController implements Initializable {
 
@@ -62,10 +64,35 @@ public class MainViewController implements Initializable {
     @FXML
     private TableColumn<Expense, String> paymentMethodColumn;
 
+    @FXML
+    private VBox baseWindow;
+    private Boolean cntrlPressed = false;
+    private Boolean sPressed = false;
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        baseWindow.setOnKeyPressed(event -> {
+            if(event.getCode() == KeyCode.S){
+                sPressed = true;
+            }      
+            if(event.getCode() == KeyCode.CONTROL){
+                cntrlPressed = true;
+            }         
+            if(cntrlPressed&&sPressed){
+                ExpenseMap.saveBinary();
+            }
+        });
+
+        baseWindow.setOnKeyReleased(event -> {
+            if(event.getCode() == KeyCode.S){
+                sPressed = false;
+            }      
+            if(event.getCode() == KeyCode.CONTROL){
+                cntrlPressed = false;
+            }         
+        });
+
         initializeTable();
-        mainTable.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 
         mainTable.setOnKeyReleased(event -> {
             if (event.getCode() == KeyCode.DELETE){
@@ -258,6 +285,7 @@ public class MainViewController implements Initializable {
             ObservableList<Expense> tableElements = mainTable.getItems();
             tableElements.add(expense);
             mainTable.setItems(tableElements);
+            selectAndDeselectAll();
         }
     }
 
@@ -266,18 +294,27 @@ public class MainViewController implements Initializable {
     }
 
     private void initializeTable() {
+        mainTable.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
         if(!(ExpenseMap.expenseMap == null || ExpenseMap.expenseMap.isEmpty())){
             for(Map.Entry<Long,Expense> entry : ExpenseMap.expenseMap.entrySet()) {
                 ObservableList<Expense> tableElements = mainTable.getItems();
                 tableElements.add(entry.getValue());
                 mainTable.setItems(tableElements);
             }
+            //mainTable.requestFocus();
+            mainTable.getSelectionModel().selectAll();
+            //mainTable.getSelectionModel().clearSelection();
         }
+    }
+
+    private void selectAndDeselectAll() {
+        mainTable.getSelectionModel().selectAll();
+        mainTable.getSelectionModel().clearSelection();
     }
 
 }
 
 
 // Notes
-// 1. add save (button, ctrl+s, on exit)
-// 2. on submit immediately select and deselect item to get table into focus and for color to update
+// 1. lose focus from textfields
+// 2. on initialization need a way to unselect everything in table
