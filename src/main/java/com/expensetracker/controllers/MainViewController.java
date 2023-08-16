@@ -83,6 +83,17 @@ public class MainViewController implements Initializable {
             }
         });
 
+        baseWindow.setOnMouseClicked(event -> {
+            baseWindow.requestFocus();
+        });
+
+        baseWindow.setOnKeyPressed(event -> {
+            if(event.getCode() == KeyCode.ESCAPE){
+                baseWindow.requestFocus();
+            }      
+        });
+
+
         baseWindow.setOnKeyReleased(event -> {
             if(event.getCode() == KeyCode.S){
                 sPressed = false;
@@ -112,6 +123,7 @@ public class MainViewController implements Initializable {
 
         UnaryOperator<Change> numFilter = change -> {
             String newText = change.getControlNewText();
+            //System.out.println(newText);
             Boolean b = Pattern.matches("\\d*\\.?\\d{0,2}", newText);
             if(b) {
                 return change;
@@ -316,5 +328,5 @@ public class MainViewController implements Initializable {
 
 
 // Notes
-// 1. lose focus from textfields
+// 1. lose focus from amount and date fields
 // 2. on initialization need a way to unselect everything in table
