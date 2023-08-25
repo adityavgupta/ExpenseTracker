@@ -1,18 +1,41 @@
 # ExpenseTracker
-Expoense Tracker made by Aditya and Brandon
+Expense Tracker made by Aditya and Brandon
 
-## Change Tracker
+## Features to Implement
+- Filters
+This would be a tab group with the amount, date, credit etc. 
+	- Date Filter
+    > Case1: Both dates entered, get data within that range, check start is before end
+    > Case2: Only start date. Start- the last entry possible
+    > Case3: Only end date. Earliest-End date.
+    > Nothing: All values
+	- Amount Filter
+    > similar cases as date filter
+	- String Matching in comments
+	- Payment Method string matching
+    - Credit Debit check boxes
+    - Apply button
+    > can be triggered by enter when that tab has focus
+    - Remove filter button
+    > keybind tbd
 
-### As of 5/25/2023:
-- Have a rudimentary gui that shows up. To make it into a form we like, there will be a lot more stuff involved
-- Right now the project is setup as maven project which should be easy enough to setup even in vscode
-- If you run this in intelliJ it should work
+- Summary
+Implement this as a tab group with the table
+    - Net expenditure (total credit) over the range of the data
+    - Avg expenditure in the time frame if the time frame permits that calculation
+        - year
+        - month
+        - week
+        - day
+    - Net earning
+    - Total profit
 
-### As of 6/2/2023
-- Basic gui is done. We have options we want to see. Gui is resizable
-- Need to add the connect the backend to the front button events
+- Plotting
+Implement this as a tab group with the table.
+>details tbd
 
-### As of 7/6/2023
-- Buttons and backend are connected
-- Application buttons and highlights are working properly with highlights
-- Gui has a table as well now which can show all expenses.
+## QOL
+- Edit expenses from within the table
+- Deselect amount and date box with escape
+- Customizable date format
+- Add Comments in code for ourselves

@@ -18,13 +18,11 @@ import javafx.scene.control.TextFormatter.Change;
 import javafx.scene.layout.VBox;
 
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.ResourceBundle;
 import java.util.function.UnaryOperator;
 import java.util.regex.Pattern;
 import java.util.Map;
-import java.util.concurrent.TimeUnit;
 
 public class MainViewController implements Initializable {
 
@@ -68,6 +66,7 @@ public class MainViewController implements Initializable {
     private VBox baseWindow;
     private Boolean cntrlPressed = false;
     private Boolean sPressed = false;
+    private Boolean iniTableFlag = true;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -80,6 +79,13 @@ public class MainViewController implements Initializable {
             }         
             if(cntrlPressed&&sPressed){
                 ExpenseMap.saveBinary();
+            }
+        });
+
+        mainTable.setOnMouseMoved(event -> {
+            if(iniTableFlag){
+                mainTable.getSelectionModel().clearSelection();
+                iniTableFlag = false;
             }
         });
 
@@ -102,8 +108,6 @@ public class MainViewController implements Initializable {
                 cntrlPressed = false;
             }         
         });
-
-        initializeTable();
 
         mainTable.setOnKeyReleased(event -> {
             if (event.getCode() == KeyCode.DELETE){
@@ -213,7 +217,6 @@ public class MainViewController implements Initializable {
                         for (int i = 0; i<getChildren().size(); i++)
                         {
                             ((Labeled)getChildren().get(i)).setStyle("-fx-background-color: #B5E981");
-
                         }
                     }
                     else
@@ -221,12 +224,12 @@ public class MainViewController implements Initializable {
                         for (int i = 0; i<getChildren().size(); i++)
                         {
                             ((Labeled)getChildren().get(i)).setStyle("-fx-background-color: transparent");
-
                         }
                     }
                 }
             }
         });
+        initializeTable();
     }
 
     private void unRed(String option) {
@@ -315,7 +318,6 @@ public class MainViewController implements Initializable {
             }
             //mainTable.requestFocus();
             mainTable.getSelectionModel().selectAll();
-            //mainTable.getSelectionModel().clearSelection();
         }
     }
 
@@ -325,8 +327,3 @@ public class MainViewController implements Initializable {
     }
 
 }
-
-
-// Notes
-// 1. lose focus from amount and date fields
-// 2. on initialization need a way to unselect everything in table
