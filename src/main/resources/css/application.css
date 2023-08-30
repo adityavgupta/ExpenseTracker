@@ -115,12 +115,6 @@
     -fx-padding: 10px 15px;
     /* -fx-background-radius: 10px; */
 }
-
-.shadow-pane {
-    -fx-background-color: transparent;
-    -fx-padding: 10px;
-}
-
 .content-pane {
     -fx-background-color: #ffffff22;
     /* -fx-background-radius: 10px; */

@@ -21,7 +21,7 @@
 <?import javafx.scene.text.Text?>
 
 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" 
-            styleClass="background-pane" stylesheets="@../css/application.css" xmlns="http://javafx.com/javafx/20.0.1" 
+            stylesheets="@../css/application.css" xmlns="http://javafx.com/javafx/20.0.1"
             xmlns:fx="http://javafx.com/fxml/1" 
             fx:controller="com.expensetracker.controllers.FilterController">
             
