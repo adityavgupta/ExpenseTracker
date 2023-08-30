@@ -41,6 +41,7 @@ Implement this as a tab group with the table.
 	>details tbd
 
 ## QOL
+- Implement converter for date input field
 - Edit expenses from within the table
 - Deselect amount and date box with escape
 - Customizable date format
