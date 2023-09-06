@@ -24,8 +24,64 @@ import java.util.function.UnaryOperator;
 import java.util.regex.Pattern;
 import java.util.Map;
 
-public class FilterController
+public class FilterController implements Initializable
 {
-    
+    @FXML
+    private TextField minAmount;
+    @FXML
+    private TextField maxAmount;
+    @FXML
+    private DatePicker minDate;
+    @FXML
+    private DatePicker maxDate;
+    @FXML
+    private CheckBox checkCredit;
+    @FXML
+    private CheckBox checkDebit;
+    @FXML
+    private TextField paymentFilter;
+    @FXML
+    private TextField commentFilter;
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+
+        //Filter for monetary values
+        UnaryOperator<Change> numFilter = change -> {
+            String newText = change.getControlNewText();
+            Boolean b = Pattern.matches("\\d*\\.?\\d{0,2}", newText);
+            if(b) {
+                return change;
+            }
+            return null;
+        };
+
+        //Filter for dates
+        UnaryOperator<Change> dateFilter = change -> {
+            String newText = change.getControlNewText();
+            Boolean b = Pattern.matches("\\d*/*\\d*/*\\d*", newText);
+            if(b) {
+                return change;
+            }
+            return null;
+        };
+
+        //Apply monetary filter to amount filters
+        TextFormatter<String> numFormatter1 = new TextFormatter<>(numFilter);
+        minAmount.setTextFormatter(numFormatter1);
+        TextFormatter<String> numFormatter2 = new TextFormatter<>(numFilter);
+        maxAmount.setTextFormatter(numFormatter2);
+
+        // Formatting for date
+        TextFormatter<String> dateFormatter1 = new TextFormatter<>(dateFilter);
+        minDate.getEditor().setTextFormatter(dateFormatter1);
+        TextFormatter<String> dateFormatter2 = new TextFormatter<>(dateFilter);
+        maxDate.getEditor().setTextFormatter(dateFormatter2);
+    }
+
+    @FXML
+    private void filter(){
+        System.out.println("button pressed");
+    }
 
 }
