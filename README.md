@@ -46,3 +46,6 @@ Implement this as a tab group with the table.
 - Deselect amount and date box with escape
 - Customizable date format
 - Add Comments in code for ourselves
+
+## Necessary Code Changes
+- Make all of ExpenseMap static and adjust MainViewController for this change

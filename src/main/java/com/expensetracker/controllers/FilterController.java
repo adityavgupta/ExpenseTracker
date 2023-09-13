@@ -1,28 +1,23 @@
 package com.expensetracker.controllers;
 
-import com.expensetracker.ExpenseMap;
-import com.expensetracker.Expense;
-
-import javafx.application.Application;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
-import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
-import javafx.scene.control.*;
-import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.input.KeyCode;
-import javafx.stage.Stage;
-import javafx.collections.ObservableList;
-import javafx.scene.control.TextFormatter.Change;
-import javafx.scene.layout.VBox;
-
 import java.net.URL;
 import java.util.Date;
+import java.util.Map;
 import java.util.ResourceBundle;
 import java.util.function.UnaryOperator;
 import java.util.regex.Pattern;
-import java.util.Map;
+
+import com.expensetracker.Expense;
+import com.expensetracker.ExpenseMap;
+import com.expensetracker.Expense.expenseType;
+
+import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
+import javafx.scene.control.CheckBox;
+import javafx.scene.control.DatePicker;
+import javafx.scene.control.TextField;
+import javafx.scene.control.TextFormatter;
+import javafx.scene.control.TextFormatter.Change;
 
 public class FilterController implements Initializable
 {
@@ -81,7 +76,33 @@ public class FilterController implements Initializable
 
     @FXML
     private void filter(){
-        System.out.println("button pressed");
+        Date dateMin = java.sql.Date.valueOf(minDate.getValue());
+        Date dateMax = java.sql.Date.valueOf(maxDate.getValue());
+        double amountMin = Float.parseFloat(minAmount.getText());;
+        double amountMax = Float.parseFloat(maxAmount.getText());;
+        String paymentMethod = paymentFilter.getText();
+        String comment = commentFilter.getText();
+        Boolean credit = checkCredit.isSelected();
+        Boolean debit = checkDebit.isSelected();
+
+        ExpenseMap.filteredMap = ExpenseMap.getDateRange(dateMin, dateMax);
+        for(Map.Entry<Long, Expense> entry : ExpenseMap.filteredMap.entrySet()){
+            Expense e = entry.getValue();
+            double a = e.getAmount();
+            Date d = e.getDate();
+            String p = e.getPaymentMethod();
+            String c = e.getComment();
+            expenseType eType = e.getExpType();
+
+            Boolean dateFlag = dateMin.after(d) || dateMax.before(d);
+            Boolean paymentFlag = !Pattern.matches(String.format(".*%s.*",paymentMethod), p);
+            Boolean commentFlag = !Pattern.matches(String.format(".*%s.*",comment), c);
+            Boolean typeFlag = (credit && eType == expenseType.Credit) || (debit && eType == expenseType.Debit);
+
+            if(a < amountMin || a > amountMax || dateFlag || paymentFlag || commentFlag || typeFlag){
+                ExpenseMap.filteredMap.remove(entry.getKey());
+            }
+        }
     }
 
 }

@@ -13,6 +13,7 @@ public class ExpenseMap {
     
     //Fields
     public static TreeMap<Long, Expense> expenseMap;
+    public static Map<Long, Expense> filteredMap;
     private static final String filePath = System.getProperty("user.dir") + "\\data.bin";
     //Constructor
     public ExpenseMap()
@@ -93,7 +94,7 @@ public class ExpenseMap {
     }
 
     //Request Range of Dates
-    public Map<Long,Expense> getDateRange(Date start, Date end)
+    public static Map<Long,Expense> getDateRange(Date start, Date end) //Need error if no expenseMap
     {
         return expenseMap.subMap(start.getTime(),end.getTime());
     }
