@@ -19,7 +19,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.TextFormatter;
 import javafx.scene.control.TextFormatter.Change;
 
-public class FilterController implements Initializable
+public class FilterController extends MainViewController
 {
     @FXML
     private TextField minAmount;
@@ -40,7 +40,6 @@ public class FilterController implements Initializable
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        
         //Filter for monetary values
         UnaryOperator<Change> numFilter = change -> {
             String newText = change.getControlNewText();
@@ -103,7 +102,7 @@ public class FilterController implements Initializable
                 ExpenseMap.filteredMap.remove(entry.getKey());
             }
         }
-        //filterTable();
+        filterTable();
     }
 
 }
