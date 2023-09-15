@@ -325,12 +325,25 @@ public class MainViewController implements Initializable {
     private void initializeTable() {
         mainTable.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
         if(!(ExpenseMap.expenseMap == null || ExpenseMap.expenseMap.isEmpty())){
+            mainTable.getItems();
+            ObservableList<Expense> tableElements = mainTable.getItems();
             for(Map.Entry<Long,Expense> entry : ExpenseMap.expenseMap.entrySet()) {
-                ObservableList<Expense> tableElements = mainTable.getItems();
                 tableElements.add(entry.getValue());
-                mainTable.setItems(tableElements);
             }
+            mainTable.setItems(tableElements);
             mainTable.getSelectionModel().selectAll();
+        }
+    }
+
+    public void filterTable() {
+        if(!(ExpenseMap.filteredMap == null || ExpenseMap.filteredMap.isEmpty())){
+            mainTable.getItems().removeAll();
+            ObservableList<Expense> tableElements = mainTable.getItems();
+            for(Map.Entry<Long,Expense> entry : ExpenseMap.filteredMap.entrySet()) {
+                tableElements.add(entry.getValue());
+            }
+            mainTable.setItems(tableElements);
+            selectAndDeselectAll();
         }
     }
 

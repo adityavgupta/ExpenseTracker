@@ -40,7 +40,7 @@ public class FilterController implements Initializable
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
+        
         //Filter for monetary values
         UnaryOperator<Change> numFilter = change -> {
             String newText = change.getControlNewText();
@@ -63,7 +63,7 @@ public class FilterController implements Initializable
 
         //Apply monetary filter to amount filters
         TextFormatter<String> numFormatter1 = new TextFormatter<>(numFilter);
-        minAmount.setTextFormatter(numFormatter1);
+        //minAmount.setTextFormatter(numFormatter1);
         TextFormatter<String> numFormatter2 = new TextFormatter<>(numFilter);
         maxAmount.setTextFormatter(numFormatter2);
 
@@ -103,6 +103,7 @@ public class FilterController implements Initializable
                 ExpenseMap.filteredMap.remove(entry.getKey());
             }
         }
+        //filterTable();
     }
 
 }

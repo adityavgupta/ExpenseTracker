@@ -55,7 +55,7 @@ public class SummaryController implements Initializable
 
     //------- for all the functions below add Map<Long, Expense> as argument --------//
 
-    public void calculateNetExpense()
+    public void calculateNetExpense(Map<Long, Expense> data)
     {
 
     }
