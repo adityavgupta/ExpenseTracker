@@ -63,7 +63,7 @@ public class FilterController implements Initializable
 
         //Apply monetary filter to amount filters
         TextFormatter<String> numFormatter1 = new TextFormatter<>(numFilter);
-        //minAmount.setTextFormatter(numFormatter1);
+        minAmount.setTextFormatter(numFormatter1);
         TextFormatter<String> numFormatter2 = new TextFormatter<>(numFilter);
         maxAmount.setTextFormatter(numFormatter2);
 
