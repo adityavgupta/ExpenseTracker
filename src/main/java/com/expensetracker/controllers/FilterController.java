@@ -84,25 +84,31 @@ public class FilterController extends MainViewController
         Boolean credit = checkCredit.isSelected();
         Boolean debit = checkDebit.isSelected();
 
-        ExpenseMap.filteredMap = ExpenseMap.getDateRange(dateMin, dateMax);
-        for(Map.Entry<Long, Expense> entry : ExpenseMap.filteredMap.entrySet()){
+        ExpenseMap.filteredMap.clear();
+        Map<Long, Expense> tempMap = ExpenseMap.getDateRange(dateMin, dateMax);
+        //Errors first time it tries to iterate
+        for(Map.Entry<Long, Expense> entry : tempMap.entrySet()){
             Expense e = entry.getValue();
             double a = e.getAmount();
-            Date d = e.getDate();
             String p = e.getPaymentMethod();
             String c = e.getComment();
             expenseType eType = e.getExpType();
 
-            Boolean dateFlag = dateMin.after(d) || dateMax.before(d);
-            Boolean paymentFlag = !Pattern.matches(String.format(".*%s.*",paymentMethod), p);
-            Boolean commentFlag = !Pattern.matches(String.format(".*%s.*",comment), c);
+            Boolean paymentFlag = Pattern.matches(String.format(".*%s.*",paymentMethod), p);
+            Boolean commentFlag = Pattern.matches(String.format(".*%s.*",comment), c);
             Boolean typeFlag = (credit && eType == expenseType.Credit) || (debit && eType == expenseType.Debit);
 
-            if(a < amountMin || a > amountMax || dateFlag || paymentFlag || commentFlag || typeFlag){
-                ExpenseMap.filteredMap.remove(entry.getKey());
+            if(a >= amountMin && a <= amountMax && paymentFlag && commentFlag && typeFlag){
+                ExpenseMap.filteredMap.put(entry.getKey(),entry.getValue());
             }
         }
         filterTable();
+    }
+
+    @Override
+    public void filterTable()
+    {
+        super.filterTable();
     }
 
 }

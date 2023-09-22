@@ -1,6 +1,7 @@
 package com.expensetracker;
 
 import java.util.Map;
+import java.util.HashMap;
 import java.util.TreeMap;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -13,7 +14,7 @@ public class ExpenseMap {
     
     //Fields
     public static TreeMap<Long, Expense> expenseMap;
-    public static Map<Long, Expense> filteredMap;
+    public static Map<Long, Expense> filteredMap = new HashMap<>();
     private static final String filePath = System.getProperty("user.dir") + "\\data.bin";
     //Constructor
     public ExpenseMap()

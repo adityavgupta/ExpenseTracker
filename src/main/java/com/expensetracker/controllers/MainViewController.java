@@ -13,6 +13,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyCode;
 import javafx.stage.Stage;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.TextFormatter.Change;
 import javafx.scene.layout.VBox;
@@ -338,7 +339,7 @@ public class MainViewController implements Initializable {
     public void filterTable() {
         if(!(ExpenseMap.filteredMap == null || ExpenseMap.filteredMap.isEmpty())){
             mainTable.getItems().removeAll();
-            ObservableList<Expense> tableElements = mainTable.getItems();
+            ObservableList<Expense> tableElements = FXCollections.observableArrayList();
             for(Map.Entry<Long,Expense> entry : ExpenseMap.filteredMap.entrySet()) {
                 tableElements.add(entry.getValue());
             }
