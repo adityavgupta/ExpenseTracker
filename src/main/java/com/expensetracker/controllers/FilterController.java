@@ -9,17 +9,22 @@ import java.util.regex.Pattern;
 
 import com.expensetracker.Expense;
 import com.expensetracker.ExpenseMap;
+import com.expensetracker.Main;
 import com.expensetracker.Expense.expenseType;
+import com.expensetracker.controllers.MainViewController;
 
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TextFormatter;
 import javafx.scene.control.TextFormatter.Change;
+import javafx.scene.Parent;
+import javafx.event.ActionEvent;
 
-public class FilterController extends MainViewController
+public class FilterController implements Initializable
 {
     @FXML
     private TextField minAmount;
@@ -37,6 +42,8 @@ public class FilterController extends MainViewController
     private TextField paymentFilter;
     @FXML
     private TextField commentFilter;
+
+    private Parent root;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -74,7 +81,7 @@ public class FilterController extends MainViewController
     }
 
     @FXML
-    private void filter(){
+    private void filter(ActionEvent event) throws Exception{
         Date dateMin = java.sql.Date.valueOf(minDate.getValue());
         Date dateMax = java.sql.Date.valueOf(maxDate.getValue());
         double amountMin = Float.parseFloat(minAmount.getText());;
@@ -102,13 +109,9 @@ public class FilterController extends MainViewController
                 ExpenseMap.filteredMap.put(entry.getKey(),entry.getValue());
             }
         }
-        filterTable();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("MainView.fxml"));
+        root = loader.load();
+        MainViewController mvc = loader.getController();
+        mvc.filterTable();
     }
-
-    @Override
-    public void filterTable()
-    {
-        super.filterTable();
-    }
-
 }
