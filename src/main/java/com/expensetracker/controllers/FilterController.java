@@ -11,17 +11,14 @@ import com.expensetracker.Expense;
 import com.expensetracker.ExpenseMap;
 import com.expensetracker.Main;
 import com.expensetracker.Expense.expenseType;
-import com.expensetracker.controllers.MainViewController;
 
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TextFormatter;
 import javafx.scene.control.TextFormatter.Change;
-import javafx.scene.Parent;
 import javafx.event.ActionEvent;
 
 public class FilterController implements Initializable
@@ -42,8 +39,6 @@ public class FilterController implements Initializable
     private TextField paymentFilter;
     @FXML
     private TextField commentFilter;
-
-    private Parent root;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -109,9 +104,6 @@ public class FilterController implements Initializable
                 ExpenseMap.filteredMap.put(entry.getKey(),entry.getValue());
             }
         }
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("MainView.fxml"));
-        root = loader.load();
-        MainViewController mvc = loader.getController();
-        mvc.filterTable();
+        ControllerMediator.getInstance().filterTable();
     }
 }
