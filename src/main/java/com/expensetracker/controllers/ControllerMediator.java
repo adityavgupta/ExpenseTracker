@@ -16,7 +16,7 @@ public class ControllerMediator implements ControllerInterface {
 
     public void filterTable()
     {
-        mainViewController.filterTable();
+        //mainViewController.filterTable();
     }
 
     /*
