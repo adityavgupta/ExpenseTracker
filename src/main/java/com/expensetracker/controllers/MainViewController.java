@@ -257,65 +257,65 @@ public class MainViewController { // implements initializable
     //     }
     // }
 
-    // //Link to github page
-    // @FXML
-    // private void handleGitButtonClicked(ActionEvent event) {
-    //     new Application() {
-    //         @Override
-    //         public void start(Stage stage) {
-    //         }
-    //     }.getHostServices().showDocument("https://github.com/adityavgupta/ExpenseTracker");
-    //     event.consume();
-    // }
+     //Link to github page
+     @FXML
+     private void handleGitButtonClicked(ActionEvent event) {
+         new Application() {
+             @Override
+             public void start(Stage stage) {
+             }
+         }.getHostServices().showDocument("https://github.com/adityavgupta/ExpenseTracker");
+         event.consume();
+     }
 
-    // //Submit button for adding expenses
-    // @FXML
-    // private void submit(ActionEvent event) {
-    //     boolean executeSubmit = true;
-    //     try{
-    //         amtLabel.setText("Amount");
-    //         amount = Float.parseFloat(inputAmount.getText());
-    //     }
-    //     catch (NumberFormatException e)
-    //     {
-    //         inputAmount.setStyle("-fx-border-color: #FF0000");
-    //         executeSubmit = false;
-    //     }
-    //     catch (Exception e)
-    //     {
-    //         inputAmount.setStyle("-fx-border-color: #FF0000");
-    //         amtLabel.setText("Error!");
-    //         executeSubmit = false;
-    //     }
-
-    //     String paymentMethod = paymentMethodText.getText();
-    //     String comment = commentText.getText();
-    //     String creditOrDebitSelection = creditDebitDropdown.getValue();
-    //     if (creditOrDebitSelection == null)
-    //     {
-    //         creditDebitDropdown.setStyle("-fx-border-color: #FF0000");
-    //         executeSubmit = false;
-    //     }
-
-    //     Date date = null;
-
-    //     if(inputDate.getValue() == null) {
-    //         inputDate.setStyle("-fx-border-color: #FF0000");
-    //         executeSubmit = false;
-    //     } else {
-    //         date = java.sql.Date.valueOf(inputDate.getValue());
-    //     }
-
-    //     if (executeSubmit)
-    //     {
-    //         Expense expense = new Expense(amount, Expense.expenseType.valueOf(creditOrDebitSelection), date, paymentMethod, comment);
-    //         expenseTable.addExpense(expense);
-    //         ObservableList<Expense> tableElements = mainTable.getItems();
-    //         tableElements.add(expense);
-    //         mainTable.setItems(tableElements);
-    //         selectAndDeselectAll();
-    //     }
-    // }
+//     //Submit button for adding expenses
+//     @FXML
+//     private void submit(ActionEvent event) {
+//         boolean executeSubmit = true;
+//         try{
+//             amtLabel.setText("Amount");
+//             amount = Float.parseFloat(inputAmount.getText());
+//         }
+//         catch (NumberFormatException e)
+//         {
+//             inputAmount.setStyle("-fx-border-color: #FF0000");
+//             executeSubmit = false;
+//         }
+//         catch (Exception e)
+//         {
+//             inputAmount.setStyle("-fx-border-color: #FF0000");
+//             amtLabel.setText("Error!");
+//             executeSubmit = false;
+//         }
+//
+//         String paymentMethod = paymentMethodText.getText();
+//         String comment = commentText.getText();
+//         String creditOrDebitSelection = creditDebitDropdown.getValue();
+//         if (creditOrDebitSelection == null)
+//         {
+//             creditDebitDropdown.setStyle("-fx-border-color: #FF0000");
+//             executeSubmit = false;
+//         }
+//
+//         Date date = null;
+//
+//         if(inputDate.getValue() == null) {
+//             inputDate.setStyle("-fx-border-color: #FF0000");
+//             executeSubmit = false;
+//         } else {
+//             date = java.sql.Date.valueOf(inputDate.getValue());
+//         }
+//
+//         if (executeSubmit)
+//         {
+//             Expense expense = new Expense(amount, Expense.expenseType.valueOf(creditOrDebitSelection), date, paymentMethod, comment);
+//             expenseTable.addExpense(expense);
+//             ObservableList<Expense> tableElements = mainTable.getItems();
+//             tableElements.add(expense);
+//             mainTable.setItems(tableElements);
+//             selectAndDeselectAll();
+//         }
+//     }
 
     // //Load saved binary data from previous sessions into expenseMap
     // public static void initializeExpenseMap() {
