@@ -27,6 +27,64 @@ import java.util.Map;
 
 public class MainViewController implements Initializable {
 
+    @FXML
+    private VBox baseWindow;
+    private Boolean cntrlPressed = false;
+    private Boolean sPressed = false;
+    private Boolean iniTableFlag = true;
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+
+        initializeExpenseMap();
+
+        // //Save the table values when cntrl + s is pressed anywhere in the app
+        // baseWindow.setOnKeyPressed(event -> {
+        //     if(event.getCode() == KeyCode.S){
+        //         sPressed = true;
+        //     }      
+        //     if(event.getCode() == KeyCode.CONTROL){
+        //         cntrlPressed = true;
+        //     }         
+        //     if(cntrlPressed&&sPressed){
+        //         ExpenseMap.saveBinary();
+        //     }
+        // });
+
+        // /* Fix for when all elements in the table are selected on application start
+        //  * On mouse move clear selections and set flag
+        //  */
+        
+        // mainTable.setOnMouseMoved(event -> {
+        //     if(iniTableFlag){
+        //         mainTable.getSelectionModel().clearSelection();
+        //         iniTableFlag = false;
+        //     }
+        // });
+
+        // //Remove focus from other elements when base window is clicked
+        // baseWindow.setOnMouseClicked(event -> {
+        //     baseWindow.requestFocus();
+        // });
+
+        // //Remove focus from most elements when esc is pressed
+        // baseWindow.setOnKeyPressed(event -> {
+        //     if(event.getCode() == KeyCode.ESCAPE){
+        //         baseWindow.requestFocus();
+        //     }      
+        // });
+
+        // //Supporting logic for cntrl + s table save
+        // baseWindow.setOnKeyReleased(event -> {
+        //     if(event.getCode() == KeyCode.S){
+        //         sPressed = false;
+        //     }      
+        //     if(event.getCode() == KeyCode.CONTROL){
+        //         cntrlPressed = false;
+        //     }         
+        // });
+    }
+
     //Link to github page
     @FXML
     private void handleGitButtonClicked(ActionEvent event) {
@@ -36,12 +94,6 @@ public class MainViewController implements Initializable {
             }
         }.getHostServices().showDocument("https://github.com/adityavgupta/ExpenseTracker");
         event.consume();
-    }
-
-    @Override
-    public void initialize(URL location, ResourceBundle resources)
-    {
-        initializeExpenseMap();
     }
 
     // Load saved binary data from previous sessions into expenseMap
