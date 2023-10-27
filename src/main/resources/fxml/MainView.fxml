@@ -82,12 +82,12 @@
                      <tabs>
                         <Tab text="Add Expense">
                            <content>
-                              <fx:include source="AddExpenseView.fxml"/>
+                              <fx:include fx:id="addExpenseAnchorPane" source="AddExpenseView.fxml"/>
                            </content>
                         </Tab>
                         <Tab text="Filter">
                            <content>
-                              <fx:include source="FilterView.fxml"/>
+                              <fx:include fx:id="filterAnchorPane" source="FilterView.fxml"/>
                            </content>
                         </Tab>
                      </tabs>
@@ -100,7 +100,7 @@
                <tabs>
                   <Tab text="Expense Table">
                      <content>
-                        <fx:include source="TableView.fxml"/>
+                        <fx:include fx:id="tableAnchorPane" source="TableView.fxml"/>
                      </content>
                   </Tab>
                   <Tab text="Summary">

@@ -1,22 +1,34 @@
 package com.expensetracker.controllers;
 
+import com.expensetracker.Expense;
+
 public class ControllerMediator implements ControllerInterface {
     
-    private MainViewController mainViewController;
     private FilterController filterController;
+    private AddExpenseController addExpenseController;
+    private TableController tableController;
     
-    public void registerMainViewController(MainViewController mainViewController)
-    {
-        this.mainViewController = mainViewController;
-    }
+    // Register Controllers
     public void registerFilterController(FilterController filterController)
     {
         this.filterController = filterController;
     }
+    public void registerAddExpenseController(AddExpenseController addExpenseController)
+    {
+        this.addExpenseController = addExpenseController;
+    }
+    public void registerTableController(TableController tableController)
+    {
+        this.tableController = tableController;
+    }
 
+    // Table Controller Functions
     public void filterTable()
     {
         //mainViewController.filterTable();
+    }
+    public void addTableExpense(Expense e) {
+        tableController.addTableExpense(e);
     }
 
     /*

@@ -135,6 +135,13 @@ public class TableController implements Initializable{
         }
     }
 
+    public void addTableExpense(Expense e) {
+        ObservableList<Expense> tableElements = mainTable.getItems();
+        tableElements.add(e);
+        mainTable.setItems(tableElements);
+        selectAndDeselectAll();
+    }
+
     public void filterTable() {
         if(!(ExpenseMap.filteredMap == null || ExpenseMap.filteredMap.isEmpty())){
             mainTable.getItems().removeAll();

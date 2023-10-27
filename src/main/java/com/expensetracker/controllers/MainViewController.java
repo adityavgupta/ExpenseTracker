@@ -16,6 +16,7 @@ import javafx.stage.Stage;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.TextFormatter.Change;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 
 import java.net.URL;
@@ -27,17 +28,30 @@ import java.util.Map;
 
 public class MainViewController implements Initializable {
 
+    // TODO: Fix the interactions between basewindow and the table
     @FXML
     private VBox baseWindow;
     private Boolean cntrlPressed = false;
     private Boolean sPressed = false;
     private Boolean iniTableFlag = true;
 
+    @FXML
+    private AnchorPane addExpenseAnchorPane;
+    @FXML
+    private AddExpenseController addExpenseAnchorPaneController;
+
+    @FXML
+    private AnchorPane tableAnchorPane;
+    @FXML
+    private TableController tableAnchorPaneController;
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
         initializeExpenseMap();
-
+        ControllerMediator.getInstance().registerAddExpenseController(addExpenseAnchorPaneController);
+        ControllerMediator.getInstance().registerTableController(tableAnchorPaneController);
+        
         // //Save the table values when cntrl + s is pressed anywhere in the app
         // baseWindow.setOnKeyPressed(event -> {
         //     if(event.getCode() == KeyCode.S){

@@ -1,8 +1,12 @@
 package com.expensetracker.controllers;
 
-public interface ControllerInterface {
-    public void registerMainViewController(MainViewController mainViewController);
-    public void registerFilterController(FilterController filterController);
-    public void filterTable();
+import com.expensetracker.Expense;
 
+public interface ControllerInterface {
+    public void registerFilterController(FilterController filterController);
+    public void registerAddExpenseController(AddExpenseController addExpenseController);
+    public void registerTableController(TableController tableController);
+
+    public void addTableExpense(Expense e);
+    public void filterTable();
 }

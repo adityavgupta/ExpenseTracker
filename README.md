@@ -48,4 +48,4 @@ Implement this as a tab group with the table.
 - Add Comments in code for ourselves
 
 ## Necessary Code Changes
-- Make all of ExpenseMap static and adjust MainViewController for this change
+- For next time: implement cross communication between different controllers via the mediator.

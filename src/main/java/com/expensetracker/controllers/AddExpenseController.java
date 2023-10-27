@@ -166,12 +166,7 @@ public class AddExpenseController implements Initializable {
         {
             Expense expense = new Expense(amount, Expense.expenseType.valueOf(creditOrDebitSelection), date, paymentMethod, comment);
             expenseTable.addExpense(expense);
-            //TODO: implement the cross communication
-    
-            // ObservableList<Expense> tableElements = mainTable.getItems();
-            // tableElements.add(expense);
-            // mainTable.setItems(tableElements);
-            // selectAndDeselectAll();
+            ControllerMediator.getInstance().addTableExpense(expense);
         }
     }
 
