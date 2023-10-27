@@ -23,7 +23,7 @@ public class ExpenseTrackerApp extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-        //MainViewController.initializeExpenseMap();
+        MainViewController.initializeExpenseMap();
 
         Parent root = FXMLLoader.load(getClass().getResource("/fxml/MainView.fxml"));
 
