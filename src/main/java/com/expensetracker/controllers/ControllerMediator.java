@@ -25,7 +25,7 @@ public class ControllerMediator implements ControllerInterface {
     // Table Controller Functions
     public void filterTable()
     {
-        //mainViewController.filterTable();
+        tableController.filterTable();
     }
     public void addTableExpense(Expense e) {
         tableController.addTableExpense(e);

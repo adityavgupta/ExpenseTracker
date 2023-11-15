@@ -88,7 +88,7 @@ public class FilterController implements Initializable
 
         ExpenseMap.filteredMap.clear();
         Map<Long, Expense> tempMap = ExpenseMap.getDateRange(dateMin, dateMax);
-        //Errors first time it tries to iterate
+        
         for(Map.Entry<Long, Expense> entry : tempMap.entrySet()){
             Expense e = entry.getValue();
             double a = e.getAmount();

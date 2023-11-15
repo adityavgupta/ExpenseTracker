@@ -1,6 +1,9 @@
 package com.expensetracker.controllers;
 
 import com.expensetracker.ExpenseMap;
+
+import eu.hansolo.tilesfx.tools.DoubleExponentialSmoothingForLinearSeries.Model;
+
 import com.expensetracker.Expense;
 
 import javafx.application.Application;
@@ -88,6 +91,19 @@ public class TableController implements Initializable{
         amountColumn.setCellValueFactory(new PropertyValueFactory<Expense, Double>("amount"));
         commentsColumn.setCellValueFactory(new PropertyValueFactory<Expense, String>("comment"));
         paymentMethodColumn.setCellValueFactory(new PropertyValueFactory<Expense, String>("paymentMethod"));
+
+        // Format floats in the table
+        amountColumn.setCellFactory(tc -> new TableCell<Expense, Double>() {
+            @Override
+            protected void updateItem(Double amountColumn, boolean empty) {
+                super.updateItem(amountColumn, empty);
+                if (empty) {
+                    setText(null);
+                } else {
+                    setText(String.format("%.2f", amountColumn.doubleValue()));
+                }
+            }
+        });
 
         mainTable.setRowFactory(row->new TableRow<Expense>() {
             @Override

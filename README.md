@@ -45,10 +45,6 @@ Implement this as a tab group with the table.
 - Edit expenses from within the table
 - Deselect amount and date box with escape
 - Customizable date format
-- Add Comments in code for ourselves
-
-## Necessary Code Changes
-- For next time: implement cross communication between different controllers via the mediator.
 
 ## Bugs
 - Can't use esc to remove focus from input boxes with filters
@@ -57,3 +53,7 @@ Implement this as a tab group with the table.
 - How do you clean cache in VSCode?
 	- Make sure settings.json has the following setting set to false "java.debug.settings.onBuildFailureProceed": false
 	- When build fails, click fix, then clear cache
+
+## Next Time
+- Just fixed basic filter functions
+- Improve filter functions to operate independently
