@@ -50,6 +50,9 @@ Implement this as a tab group with the table.
 ## Necessary Code Changes
 - For next time: implement cross communication between different controllers via the mediator.
 
+## Bugs
+- Can't use esc to remove focus from input boxes with filters
+
 ## FAQ
 - How do you clean cache in VSCode?
 	- Make sure settings.json has the following setting set to false "java.debug.settings.onBuildFailureProceed": false

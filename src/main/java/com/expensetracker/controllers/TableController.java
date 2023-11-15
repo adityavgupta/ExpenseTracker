@@ -29,7 +29,8 @@ import java.util.Map;
 public class TableController implements Initializable{
 
     private ExpenseMap expenseTable = new ExpenseMap();
-
+    private Boolean iniTableFlag = true;
+    
     @FXML
     private TableView<Expense> mainTable;
     @FXML
@@ -43,6 +44,17 @@ public class TableController implements Initializable{
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+
+        // /* Fix for when all elements in the table are selected on application start
+        //  * On mouse move clear selections and set flag
+        //  */
+        
+        mainTable.setOnMouseMoved(event -> {
+            if(iniTableFlag){
+                mainTable.getSelectionModel().clearSelection();
+                iniTableFlag = false;
+            }
+        });
 
         //Delete selected elements from the table and expenseMap when delete is pressed while the table has focus
         mainTable.setOnKeyReleased(event -> {
