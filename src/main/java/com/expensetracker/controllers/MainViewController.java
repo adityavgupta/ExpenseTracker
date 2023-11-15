@@ -63,18 +63,11 @@ public class MainViewController implements Initializable {
             if(cntrlPressed&&sPressed){
                 ExpenseMap.saveBinary();
             }
-        });
-
-        //Remove focus from other elements when base window is clicked
-        baseWindow.setOnMouseClicked(event -> {
-            baseWindow.requestFocus();
-        });
-
-        //Remove focus from most elements when esc is pressed
-        baseWindow.setOnKeyPressed(event -> {
+            
+            //Remove focus from most elements when esc is pressed
             if(event.getCode() == KeyCode.ESCAPE){
                 baseWindow.requestFocus();
-            }      
+            }   
         });
 
         //Supporting logic for ctrl + s table save
@@ -86,6 +79,12 @@ public class MainViewController implements Initializable {
                 cntrlPressed = false;
             }         
         });
+
+        //Remove focus from other elements when base window is clicked
+        baseWindow.setOnMouseClicked(event -> {
+            baseWindow.requestFocus();
+        });
+
     }
 
     //Link to github page
