@@ -53,6 +53,7 @@ Implement this as a tab group with the table.
 - How do you clean cache in VSCode?
 	- Make sure settings.json has the following setting set to false "java.debug.settings.onBuildFailureProceed": false
 	- When build fails, click fix, then clear cache
+		- or click search bar at the top of VS Code. Select run task then Java build
 
 ## Next Time
 - Just fixed basic filter functions
