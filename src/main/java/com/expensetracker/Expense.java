@@ -51,7 +51,7 @@ public class Expense implements Serializable {
                 this.comment = paymentMethodOrComment;
                 break;
             default:
-                System.out.println("here");
+                //TODO: add error
                 //throw new Exception("Expense constructor for payment/comment flag invalid");
         }
     }

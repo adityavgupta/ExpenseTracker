@@ -131,7 +131,7 @@ public class AddExpenseController implements Initializable {
         try{
             amtLabel.setText("Amount");
             amount = Float.parseFloat(inputAmount.getText());
-            System.out.println(amount);
+            //System.out.println(amount);
         }
         catch (NumberFormatException e)
         {

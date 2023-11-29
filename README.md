@@ -2,28 +2,7 @@
 Expense Tracker made by Aditya and Brandon
 
 ## Features to Implement
-- Filters
-This would be a tab group with the amount, date, credit etc. 
-	- Date Filter
-   		>- Case1: Both dates entered, get data within that range, check start is before end.
-   		>- Case2: Only start date. Start till the last entry possible.
-     	>- Case3: Only end date. Earliest till End date.
-    	>- Nothing: All values
-    
-	- Amount Filter
- 		> similar cases as date filter
-     
-	- String Matching in comments
-  
-	- Payment Method string matching
-   
-    - Credit Debit check boxes
-      
-    - Apply button
-    	> can be triggered by enter when that tab has focus
-    
-    - Remove filter button
-    	> keybind tbd
+- Filters - DONE
 
 - Summary
 Implement this as a tab group with the table
@@ -56,5 +35,5 @@ Implement this as a tab group with the table.
 		- or click search bar at the top of VS Code. Select run task then Java build
 
 ## Next Time
-- Just fixed basic filter functions
-- Improve filter functions to operate independently
+- Clear/Apply filters toggle button
+- Summary view

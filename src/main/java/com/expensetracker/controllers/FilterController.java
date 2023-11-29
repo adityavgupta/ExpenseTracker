@@ -85,11 +85,11 @@ public class FilterController implements Initializable
         if(maxDate.getValue() != null){
             dateMax = java.sql.Date.valueOf(maxDate.getValue());
         }
-        double amountMin = Float.NaN;
+        Float amountMin = Float.NaN;
         if(!minAmount.getText().isEmpty()){
             amountMin = Float.parseFloat(minAmount.getText());
         }
-        double amountMax = Float.NaN;
+        Float amountMax = Float.NaN;
         if(!maxAmount.getText().isEmpty()){
             amountMax = Float.parseFloat(maxAmount.getText());
         }
@@ -120,10 +120,10 @@ public class FilterController implements Initializable
             if(!comment.isEmpty()){
                 commentFlag = Pattern.matches(String.format(".*%s.*",comment), c);
             }
-            if(amountMin != Float.NaN){
+            if(!amountMin.isNaN()){
                 minBoundary = a >= amountMin;
             }
-            if(amountMax != Float.NaN){
+            if(!amountMax.isNaN()){
                 maxBoundary = a <= amountMax;
             }
 
