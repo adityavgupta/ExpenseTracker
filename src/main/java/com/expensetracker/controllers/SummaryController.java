@@ -2,6 +2,7 @@ package com.expensetracker.controllers;
 
 import com.expensetracker.ExpenseMap;
 import com.expensetracker.Expense;
+import com.expensetracker.Expense.expenseType;
 
 import javafx.application.Application;
 import javafx.beans.value.ChangeListener;
@@ -48,16 +49,27 @@ public class SummaryController implements Initializable
     private Label totalProfit;
 
     @Override
-    public void initialize(URL location, ResourceBundle resources) 
+    public void initialize(URL location, ResourceBundle resources)
     {
-        // use ExpenseMap.expenseMap for setting the initial values
     }
 
     //------- for all the functions below add Map<Long, Expense> as argument --------//
 
+    public void calculateAll()
+    {
+        calculateNetExpense(ExpenseMap.filteredMap);
+    }
     public void calculateNetExpense(Map<Long, Expense> data)
     {
-
+        double tot = 0;
+        for(Map.Entry<Long, Expense> entry: data.entrySet())
+        {
+            Expense e = entry.getValue();
+            double a = e.getAmount();
+            expenseType eType = e.getExpType();
+            tot += (eType == expenseType.Debit) ? a:-1*a;
+        }
+        netExpense.setText(String.format("$%.2f", tot));
     }
 
     public void calculateAvgAnnualExpense()

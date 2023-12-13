@@ -28,6 +28,9 @@ public class ExpenseMap {
             FileInputStream fileInput = new FileInputStream(filePath);
             ObjectInputStream objectInput = new ObjectInputStream(fileInput);
             expenseMap = (TreeMap<Long, Expense>)objectInput.readObject();
+            Date dateMin = new Date(Long.MIN_VALUE);
+            Date dateMax = new Date(Long.MAX_VALUE);
+            filteredMap = getDateRange(dateMin,dateMax);
             objectInput.close();
             fileInput.close();
         }

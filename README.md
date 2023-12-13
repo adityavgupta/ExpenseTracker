@@ -24,6 +24,7 @@ Implement this as a tab group with the table.
 - Edit expenses from within the table
 - Deselect amount and date box with escape
 - Customizable date format
+- In loadBinary() perhaps try not to load the data 2 times for expense and filter. More efficient method??
 
 ## Bugs
 - Can't use esc to remove focus from input boxes with filters
@@ -37,3 +38,4 @@ Implement this as a tab group with the table.
 ## Next Time
 - Clear/Apply filters toggle button
 - Summary view
+- Right now, filtering is broken due to changes with summary controller and how filtered Map is being initialized.   

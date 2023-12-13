@@ -103,9 +103,9 @@
                         <fx:include fx:id="tableAnchorPane" source="TableView.fxml"/>
                      </content>
                   </Tab>
-                  <Tab text="Summary">
+                  <Tab fx:id="SummaryTab" text="Summary">
                      <content>
-                        <fx:include source="SummaryView.fxml"/>
+                        <fx:include fx:id="summaryAnchorPane" source="SummaryView.fxml"/>
                      </content>
                   </Tab>
                   <Tab text="Plots">

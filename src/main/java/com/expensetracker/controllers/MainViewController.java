@@ -45,12 +45,23 @@ public class MainViewController implements Initializable {
     @FXML
     private TableController tableAnchorPaneController;
 
+    @FXML
+    private AnchorPane summaryAnchorPane;
+    @FXML
+    private SummaryController summaryAnchorPaneController;
+
+    @FXML
+    private TabPane RightTabPane;
+    @FXML
+    private Tab SummaryTab;
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
-        initializeExpenseMap();
+        //initializeExpenseMap();
         ControllerMediator.getInstance().registerAddExpenseController(addExpenseAnchorPaneController);
         ControllerMediator.getInstance().registerTableController(tableAnchorPaneController);
+        ControllerMediator.getInstance().registerSummaryController(summaryAnchorPaneController);
         
         //Save the table values when cntrl + s is pressed anywhere in the app
         baseWindow.setOnKeyPressed(event -> {
@@ -83,6 +94,16 @@ public class MainViewController implements Initializable {
         //Remove focus from other elements when base window is clicked
         baseWindow.setOnMouseClicked(event -> {
             baseWindow.requestFocus();
+        });
+
+        //Summary view calculate when click in
+        RightTabPane.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Tab>() { 
+            @Override 
+            public void changed(ObservableValue<? extends Tab> observable, Tab oldTab, Tab newTab) {
+                if(newTab.equals(SummaryTab)) {            
+                    ControllerMediator.getInstance().calculateAll();
+                }
+            }
         });
 
     }
