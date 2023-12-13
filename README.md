@@ -39,3 +39,4 @@ Implement this as a tab group with the table.
 - Clear/Apply filters toggle button
 - Summary view
 - Right now, filtering is broken due to changes with summary controller and how filtered Map is being initialized.   
+- Add check on filter to see if summary tab is selected and recalculate summary values
