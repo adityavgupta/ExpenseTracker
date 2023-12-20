@@ -38,4 +38,3 @@ Implement this as a tab group with the table.
 ## Next Time
 - Clear/Apply filters toggle button
 - Summary view
-- Right now, filtering is broken due to changes with summary controller and how filtered Map is being initialized.   
