@@ -59,7 +59,7 @@ public class SummaryController implements Initializable
     {
         calculateNetExpense(ExpenseMap.filteredMap);
     }
-    public void calculateNetExpense(Map<Long, Expense> data)
+    private void calculateNetExpense(Map<Long, Expense> data)
     {
         double tot = 0;
         for(Map.Entry<Long, Expense> entry: data.entrySet())
@@ -72,32 +72,35 @@ public class SummaryController implements Initializable
         netExpense.setText(String.format("$%.2f", tot));
     }
 
-    public void calculateAvgAnnualExpense()
+    private void calculateAvgAnnualExpense()
+    {
+        double avg = 0;
+         
+    }
+
+    //Projected expense for the year
+
+    private void calculateAvgMonthlyExpense() 
     {
 
     }
 
-    public void calculateAvgMonthlyExpense() 
+    private void calculateAvgWeeklyExpense()
     {
 
     }
 
-    public void calculateAvgWeeklyExpense()
+    private void calculateAvgDailyExpense() 
     {
 
     }
 
-    public void calculateAvgDailyExpense() 
+    private void calculateNetEarning()
     {
 
     }
 
-    public void calculateNetEarning()
-    {
-
-    }
-
-    public void calculateTotalProfit()
+    private void calculateTotalProfit()
     {
 
     }

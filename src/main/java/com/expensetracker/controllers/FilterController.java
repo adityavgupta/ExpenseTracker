@@ -131,6 +131,7 @@ public class FilterController implements Initializable
                 ExpenseMap.filteredMap.put(entry.getKey(),entry.getValue());
             }
         }
+        ControllerMediator.getInstance().calculateAll();
         ControllerMediator.getInstance().filterTable();
     }
 }

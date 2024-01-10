@@ -100,7 +100,8 @@ public class ExpenseMap {
     //Request Range of Dates
     public static Map<Long,Expense> getDateRange(Date start, Date end) //Need error if no expenseMap
     {
-        return expenseMap.subMap(start.getTime(),end.getTime());
+        TreeMap<Long,Expense> temp = new TreeMap<Long,Expense>(expenseMap);
+        return temp.subMap(start.getTime(),end.getTime());
     }
 
 }

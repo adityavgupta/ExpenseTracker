@@ -28,12 +28,11 @@ import java.util.Map;
 
 public class MainViewController implements Initializable {
 
-    // TODO: Fix the interactions between basewindow and the table
     @FXML
     private VBox baseWindow;
     private Boolean cntrlPressed = false;
     private Boolean sPressed = false;
-    
+    private Boolean summaryFirstClick = true;
 
     @FXML
     private AnchorPane addExpenseAnchorPane;
@@ -100,8 +99,9 @@ public class MainViewController implements Initializable {
         RightTabPane.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Tab>() { 
             @Override 
             public void changed(ObservableValue<? extends Tab> observable, Tab oldTab, Tab newTab) {
-                if(newTab.equals(SummaryTab)) {            
+                if(newTab.equals(SummaryTab) && summaryFirstClick == true) {            
                     ControllerMediator.getInstance().calculateAll();
+                    summaryFirstClick = false;
                 }
             }
         });
