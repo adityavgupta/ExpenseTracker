@@ -15,23 +15,31 @@
 
 }
 
+/*
 .tab{
     -fx-background-color: transparent;
     -fx-background-insets: 0.0;
     -fx-background-radius: 0.0;
     -fx-padding: 0 30 0 30;
+}*/
+
+.tab
+{
+    -fx-background-insets: 0.0;
+    -fx-background-radius: 0.0;
+    -fx-padding: 0 30 0 30;
+    -fx-background-color: derive(-primary, 10%);
+    -fx-border-width: 0 0 2 0;
+    -fx-border-color: #3fe3868e;
 }
 
 .tab:selected
 {
-    -fx-background-color: derive(-primary, 10%);;
+    -fx-background-color: transparent;
     -fx-background-radius: 0;
     -fx-background-insets: 0;
-    -fx-border-width: 5 0 0 0;
-    -fx-border-color: #3FE387;
-
-
-
+    -fx-border-width: 2 2 0 2;
+    -fx-border-color: #3fe3868e;
 }
 
 .tab:focused

@@ -13,6 +13,7 @@ Expense Tracker made by Aditya and Brandon
 - Deselect amount and date box with escape
 - Customizable date format
 - Applying a filter that doesn't match anything should at least give a pop up.
+- Filter tab invalid inputs highlight red
 
 ## Bugs
 - Can't use esc to remove focus from input boxes with filters
@@ -24,11 +25,9 @@ Expense Tracker made by Aditya and Brandon
 		- or click search bar at the top of VS Code. Select run task then Java build
 
 ## Next Time
-- Clear/Apply filters toggle button
-- Restructure scenebuilder stuff to one tab pane.
-- Tab1 add expense and table
-- Tab2 plots and summary
-- On both we want filters. Either part of each tab or existing as its own anchor pane. TBD
+- Yahoo Tab
+- More summary calculations
 
 ## Maybe feature
 - Add Category to expenses
+- Filter with no matches does nothing. Change this?

@@ -65,9 +65,9 @@
             </HBox>
          </children>
       </AnchorPane>
-      <TabPane prefHeight="673.0" prefWidth="1307.0" tabClosingPolicy="UNAVAILABLE">
+      <TabPane fx:id="MainTabPane" prefHeight="673.0" prefWidth="1307.0" tabClosingPolicy="UNAVAILABLE">
         <tabs>
-          <Tab text="Retro View">
+          <Tab fx:id="RetroTab" text="Retro View">
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
@@ -75,12 +75,12 @@
                            <children>
                               <AnchorPane prefHeight="569.0" prefWidth="654.0">
                                  <children>
-                                    <fx:include source="AddExpenseView.fxml" />
+                                    <fx:include fx:id="addExpenseAnchorPane" source="AddExpenseView.fxml" />
                                  </children>
                               </AnchorPane>
                               <AnchorPane prefHeight="200.0" prefWidth="653.0">
                                  <children>
-                                    <fx:include source="TableView.fxml" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                                    <fx:include fx:id="tableAnchorPane" source="TableView.fxml" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                                  </children>
                               </AnchorPane>
                            </children>
@@ -89,11 +89,11 @@
                   </AnchorPane>
             </content>
           </Tab>
-          <Tab text="Yahoo view">
+          <Tab fx:id="YahooTab" text="Yahoo view">
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <fx:include source="SummaryView.fxml" />
+                        <fx:include fx:id="summaryAnchorPane" source="SummaryView.fxml" />
                      </children>
                   </AnchorPane>
             </content>
@@ -104,7 +104,7 @@
          <children>
             <AnchorPane layoutX="200.0" prefHeight="82.0" prefWidth="908.0" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="0.0">
                <children>
-                  <fx:include source="FilterView.fxml" />
+                  <fx:include fx:id="filterAnchorPane" source="FilterView.fxml" />
                </children>
             </AnchorPane>
          </children>

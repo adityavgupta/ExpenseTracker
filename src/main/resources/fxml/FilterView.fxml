@@ -26,7 +26,8 @@
       <Text fill="#00000080" layoutX="507.0" layoutY="28.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Payment Method" />
       <AnchorPane layoutX="736.0" layoutY="41.0" prefHeight="25.0" prefWidth="139.0">
          <children>
-            <Button fx:id="applyFilter" depthTest="DISABLE" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" onAction="#filter" prefHeight="25.0" prefWidth="141.0" text="Filter" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+            <Button fx:id="applyFilter" depthTest="DISABLE" maxHeight="25.0" maxWidth="103.0" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" onAction="#filter" prefHeight="25.0" prefWidth="103.0" text="Filter" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="36.0" AnchorPane.topAnchor="0.0" />
+            <Button fx:id="refreshButton" layoutX="112.0" maxHeight="25.0" maxWidth="25.0" mnemonicParsing="false" onAction="#unfilter" prefHeight="25.0" prefWidth="25.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="112.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
          </children>
       </AnchorPane>
    </children>

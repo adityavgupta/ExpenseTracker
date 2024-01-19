@@ -50,9 +50,9 @@ public class MainViewController implements Initializable {
     private SummaryController summaryAnchorPaneController;
 
     @FXML
-    private TabPane RightTabPane;
+    private TabPane MainTabPane;
     @FXML
-    private Tab SummaryTab;
+    private Tab YahooTab;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -96,14 +96,14 @@ public class MainViewController implements Initializable {
         });
 
         //Summary view calculate when click in
-//        RightTabPane.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Tab>() {
-//            @Override
-//            public void changed(ObservableValue<? extends Tab> observable, Tab oldTab, Tab newTab) {
-//                if(newTab.equals(SummaryTab)) {
-//                    ControllerMediator.getInstance().calculateAll();
-//                }
-//            }
-//        });
+        MainTabPane.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Tab>() {
+            @Override
+            public void changed(ObservableValue<? extends Tab> observable, Tab oldTab, Tab newTab) {
+                if(newTab.equals(YahooTab)) {
+                    ControllerMediator.getInstance().calculateAll();
+                }
+            }
+        });
 
     }
 
