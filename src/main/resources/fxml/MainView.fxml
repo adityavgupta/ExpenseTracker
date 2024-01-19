@@ -1,23 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ChoiceBox?>
-<?import javafx.scene.control.DatePicker?>
-<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.SeparatorMenuItem?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
-<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Font?>
-<?import javafx.scene.text.Text?>
 
 <VBox fx:id="baseWindow" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="749.0" minWidth="1337.0" prefHeight="749.0" prefWidth="1337.0" styleClass="background-pane" stylesheets="@../css/application.css, @../css/tabs.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.expensetracker.controllers.MainViewController">
    <children>
@@ -73,50 +65,49 @@
             </HBox>
          </children>
       </AnchorPane>
-      <HBox prefHeight="367.0" prefWidth="1307.0" VBox.vgrow="ALWAYS">
+      <TabPane prefHeight="673.0" prefWidth="1307.0" tabClosingPolicy="UNAVAILABLE">
+        <tabs>
+          <Tab text="Retro View">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <HBox layoutX="1.0" layoutY="-1.0" prefHeight="569.0" prefWidth="1307.0">
+                           <children>
+                              <AnchorPane prefHeight="569.0" prefWidth="654.0">
+                                 <children>
+                                    <fx:include source="AddExpenseView.fxml" />
+                                 </children>
+                              </AnchorPane>
+                              <AnchorPane prefHeight="200.0" prefWidth="653.0">
+                                 <children>
+                                    <fx:include source="TableView.fxml" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                                 </children>
+                              </AnchorPane>
+                           </children>
+                        </HBox>
+                     </children>
+                  </AnchorPane>
+            </content>
+          </Tab>
+          <Tab text="Yahoo view">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <fx:include source="SummaryView.fxml" />
+                     </children>
+                  </AnchorPane>
+            </content>
+          </Tab>
+        </tabs>
+      </TabPane>
+      <AnchorPane prefHeight="133.0" prefWidth="1197.0" VBox.vgrow="ALWAYS">
          <children>
-            <VBox prefHeight="683.0" prefWidth="68.0" HBox.hgrow="ALWAYS" />
-            <VBox alignment="TOP_CENTER" HBox.hgrow="NEVER">
+            <AnchorPane layoutX="200.0" prefHeight="82.0" prefWidth="908.0" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="0.0">
                <children>
-                  <TabPane fx:id="LeftTabPane" prefHeight="685.0" prefWidth="830.0" styleClass="highlight-rectangle" tabClosingPolicy="UNAVAILABLE">
-                     <tabs>
-                        <Tab text="Add Expense">
-                           <content>
-                              <fx:include fx:id="addExpenseAnchorPane" source="AddExpenseView.fxml"/>
-                           </content>
-                        </Tab>
-                        <Tab text="Filter">
-                           <content>
-                              <fx:include fx:id="filterAnchorPane" source="FilterView.fxml"/>
-                           </content>
-                        </Tab>
-                     </tabs>
-                  </TabPane>
+                  <fx:include source="FilterView.fxml" />
                </children>
-            </VBox>
-            <VBox prefHeight="200.0" prefWidth="300.0" HBox.hgrow="ALWAYS" />
-            <VBox prefHeight="200.0" prefWidth="250.0" />
-            <TabPane fx:id="RightTabPane" prefHeight="601.0" prefWidth="882.0" styleClass="highlight-rectangle" tabClosingPolicy="UNAVAILABLE">
-               <tabs>
-                  <Tab text="Expense Table">
-                     <content>
-                        <fx:include fx:id="tableAnchorPane" source="TableView.fxml"/>
-                     </content>
-                  </Tab>
-                  <Tab fx:id="SummaryTab" text="Summary">
-                     <content>
-                        <fx:include fx:id="summaryAnchorPane" source="SummaryView.fxml"/>
-                     </content>
-                  </Tab>
-                  <Tab text="Plots">
-                     <content>
-                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
-                     </content>
-                  </Tab>
-               </tabs>
-            </TabPane>
+            </AnchorPane>
          </children>
-      </HBox>
-      <HBox maxHeight="100.0" VBox.vgrow="ALWAYS" />
+      </AnchorPane>
    </children>
 </VBox>

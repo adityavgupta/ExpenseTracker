@@ -96,15 +96,14 @@ public class MainViewController implements Initializable {
         });
 
         //Summary view calculate when click in
-        RightTabPane.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Tab>() { 
-            @Override 
-            public void changed(ObservableValue<? extends Tab> observable, Tab oldTab, Tab newTab) {
-                if(newTab.equals(SummaryTab) && summaryFirstClick == true) {            
-                    ControllerMediator.getInstance().calculateAll();
-                    summaryFirstClick = false;
-                }
-            }
-        });
+//        RightTabPane.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Tab>() {
+//            @Override
+//            public void changed(ObservableValue<? extends Tab> observable, Tab oldTab, Tab newTab) {
+//                if(newTab.equals(SummaryTab)) {
+//                    ControllerMediator.getInstance().calculateAll();
+//                }
+//            }
+//        });
 
     }
 
