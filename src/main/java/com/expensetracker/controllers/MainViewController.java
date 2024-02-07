@@ -32,7 +32,6 @@ public class MainViewController implements Initializable {
     private VBox baseWindow;
     private Boolean cntrlPressed = false;
     private Boolean sPressed = false;
-    private Boolean summaryFirstClick = true;
 
     @FXML
     private AnchorPane addExpenseAnchorPane;
@@ -45,9 +44,9 @@ public class MainViewController implements Initializable {
     private TableController tableAnchorPaneController;
 
     @FXML
-    private AnchorPane summaryAnchorPane;
+    private AnchorPane lineGraphAnchorPane;
     @FXML
-    private SummaryController summaryAnchorPaneController;
+    private LineGraphController lineGraphAnchorPaneController;
 
     @FXML
     private TabPane MainTabPane;
@@ -60,7 +59,7 @@ public class MainViewController implements Initializable {
         //initializeExpenseMap();
         ControllerMediator.getInstance().registerAddExpenseController(addExpenseAnchorPaneController);
         ControllerMediator.getInstance().registerTableController(tableAnchorPaneController);
-        ControllerMediator.getInstance().registerSummaryController(summaryAnchorPaneController);
+        ControllerMediator.getInstance().registerLineGraphController(lineGraphAnchorPaneController);
         
         //Save the table values when cntrl + s is pressed anywhere in the app
         baseWindow.setOnKeyPressed(event -> {
@@ -100,7 +99,8 @@ public class MainViewController implements Initializable {
             @Override
             public void changed(ObservableValue<? extends Tab> observable, Tab oldTab, Tab newTab) {
                 if(newTab.equals(YahooTab)) {
-                    ControllerMediator.getInstance().calculateAll();
+                    //ControllerMediator.getInstance().calculateAll();
+                    ControllerMediator.getInstance().updateData();
                 }
             }
         });

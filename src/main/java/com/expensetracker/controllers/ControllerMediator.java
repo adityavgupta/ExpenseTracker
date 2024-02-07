@@ -8,6 +8,7 @@ public class ControllerMediator implements ControllerInterface {
     private AddExpenseController addExpenseController;
     private TableController tableController;
     private SummaryController summaryController;
+    private LineGraphController lineGraphController;
     
     // Register Controllers
     public void registerFilterController(FilterController filterController)
@@ -26,6 +27,10 @@ public class ControllerMediator implements ControllerInterface {
     {
         this.summaryController = summaryController;
     }
+    public void registerLineGraphController(LineGraphController lineGraphController)
+    {
+        this.lineGraphController = lineGraphController;
+    }
 
     // Table Controller Functions
     public void filterTable()
@@ -38,6 +43,9 @@ public class ControllerMediator implements ControllerInterface {
     public void calculateAll()
     {
         summaryController.calculateAll();   
+    }
+    public void updateData(){
+        lineGraphController.updateData();
     }
 
     /*

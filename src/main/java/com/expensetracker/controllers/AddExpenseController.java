@@ -168,6 +168,7 @@ public class AddExpenseController implements Initializable {
             Expense expense = new Expense(amount, Expense.expenseType.valueOf(creditOrDebitSelection), date, paymentMethod, comment);
             expenseTable.addExpense(expense);
             ControllerMediator.getInstance().addTableExpense(expense);
+            ControllerMediator.getInstance().updateData();
         }
     }
 

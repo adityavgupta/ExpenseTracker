@@ -188,7 +188,7 @@ public class FilterController implements Initializable
                     ExpenseMap.filteredMap.put(entry.getKey(),entry.getValue());
                 }
             }
-            ControllerMediator.getInstance().calculateAll();
+            ControllerMediator.getInstance().updateData();
             ControllerMediator.getInstance().filterTable();
         }
     }
@@ -213,7 +213,7 @@ public class FilterController implements Initializable
         Date dMin = new Date(Long.MIN_VALUE);
         Date dMax = new Date(Long.MAX_VALUE);
         ExpenseMap.filteredMap = ExpenseMap.getDateRange(dMin, dMax);
-        ControllerMediator.getInstance().calculateAll();
+        ControllerMediator.getInstance().updateData();
         ControllerMediator.getInstance().filterTable();
     }
 

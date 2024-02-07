@@ -27,6 +27,7 @@ import java.util.Map;
 
 public class SummaryController implements Initializable
 {
+    /* 
     @FXML
     private Label netExpense;
 
@@ -46,7 +47,7 @@ public class SummaryController implements Initializable
     private Label netEarning;
 
     @FXML
-    private Label totalProfit;
+    private Label totalProfit;*/
 
     @Override
     public void initialize(URL location, ResourceBundle resources)
@@ -69,7 +70,7 @@ public class SummaryController implements Initializable
             expenseType eType = e.getExpType();
             tot += (eType == expenseType.Debit) ? a:-1*a;
         }
-        netExpense.setText(String.format("$%.2f", tot));
+        //netExpense.setText(String.format("$%.2f", tot));
     }
 
     private void calculateAvgAnnualExpense()
