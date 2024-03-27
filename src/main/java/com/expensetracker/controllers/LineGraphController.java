@@ -21,14 +21,13 @@ import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 
-import com.expensetracker.DateAxis;
 import com.expensetracker.Expense;
 import com.expensetracker.Expense.expenseType;
 import com.expensetracker.ExpenseMap;
 
 public class LineGraphController implements Initializable {
 
-    private ObservableList<XYChart.Series<Date, Number>> series = FXCollections.observableArrayList();
+    private XYChart.Series<String,Number> series;
 
     @FXML
     private AnchorPane lineGraphAnchorPane;
@@ -44,44 +43,39 @@ public class LineGraphController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources)
     {
+        //lineGraph.setTitle("Title");
+        lineGraph.setLegendVisible(false);
+        series = new XYChart.Series();
+        yAxis.setLabel("$");
+        xAxis.setLabel("Date");
+        lineGraph.getData().addAll(series);
         updateData();
     }
 
      public void updateData() {
-         lineGraph.setTitle("Exemplo Gráfico");
-         yAxis.setLabel("Valores");
-         xAxis.setLabel("Meses");
 
-         XYChart.Series series = new XYChart.Series();
-         series.setName("Ano: 2018");
-         series.getData().add(new XYChart.Data("Jan", 23));
-         series.getData().add(new XYChart.Data("Feb", 14));
-         series.getData().add(new XYChart.Data("Mar", 15));
-         //series.getData().add(new XYChart.Data("Apr", 24));
-         series.getData().add(new XYChart.Data("May", 34));
-         series.getData().add(new XYChart.Data("Jun", 36));
-         series.getData().add(new XYChart.Data("Jul", 22));
-         series.getData().add(new XYChart.Data("Aug", 45));
-         series.getData().add(new XYChart.Data("Sep", 43));
-         series.getData().add(new XYChart.Data("Oct", 17));
-         series.getData().add(new XYChart.Data("Nov", 29));
-         series.getData().add(new XYChart.Data("Dec", 25));
-
-         XYChart.Series series2 = new XYChart.Series();
-         series2.setName("Ano: 2019");
-         series2.getData().add(new XYChart.Data("Jan", 28));
-         series2.getData().add(new XYChart.Data("Feb", 17));
-         series2.getData().add(new XYChart.Data("Mar", 19));
-         //series2.getData().add(new XYChart.Data("Apr", 14));
-         series2.getData().add(new XYChart.Data("May", 20));
-         series2.getData().add(new XYChart.Data("Jun", 42));
-         series2.getData().add(new XYChart.Data("Jul", 27));
-         series2.getData().add(new XYChart.Data("Aug", 48));
-         series2.getData().add(new XYChart.Data("Sep", 47));
-         series2.getData().add(new XYChart.Data("Oct", 19));
-         series2.getData().add(new XYChart.Data("Nov", 39));
-         series2.getData().add(new XYChart.Data("Dec", 29));
-
-         lineGraph.getData().addAll(series, series2);
+        series.getData().clear();
+        Map<Long, Expense> data = ExpenseMap.filteredMap;
+        double tot = 0;
+        Long pastUID = Long.MIN_VALUE;
+        Boolean flag = true;
+        String strDate = "";
+        for(Map.Entry<Long, Expense> entry: data.entrySet())
+        {
+            Expense e = entry.getValue();
+            if(!flag && pastUID/1000 != e.getUID()/1000) {
+                series.getData().add(new XYChart.Data(strDate, tot));
+            }
+            flag = false;
+            pastUID = e.getUID();
+            double a = e.getAmount();
+            expenseType eType = e.getExpType();
+            DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+            strDate = dateFormat.format(e.getDate());
+            tot += (eType == expenseType.Debit) ? a:-1*a;
+        }
+        if(!flag) {
+            series.getData().add(new XYChart.Data(strDate, tot));
+        }
      }
 }
