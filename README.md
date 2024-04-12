@@ -25,10 +25,11 @@ Expense Tracker made by Aditya and Brandon
 		- or click search bar at the top of VS Code. Select run task then Java build
 
 ## Next Time
-- Timescale on plot
 - Plot on hover display values on axis (ideally use closest datapoint and indicate this datapoint)
 - Make plot look better
 - More summary calculations
+- Deleting from table does not update plot
+- Diagonal lines on plot that shouldn't be there
 
 ## Maybe feature
 - Add Category to expenses

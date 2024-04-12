@@ -13,10 +13,17 @@ import javafx.stage.Stage;
 import java.net.URL;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.ResourceBundle;
+import java.util.Set;
+import java.util.TreeMap;
+
+import javax.sound.midi.SysexMessage;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -28,7 +35,7 @@ import com.expensetracker.ExpenseMap;
 public class LineGraphController implements Initializable {
 
     private XYChart.Series<String,Number> series;
-
+    private long dayInMils = 86400000;
     @FXML
     private AnchorPane lineGraphAnchorPane;
 
@@ -57,25 +64,47 @@ public class LineGraphController implements Initializable {
         series.getData().clear();
         Map<Long, Expense> data = ExpenseMap.filteredMap;
         double tot = 0;
-        Long pastUID = Long.MIN_VALUE;
-        Boolean flag = true;
+        Long pastDay = Long.MIN_VALUE;
+        Boolean firstDay = true;
         String strDate = "";
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+
         for(Map.Entry<Long, Expense> entry: data.entrySet())
         {
-            Expense e = entry.getValue();
-            if(!flag && pastUID/1000 != e.getUID()/1000) {
+            if(firstDay)
+            {
+                firstDay = false;
+                Expense e = entry.getValue();
+                expenseType eType = e.getExpType();
+                double a = e.getAmount();
+                strDate = dateFormat.format(e.getDate());
+                tot += (eType == expenseType.Debit) ? a:-1*a;
                 series.getData().add(new XYChart.Data(strDate, tot));
+                pastDay = e.getUID()/dayInMils;
             }
-            flag = false;
-            pastUID = e.getUID();
-            double a = e.getAmount();
-            expenseType eType = e.getExpType();
-            DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
-            strDate = dateFormat.format(e.getDate());
-            tot += (eType == expenseType.Debit) ? a:-1*a;
-        }
-        if(!flag) {
-            series.getData().add(new XYChart.Data(strDate, tot));
+            else
+            {
+                Expense e = entry.getValue();
+                Long currentDay = e.getUID()/dayInMils;
+                double a = e.getAmount();
+                expenseType eType = e.getExpType();
+
+                if(pastDay != currentDay) 
+                {
+                    // Find number of days between
+                    Long fillCount = currentDay - pastDay;
+                    for(int i = 0; i < fillCount; i++)
+                    {
+                        // get the days between any two days and fill them in including the second day
+                        Date d = new Date(e.getDate().getTime()-(fillCount-i-1)*dayInMils);
+                        series.getData().add(new XYChart.Data(dateFormat.format(d), tot));
+                    }
+                    strDate = dateFormat.format(e.getDate());
+                    tot += (eType == expenseType.Debit) ? a:-1*a;
+                    series.getData().add(new XYChart.Data(strDate, tot));
+                }
+                pastDay = e.getUID()/dayInMils;
+            }
         }
      }
 }
