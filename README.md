@@ -29,7 +29,8 @@ Expense Tracker made by Aditya and Brandon
 - Make plot look better
 - More summary calculations
 - Deleting from table does not update plot
-- Diagonal lines on plot that shouldn't be there
+- Right now have to click the filter and refresh twice to get the correct rendering on the date axis. Will Potentiallly
+need to fix the sort and stuff to resolve this.
 
 ## Maybe feature
 - Add Category to expenses
