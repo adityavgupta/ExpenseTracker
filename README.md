@@ -31,6 +31,7 @@ Expense Tracker made by Aditya and Brandon
 - Deleting from table does not update plot
 - Right now have to click the filter and refresh twice to get the correct rendering on the date axis. Will Potentiallly
 need to fix the sort and stuff to resolve this.
+- Look into localdate from datepicker and timezone issue for expense dates
 
 ## Maybe feature
 - Add Category to expenses

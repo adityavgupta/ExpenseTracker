@@ -161,6 +161,7 @@ public class AddExpenseController implements Initializable {
             executeSubmit = false;
         } else {
             date = java.sql.Date.valueOf(inputDate.getValue());
+            //System.out.println("inputDate.getValue().getYear() inputDate.getValue().getMonth() + inputDate.getValue().getDayOfMonth()");
         }
 
         if (executeSubmit)

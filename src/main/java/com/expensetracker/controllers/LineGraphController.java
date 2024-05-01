@@ -79,7 +79,7 @@ public class LineGraphController implements Initializable {
         {
             e = entry.getValue();
             Long currentDay = e.getUID()/dayInMils;
-            System.out.println(new Date(e.getDate().getTime()));
+            //System.out.println(new Date(e.getDate().getTime()));
             double a = e.getAmount();
             expenseType eType = e.getExpType();
 
