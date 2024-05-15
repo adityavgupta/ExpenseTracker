@@ -60,6 +60,7 @@ public class LineGraphController implements Initializable {
         xAxis.setLabel("Date");
         lineGraph.getData().addAll(series);
         lineGraph.setAnimated(false);
+        lineGraph.setCreateSymbols(false);
         updateData();
     }
 
@@ -86,15 +87,18 @@ public class LineGraphController implements Initializable {
             if(!pastDay.equals(currentDay) && !firstDay) 
             {
                 // Find number of days between
-                Long fillCount = currentDay - pastDay;
+                int fillCount = (int)(currentDay - pastDay);
                 for(int i = 0; i < fillCount; i++)
                 {
                     // get the days between any two days and fill them in including the second day
-                    Date d = new Date(e.getDate().getTime()-(fillCount-i-1)*dayInMils);
+                    Date d = new Date(e.getDate().getYear(),e.getDate().getMonth(),e.getDate().getDate()-(fillCount-i-1));
+                    System.out.println(d.toString() + " " + tot);
                     series.getData().add(new XYChart.Data(dateFormat.format(d), tot));
                 }
+                //TODO: Remove extra miliseconds here
                 strDate = dateFormat.format(pastE.getDate());
                 series.getData().add(new XYChart.Data(strDate, tot));
+                System.out.println(pastE.getDate().toString() + " " + tot);
             }
             firstDay = false;
             pastDay = e.getUID()/dayInMils;
@@ -106,6 +110,7 @@ public class LineGraphController implements Initializable {
             strDate = dateFormat.format(e.getDate());
             series.getData().add(new XYChart.Data(strDate, tot));
             series.getData().sort(new LineChartComparator());
+            System.out.println(series.getData().toString());
         }
      }
 
