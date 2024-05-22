@@ -2,13 +2,18 @@ package com.expensetracker.controllers;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.scene.Cursor;
 import javafx.scene.Scene;
 import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
 import javafx.scene.chart.XYChart.Data;
+import javafx.scene.control.Label;
+import javafx.scene.control.Tooltip;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.StackPane;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 import java.net.URL;
@@ -35,6 +40,10 @@ import com.expensetracker.Expense;
 import com.expensetracker.Expense.expenseType;
 import com.expensetracker.ExpenseMap;
 
+import javafx.event.EventHandler;
+import javafx.scene.input.MouseEvent;
+
+
 public class LineGraphController implements Initializable {
 
     private XYChart.Series<String,Number> series;
@@ -60,7 +69,8 @@ public class LineGraphController implements Initializable {
         xAxis.setLabel("Date");
         lineGraph.getData().addAll(series);
         lineGraph.setAnimated(false);
-        lineGraph.setCreateSymbols(false);
+        //lineGraph.setCreateSymbols(false);
+        lineGraph.setCursor(Cursor.CROSSHAIR);
         updateData();
     }
 
@@ -80,7 +90,6 @@ public class LineGraphController implements Initializable {
         {
             e = entry.getValue();
             Long currentDay = e.getUID()/dayInMils;
-            //System.out.println(new Date(e.getDate().getTime()));
             double a = e.getAmount();
             expenseType eType = e.getExpType();
 
@@ -91,14 +100,13 @@ public class LineGraphController implements Initializable {
                 for(int i = 0; i < fillCount; i++)
                 {
                     // get the days between any two days and fill them in including the second day
-                    Date d = new Date(e.getDate().getYear(),e.getDate().getMonth(),e.getDate().getDate()-(fillCount-i-1));
-                    System.out.println(d.toString() + " " + tot);
-                    series.getData().add(new XYChart.Data(dateFormat.format(d), tot));
+                    Date d = new Date(e.getDate().getYear(),e.getDate().getMonth(),e.getDate().getDate()-(fillCount-i));
+                    if(d.compareTo(new Date(pastE.getDate().getYear(),pastE.getDate().getMonth(),pastE.getDate().getDate())) != 0){
+                        series.getData().add(new XYChart.Data(dateFormat.format(d), tot));
+                    }
                 }
-                //TODO: Remove extra miliseconds here
                 strDate = dateFormat.format(pastE.getDate());
                 series.getData().add(new XYChart.Data(strDate, tot));
-                System.out.println(pastE.getDate().toString() + " " + tot);
             }
             firstDay = false;
             pastDay = e.getUID()/dayInMils;
@@ -110,7 +118,11 @@ public class LineGraphController implements Initializable {
             strDate = dateFormat.format(e.getDate());
             series.getData().add(new XYChart.Data(strDate, tot));
             series.getData().sort(new LineChartComparator());
-            System.out.println(series.getData().toString());
+            for(Data<String,Number> entry: series.getData()){
+                Tooltip t = new Tooltip(entry.getYValue().toString());
+                Tooltip.install(entry.getNode(), t);
+            }
+            // System.out.println(series.getData().toString());
         }
      }
 
@@ -133,4 +145,5 @@ public class LineGraphController implements Initializable {
             return temp == 0 ? 1:temp;
         }
     }
+
 }
