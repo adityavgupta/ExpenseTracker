@@ -13,4 +13,7 @@ public interface ControllerInterface {
     public void filterTable();
     public void calculateAll();
     public void updateData();
+
+    // Filter Controller methods
+    public void setEditablePropertyMinAndMaxAmount(boolean value) throws Exception;
 }

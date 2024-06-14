@@ -44,14 +44,24 @@ public class MainViewController implements Initializable {
     private TableController tableAnchorPaneController;
 
     @FXML
+    private AnchorPane filterAnchorPane;
+    @FXML
+    private FilterController filterAnchorPaneController;
+
+    @FXML
     private AnchorPane lineGraphAnchorPane;
     @FXML
     private LineGraphController lineGraphAnchorPaneController;
 
     @FXML
     private TabPane MainTabPane;
+
+    @FXML
+    private Tab RetroTab;
+
     @FXML
     private Tab YahooTab;
+
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -60,6 +70,7 @@ public class MainViewController implements Initializable {
         ControllerMediator.getInstance().registerAddExpenseController(addExpenseAnchorPaneController);
         ControllerMediator.getInstance().registerTableController(tableAnchorPaneController);
         ControllerMediator.getInstance().registerLineGraphController(lineGraphAnchorPaneController);
+        ControllerMediator.getInstance().registerFilterController(filterAnchorPaneController);
         
         //Save the table values when cntrl + s is pressed anywhere in the app
         baseWindow.setOnKeyPressed(event -> {
@@ -94,13 +105,25 @@ public class MainViewController implements Initializable {
             baseWindow.requestFocus();
         });
 
-        //Summary view calculate when click in
+        // Updates when tab is changed
         MainTabPane.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Tab>() {
             @Override
             public void changed(ObservableValue<? extends Tab> observable, Tab oldTab, Tab newTab) {
                 if(newTab.equals(YahooTab)) {
-                    //ControllerMediator.getInstance().calculateAll();
+                    try {
+                        ControllerMediator.getInstance().setEditablePropertyMinAndMaxAmount(false);
+                    } catch (Exception e) {
+                        throw new RuntimeException(e);
+                    }
                     ControllerMediator.getInstance().updateData();
+                }
+                if(newTab.equals(RetroTab))
+                {
+                    try {
+                        ControllerMediator.getInstance().setEditablePropertyMinAndMaxAmount(true);
+                    } catch (Exception e) {
+                        throw new RuntimeException(e);
+                    }
                 }
             }
         });

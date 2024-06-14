@@ -48,6 +48,11 @@ public class ControllerMediator implements ControllerInterface {
         lineGraphController.updateData();
     }
 
+    // Filter Controller methods
+    public void setEditablePropertyMinAndMaxAmount(boolean value) throws Exception
+    {
+        filterController.setEditablePropertyMinAndMaxAmount(value);
+    }
     /*
      * Everything below here is in support of Singleton pattern
      */

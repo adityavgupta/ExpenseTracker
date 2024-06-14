@@ -217,4 +217,18 @@ public class FilterController implements Initializable
         ControllerMediator.getInstance().filterTable();
     }
 
+    // Filter Controller methods
+    public void setEditablePropertyMinAndMaxAmount(boolean value) throws Exception
+    {
+        if (!value)
+        {
+            minAmount.clear();
+            maxAmount.clear();
+
+            filter(new ActionEvent());
+        }
+        minAmount.setEditable(value);
+        maxAmount.setEditable(value);
+    }
+
 }

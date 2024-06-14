@@ -25,10 +25,10 @@ Expense Tracker made by Aditya and Brandon
 		- or click search bar at the top of VS Code. Select run task then Java build
 
 ## Next Time
-- Plot on hover display values on axis (ideally use closest datapoint and indicate this datapoint)
 - Make plot look better (remove ramps)
 - More summary calculations
-- Deleting from table does not update plot
+- Change the CSS for the min and max boxes to grayed out on changing tab to Yahoo View
+- Eventually add node selection and calculations between node selections
 
 ## Maybe feature
 - Add Category to expenses

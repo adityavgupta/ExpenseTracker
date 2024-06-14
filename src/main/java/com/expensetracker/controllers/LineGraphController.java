@@ -42,6 +42,7 @@ import com.expensetracker.ExpenseMap;
 
 import javafx.event.EventHandler;
 import javafx.scene.input.MouseEvent;
+import javafx.util.Duration;
 
 
 public class LineGraphController implements Initializable {
@@ -65,7 +66,7 @@ public class LineGraphController implements Initializable {
         //lineGraph.setTitle("Title");
         lineGraph.setLegendVisible(false);
         series = new XYChart.Series();
-        yAxis.setLabel("$");
+        yAxis.setLabel("$ Total expense");
         xAxis.setLabel("Date");
         lineGraph.getData().addAll(series);
         lineGraph.setAnimated(false);
@@ -103,6 +104,8 @@ public class LineGraphController implements Initializable {
                     Date d = new Date(e.getDate().getYear(),e.getDate().getMonth(),e.getDate().getDate()-(fillCount-i));
                     if(d.compareTo(new Date(pastE.getDate().getYear(),pastE.getDate().getMonth(),pastE.getDate().getDate())) != 0){
                         series.getData().add(new XYChart.Data(dateFormat.format(d), tot));
+                        ObservableList<Data<String,Number>> list = series.getData();
+                        list.get(list.size()-1).getNode().setVisible(false);
                     }
                 }
                 strDate = dateFormat.format(pastE.getDate());
@@ -118,8 +121,13 @@ public class LineGraphController implements Initializable {
             strDate = dateFormat.format(e.getDate());
             series.getData().add(new XYChart.Data(strDate, tot));
             series.getData().sort(new LineChartComparator());
-            for(Data<String,Number> entry: series.getData()){
-                Tooltip t = new Tooltip(entry.getYValue().toString());
+            int index = 0;
+            for(Data<String,Number> entry: series.getData())
+            {
+                String xVal = entry.getXValue();
+                String yVal = String.format("%.2f", entry.getYValue().floatValue());
+                Tooltip t = new Tooltip("Date: " + xVal+"\n"+"Total $: "+yVal);
+                t.setShowDelay(new Duration(0));
                 Tooltip.install(entry.getNode(), t);
             }
             // System.out.println(series.getData().toString());
