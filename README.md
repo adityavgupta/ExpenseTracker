@@ -17,6 +17,9 @@ Expense Tracker made by Aditya and Brandon
 
 ## Bugs
 - Can't use esc to remove focus from input boxes with filters
+- In retro view add a filter to payment or comment, press filter. Press the refresh button and then go to yahoo view.
+  The graph still shows the filtered data. Need to clear the filter after refresh.\
+- If there is no match in the yahoo view, then it should not get rid of the points. It should just not do anything.
 
 ## FAQ
 - How do you clean cache in VSCode?
@@ -25,10 +28,9 @@ Expense Tracker made by Aditya and Brandon
 		- or click search bar at the top of VS Code. Select run task then Java build
 
 ## Next Time
-- Make plot look better (remove ramps)
 - More summary calculations
 - Change the CSS for the min and max boxes to grayed out on changing tab to Yahoo View
-- Eventually add node selection and calculations between node selections
+- Add summary to the right of the plot that shows current savings etc etc.
 
 ## Maybe feature
 - Add Category to expenses
