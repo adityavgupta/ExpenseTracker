@@ -14,6 +14,8 @@ Expense Tracker made by Aditya and Brandon
 - Customizable date format
 - Applying a filter that doesn't match anything should at least give a pop up.
 - Filter tab invalid inputs highlight red
+- Change the CSS for the min and max boxes to grayed out on changing tab to Yahoo View
+
 
 ## Bugs
 - Can't use esc to remove focus from input boxes with filters
@@ -29,7 +31,6 @@ Expense Tracker made by Aditya and Brandon
 
 ## Next Time
 - More summary calculations
-- Change the CSS for the min and max boxes to grayed out on changing tab to Yahoo View
 - Add summary to the right of the plot that shows current savings etc etc.
 
 ## Maybe feature
