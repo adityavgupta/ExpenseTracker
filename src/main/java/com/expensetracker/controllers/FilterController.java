@@ -16,9 +16,12 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.DatePicker;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TextFormatter;
 import javafx.scene.control.TextFormatter.Change;
+import javafx.scene.input.KeyCode;
+import javafx.scene.layout.AnchorPane;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
@@ -44,6 +47,8 @@ public class FilterController implements Initializable
     private TextField commentFilter;
     @FXML
     private Button refreshButton;
+    @FXML
+    private Label amtLabel;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -66,6 +71,28 @@ public class FilterController implements Initializable
             }
             return null;
         };
+
+        // Remove focus from the text boxes
+        minAmount.setOnKeyPressed(event -> {
+            if(event.getCode() == KeyCode.ESCAPE){
+                amtLabel.requestFocus();
+            }   
+        });
+        maxAmount.setOnKeyPressed(event -> {
+            if(event.getCode() == KeyCode.ESCAPE){
+                amtLabel.requestFocus();
+            }   
+        });
+        minDate.setOnKeyPressed(event -> {
+            if(event.getCode() == KeyCode.ESCAPE){
+                amtLabel.requestFocus();
+            }   
+        });
+        maxDate.setOnKeyPressed(event -> {
+            if(event.getCode() == KeyCode.ESCAPE){
+                amtLabel.requestFocus();
+            }   
+        });
 
         //Apply monetary filter to amount filters
         TextFormatter<String> numFormatter1 = new TextFormatter<>(numFilter);
@@ -161,8 +188,8 @@ public class FilterController implements Initializable
             for(Map.Entry<Long, Expense> entry : tempMap.entrySet()){
                 Expense e = entry.getValue();
                 double a = e.getAmount();
-                String p = e.getPaymentMethod();
-                String c = e.getComment();
+                String p = e.getPaymentMethod().toUpperCase();
+                String c = e.getComment().toUpperCase();
                 expenseType eType = e.getExpType();
 
                 Boolean paymentFlag = true;
@@ -172,10 +199,10 @@ public class FilterController implements Initializable
                 Boolean typeFlag = (credit && eType == expenseType.Credit) || (debit && eType == expenseType.Debit);
 
                 if(!paymentMethod.isEmpty()){
-                    paymentFlag = Pattern.matches(String.format(".*%s.*",paymentMethod), p);
+                    paymentFlag = Pattern.matches(String.format(".*%s.*",paymentMethod.toUpperCase()), p);
                 }
                 if(!comment.isEmpty()){
-                    commentFlag = Pattern.matches(String.format(".*%s.*",comment), c);
+                    commentFlag = Pattern.matches(String.format(".*%s.*",comment.toUpperCase()), c);
                 }
                 if(!amountMin.isNaN()){
                     minBoundary = a >= amountMin;

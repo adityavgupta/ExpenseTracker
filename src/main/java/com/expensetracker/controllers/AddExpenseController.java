@@ -53,6 +53,18 @@ public class AddExpenseController implements Initializable {
         //Add choices to the credit/debit dropdown box
         creditDebitDropdown.getItems().addAll(CreditDebit);
 
+        //Remove focus from amount and date boxes on esc press
+        inputAmount.setOnKeyPressed(event -> {
+            if(event.getCode() == KeyCode.ESCAPE){
+                amtLabel.requestFocus();
+            }   
+        });
+        inputDate.setOnKeyPressed(event -> {
+            if(event.getCode() == KeyCode.ESCAPE){
+                amtLabel.requestFocus();
+            }   
+        });
+
         //Filter for monetary values
         UnaryOperator<Change> numFilter = change -> {
             String newText = change.getControlNewText();
