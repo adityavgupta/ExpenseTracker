@@ -77,60 +77,62 @@ public class LineGraphController implements Initializable {
 
      public void updateData() 
      {
-        series.getData().clear();
-        Map<Long, Expense> data = ExpenseMap.filteredMap;
-        double tot = 0;
-        Expense pastE= null;
-        Expense e = null;
-        Boolean firstDay = true;
-        Long pastDay = Long.MIN_VALUE;
-        String strDate = "";
-        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        if(!(ExpenseMap.filteredMap == null || ExpenseMap.filteredMap.isEmpty())){
+            series.getData().clear();
+            Map<Long, Expense> data = ExpenseMap.filteredMap;
+            double tot = 0;
+            Expense pastE= null;
+            Expense e = null;
+            Boolean firstDay = true;
+            Long pastDay = Long.MIN_VALUE;
+            String strDate = "";
+            DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
-        for(Map.Entry<Long, Expense> entry: data.entrySet())
-        {
-            e = entry.getValue();
-            Long currentDay = e.getUID()/dayInMils;
-            double a = e.getAmount();
-            expenseType eType = e.getExpType();
-
-            if(!pastDay.equals(currentDay) && !firstDay) 
+            for(Map.Entry<Long, Expense> entry: data.entrySet())
             {
-                // Find number of days between
-                int fillCount = (int)(currentDay - pastDay);
-                for(int i = 0; i < fillCount; i++)
+                e = entry.getValue();
+                Long currentDay = e.getUID()/dayInMils;
+                double a = e.getAmount();
+                expenseType eType = e.getExpType();
+
+                if(!pastDay.equals(currentDay) && !firstDay) 
                 {
-                    // get the days between any two days and fill them in including the second day
-                    Date d = new Date(e.getDate().getYear(),e.getDate().getMonth(),e.getDate().getDate()-(fillCount-i));
-                    if(d.compareTo(new Date(pastE.getDate().getYear(),pastE.getDate().getMonth(),pastE.getDate().getDate())) != 0){
-                        series.getData().add(new XYChart.Data(dateFormat.format(d), tot));
-                        ObservableList<Data<String,Number>> list = series.getData();
-                        list.get(list.size()-1).getNode().setVisible(false);
+                    // Find number of days between
+                    int fillCount = (int)(currentDay - pastDay);
+                    for(int i = 0; i < fillCount; i++)
+                    {
+                        // get the days between any two days and fill them in including the second day
+                        Date d = new Date(e.getDate().getYear(),e.getDate().getMonth(),e.getDate().getDate()-(fillCount-i));
+                        if(d.compareTo(new Date(pastE.getDate().getYear(),pastE.getDate().getMonth(),pastE.getDate().getDate())) != 0){
+                            series.getData().add(new XYChart.Data(dateFormat.format(d), tot));
+                            ObservableList<Data<String,Number>> list = series.getData();
+                            list.get(list.size()-1).getNode().setVisible(false);
+                        }
                     }
+                    strDate = dateFormat.format(pastE.getDate());
+                    series.getData().add(new XYChart.Data(strDate, tot));
                 }
-                strDate = dateFormat.format(pastE.getDate());
-                series.getData().add(new XYChart.Data(strDate, tot));
+                firstDay = false;
+                pastDay = e.getUID()/dayInMils;
+                pastE = entry.getValue();
+                tot += (eType == expenseType.Debit) ? a:-1*a;
             }
-            firstDay = false;
-            pastDay = e.getUID()/dayInMils;
-            pastE = entry.getValue();
-            tot += (eType == expenseType.Debit) ? a:-1*a;
-        }
-        if(e != null)
-        {
-            strDate = dateFormat.format(e.getDate());
-            series.getData().add(new XYChart.Data(strDate, tot));
-            series.getData().sort(new LineChartComparator());
-            int index = 0;
-            for(Data<String,Number> entry: series.getData())
+            if(e != null)
             {
-                String xVal = entry.getXValue();
-                String yVal = String.format("%.2f", entry.getYValue().floatValue());
-                Tooltip t = new Tooltip("Date: " + xVal+"\n"+"Total $: "+yVal);
-                t.setShowDelay(new Duration(0));
-                Tooltip.install(entry.getNode(), t);
+                strDate = dateFormat.format(e.getDate());
+                series.getData().add(new XYChart.Data(strDate, tot));
+                series.getData().sort(new LineChartComparator());
+                int index = 0;
+                for(Data<String,Number> entry: series.getData())
+                {
+                    String xVal = entry.getXValue();
+                    String yVal = String.format("%.2f", entry.getYValue().floatValue());
+                    Tooltip t = new Tooltip("Date: " + xVal+"\n"+"Total $: "+yVal);
+                    t.setShowDelay(new Duration(0));
+                    Tooltip.install(entry.getNode(), t);
+                }
+                // System.out.println(series.getData().toString());
             }
-            // System.out.println(series.getData().toString());
         }
      }
 

@@ -18,8 +18,6 @@ Expense Tracker made by Aditya and Brandon
 
 
 ## Bugs
-- In retro view add a filter to payment or comment, press filter. Press the refresh button and then go to yahoo view.
-  The graph still shows the filtered data. Need to clear the filter after refresh.\
 - If there is no match in the yahoo view, then it should not get rid of the points. It should just not do anything.
 
 ## FAQ

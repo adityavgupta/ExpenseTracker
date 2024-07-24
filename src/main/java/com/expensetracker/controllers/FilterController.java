@@ -239,6 +239,14 @@ public class FilterController implements Initializable
     private void unfilter(){
         Date dMin = new Date(Long.MIN_VALUE);
         Date dMax = new Date(Long.MAX_VALUE);
+        minAmount.clear();
+        maxAmount.clear();
+        minDate.getEditor().clear();
+        maxDate.getEditor().clear();
+        checkDebit.setSelected(true);
+        checkCredit.setSelected(true);
+        paymentFilter.clear();
+        commentFilter.clear();
         ExpenseMap.filteredMap = ExpenseMap.getDateRange(dMin, dMax);
         ControllerMediator.getInstance().updateData();
         ControllerMediator.getInstance().filterTable();
