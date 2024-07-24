@@ -219,12 +219,10 @@
     -fx-background-image: url("../img/warning.png");
     -fx-background-size: 18 18;
     -fx-background-repeat: no-repeat;
+    -fx-background-color: transparent;
     -fx-background-position: center;
 }
 
-#warningButton:hover {
-    -fx-background-image: url("../img/refresh.png");
-}
 .tooltip {
     -fx-background-color: white;
     -fx-text-fill: black;

@@ -49,6 +49,8 @@ public class FilterController implements Initializable
     private Button refreshButton;
     @FXML
     private Label amtLabel;
+    @FXML
+    private Button warningButton;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -109,55 +111,69 @@ public class FilterController implements Initializable
         // Turn invalid boxes red
         minDate.focusedProperty().addListener(new ChangeListener<Boolean>() {
             @Override
-            public void changed(ObservableValue<? extends Boolean> ov, Boolean onHidden, Boolean onShown) {
-                if(onShown == true) {
+            public void changed(ObservableValue<? extends Boolean> ov, Boolean onHidden, Boolean onShown)
+            {
+                if(onShown == true)
+                {
                     unRed("date");
                 }
             }
         });
         maxDate.focusedProperty().addListener(new ChangeListener<Boolean>() {
             @Override
-            public void changed(ObservableValue<? extends Boolean> ov, Boolean onHidden, Boolean onShown) {
-                if(onShown == true) {
+            public void changed(ObservableValue<? extends Boolean> ov, Boolean onHidden, Boolean onShown)
+            {
+                if(onShown == true)
+                {
                     unRed("date");
                 }
             }
         });
         minAmount.focusedProperty().addListener(new ChangeListener<Boolean>() {
             @Override
-            public void changed(ObservableValue<? extends Boolean> ov, Boolean onHidden, Boolean onShown) {
-                if(onShown == true) {
+            public void changed(ObservableValue<? extends Boolean> ov, Boolean onHidden, Boolean onShown)
+            {
+                if(onShown == true)
+                {
                     unRed("amount");
                 }
             }
         });
         maxAmount.focusedProperty().addListener(new ChangeListener<Boolean>() {
             @Override
-            public void changed(ObservableValue<? extends Boolean> ov, Boolean onHidden, Boolean onShown) {
-                if(onShown == true) {
+            public void changed(ObservableValue<? extends Boolean> ov, Boolean onHidden, Boolean onShown)
+            {
+                if(onShown == true)
+                {
                     unRed("amount");
                 }
             }
         });
+
+        warningButton.setVisible(false);
     }
 
     @FXML
-    private void filter(ActionEvent event) throws Exception{
-
+    private void filter(ActionEvent event) throws Exception
+    {
         Date dateMin = new Date(Long.MIN_VALUE);
-        if(minDate.getValue() != null){
+        if(minDate.getValue() != null)
+        {
             dateMin = java.sql.Date.valueOf(minDate.getValue());
         }
         Date dateMax = new Date(Long.MAX_VALUE);
-        if(maxDate.getValue() != null){
+        if(maxDate.getValue() != null)
+        {
             dateMax = java.sql.Date.valueOf(maxDate.getValue());
         }
         Float amountMin = Float.NaN;
-        if(!minAmount.getText().isEmpty()){
+        if(!minAmount.getText().isEmpty())
+        {
             amountMin = Float.parseFloat(minAmount.getText());
         }
         Float amountMax = Float.NaN;
-        if(!maxAmount.getText().isEmpty()){
+        if(!maxAmount.getText().isEmpty())
+        {
             amountMax = Float.parseFloat(maxAmount.getText());
         }
         String paymentMethod = paymentFilter.getText();
@@ -169,23 +185,29 @@ public class FilterController implements Initializable
 
         invalidInput = dateMin.after(dateMax) || (amountMin > amountMax);
 
-        if(invalidInput){
-            if(dateMin.after(dateMax)){
+        if(invalidInput)
+        {
+            if(dateMin.after(dateMax))
+            {
                 minDate.setStyle("-fx-border-color: #FF0000");
                 maxDate.setStyle("-fx-border-color: #FF0000");
             }
-            if(amountMin > amountMax){
+            if(amountMin > amountMax)
+            {
                 minAmount.setStyle("-fx-border-color: #FF0000");
                 maxAmount.setStyle("-fx-border-color: #FF0000");
             }
+
+            warningButton.setVisible(true);
         } 
-        else{
-
-
+        else
+        {
+            warningButton.setVisible(false);
             ExpenseMap.filteredMap.clear();
             Map<Long, Expense> tempMap = ExpenseMap.getDateRange(dateMin, dateMax);
             
-            for(Map.Entry<Long, Expense> entry : tempMap.entrySet()){
+            for(Map.Entry<Long, Expense> entry : tempMap.entrySet())
+            {
                 Expense e = entry.getValue();
                 double a = e.getAmount();
                 String p = e.getPaymentMethod().toUpperCase();
@@ -198,20 +220,25 @@ public class FilterController implements Initializable
                 Boolean maxBoundary = true;
                 Boolean typeFlag = (credit && eType == expenseType.Credit) || (debit && eType == expenseType.Debit);
 
-                if(!paymentMethod.isEmpty()){
+                if(!paymentMethod.isEmpty())
+                {
                     paymentFlag = Pattern.matches(String.format(".*%s.*",paymentMethod.toUpperCase()), p);
                 }
-                if(!comment.isEmpty()){
+                if(!comment.isEmpty())
+                {
                     commentFlag = Pattern.matches(String.format(".*%s.*",comment.toUpperCase()), c);
                 }
-                if(!amountMin.isNaN()){
+                if(!amountMin.isNaN())
+                {
                     minBoundary = a >= amountMin;
                 }
-                if(!amountMax.isNaN()){
+                if(!amountMax.isNaN())
+                {
                     maxBoundary = a <= amountMax;
                 }
 
-                if(minBoundary && maxBoundary && paymentFlag && commentFlag && typeFlag){
+                if(minBoundary && maxBoundary && paymentFlag && commentFlag && typeFlag)
+                {
                     ExpenseMap.filteredMap.put(entry.getKey(),entry.getValue());
                 }
             }
@@ -221,8 +248,10 @@ public class FilterController implements Initializable
     }
 
     //Remove red borders from input fields
-    private void unRed(String option) {
-        switch(option) {
+    private void unRed(String option)
+    {
+        switch(option)
+        {
             case "date":
                 minDate.setStyle("-fx-border-color: transparent");
                 maxDate.setStyle("-fx-border-color: transparent");
@@ -236,9 +265,11 @@ public class FilterController implements Initializable
 
     //Remove Filters
     @FXML
-    private void unfilter(){
+    private void unfilter()
+    {
         Date dMin = new Date(Long.MIN_VALUE);
         Date dMax = new Date(Long.MAX_VALUE);
+        warningButton.setVisible(false);
         minAmount.clear();
         maxAmount.clear();
         minDate.getEditor().clear();

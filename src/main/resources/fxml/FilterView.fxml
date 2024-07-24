@@ -10,7 +10,7 @@
 
 <AnchorPane prefHeight="82.0" prefWidth="903.0" stylesheets="@../css/application.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.expensetracker.controllers.FilterController">
    <children>
-      <AnchorPane layoutX="7.0" layoutY="31.0" prefHeight="25.0" prefWidth="27.0">
+      <AnchorPane layoutX="11.0" layoutY="41.0" prefHeight="25.0" prefWidth="27.0" AnchorPane.bottomAnchor="16.0" AnchorPane.leftAnchor="11.0" AnchorPane.rightAnchor="865.0" AnchorPane.topAnchor="41.0">
          <children>
             <Button fx:id="warningButton" mnemonicParsing="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
          </children>
