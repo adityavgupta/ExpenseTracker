@@ -10,6 +10,11 @@
 
 <AnchorPane prefHeight="82.0" prefWidth="903.0" stylesheets="@../css/application.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.expensetracker.controllers.FilterController">
    <children>
+      <AnchorPane layoutX="7.0" layoutY="31.0" prefHeight="25.0" prefWidth="27.0">
+         <children>
+            <Button fx:id="warningButton" mnemonicParsing="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+         </children>
+      </AnchorPane>
       <DatePicker fx:id="minDate" layoutX="44.0" layoutY="41.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="25.0" prefWidth="96.0" />
       <DatePicker fx:id="maxDate" layoutX="150.0" layoutY="41.0" prefHeight="25.0" prefWidth="96.0" />
       <TextField fx:id="minAmount" layoutX="282.0" layoutY="41.0" prefHeight="25.0" prefWidth="96.0" promptText="0.00" />

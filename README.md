@@ -18,7 +18,7 @@ Expense Tracker made by Aditya and Brandon
 
 
 ## Bugs
-- If there is no match in the yahoo view, then it should not get rid of the points. It should just not do anything.
+
 
 ## FAQ
 - How do you clean cache in VSCode?
@@ -27,6 +27,7 @@ Expense Tracker made by Aditya and Brandon
 		- or click search bar at the top of VS Code. Select run task then Java build
 
 ## Next Time
+- Continue implementation of warning button.
 - More summary calculations
 - Add summary to the right of the plot that shows current savings etc etc.
 
