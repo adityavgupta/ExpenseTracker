@@ -27,7 +27,6 @@ Expense Tracker made by Aditya and Brandon
 		- or click search bar at the top of VS Code. Select run task then Java build
 
 ## Next Time
-- Continue implementation of warning button.
 - More summary calculations
 - Add summary to the right of the plot that shows current savings etc etc.
 

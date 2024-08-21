@@ -20,8 +20,14 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TextFormatter;
 import javafx.scene.control.TextFormatter.Change;
+import javafx.scene.control.Tooltip;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontPosture;
+import javafx.scene.text.FontWeight;
+import javafx.stage.PopupWindow;
+import javafx.stage.PopupWindow.AnchorLocation;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
@@ -199,6 +205,11 @@ public class FilterController implements Initializable
             }
 
             warningButton.setVisible(true);
+            Tooltip t = new Tooltip();
+            t.setText("Invalid date or amount range");
+            t.setStyle("-fx-font-size: 15");
+            t.setAnchorLocation(PopupWindow.AnchorLocation.WINDOW_BOTTOM_LEFT);
+            Tooltip.install(warningButton, t);
         } 
         else
         {
@@ -244,6 +255,14 @@ public class FilterController implements Initializable
             }
             ControllerMediator.getInstance().updateData();
             ControllerMediator.getInstance().filterTable();
+            if(ExpenseMap.filteredMap.isEmpty()){
+                warningButton.setVisible(true);
+                Tooltip t = new Tooltip();
+                t.setText("No matching expenses");
+                t.setStyle("-fx-font-size: 15");
+                t.setAnchorLocation(PopupWindow.AnchorLocation.WINDOW_BOTTOM_LEFT);
+                Tooltip.install(warningButton, t);
+            }
         }
     }
 
@@ -272,6 +291,8 @@ public class FilterController implements Initializable
         warningButton.setVisible(false);
         minAmount.clear();
         maxAmount.clear();
+        minDate.setValue(null);
+        maxDate.setValue(null);
         minDate.getEditor().clear();
         maxDate.getEditor().clear();
         checkDebit.setSelected(true);
@@ -281,6 +302,8 @@ public class FilterController implements Initializable
         ExpenseMap.filteredMap = ExpenseMap.getDateRange(dMin, dMax);
         ControllerMediator.getInstance().updateData();
         ControllerMediator.getInstance().filterTable();
+        unRed("date");
+        unRed("amount");
     }
 
     // Filter Controller methods
