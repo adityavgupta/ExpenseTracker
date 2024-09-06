@@ -6,18 +6,35 @@ Expense Tracker made by Aditya and Brandon
     - part of the plot view and see the summary for the selected filter with the plot itself.
 - Direction for Plot View
     - Plot the net for each day within the filtered range
+- Summary tab
+	- avg savings
+		- day avg
+		- week avg
+		- month avg
+		- year avg
+	- net earning
+	- net spent
+	- net savings
+	- wishlist
+		- Estimated time to achieve
+		- time to accumulate certain amount
+	- Calculator
+		- time to accumulate certain amount (with or without intrest)
+		- Want to hit amount by date, what do earnings need to look like (can use spending history)
+		- interest rate on input amount
+			- if you allocate part of savings, intrest rate projections
+	- naive calculations with only slope
+	- look at 551 notes for better curve fitting solutions
 
 ## QOL
 - Implement converter for date input field
 - Edit expenses from within the table
 - Deselect amount and date box with escape
 - Customizable date format
-- Applying a filter that doesn't match anything should at least give a pop up.
-- Filter tab invalid inputs highlight red
-- Change the CSS for the min and max boxes to grayed out on changing tab to Yahoo View
 
 
 ## Bugs
+- Table coloring on startup
 
 
 ## FAQ
@@ -32,4 +49,3 @@ Expense Tracker made by Aditya and Brandon
 
 ## Maybe feature
 - Add Category to expenses
-- Filter with no matches does nothing. Change this?
