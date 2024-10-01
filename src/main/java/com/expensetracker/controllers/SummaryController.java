@@ -49,6 +49,26 @@ public class SummaryController implements Initializable
     @FXML
     private Label totalProfit;*/
 
+    private long dayInMils = 86400000;
+
+    private double avgAnnualExpense = 0;
+    private double avgMonthlyExpense = 0;
+    private double avgWeeklyExpense = 0;
+    private double avgDailyExpense = 0;
+
+    private double avgAnnualCredit = 0;
+    private double avgMonthlyCredit = 0;
+    private double avgWeeklyCredit = 0;
+    private double avgDailyCredit = 0;
+
+    private double avgAnnualDebit = 0;
+    private double avgMonthlyDebit = 0;
+    private double avgWeeklyDebit = 0;
+    private double avgDailyDebit = 0;
+
+    private double netCredit = 0;
+    private double netDebit = 0;
+
     @Override
     public void initialize(URL location, ResourceBundle resources)
     {
@@ -73,36 +93,74 @@ public class SummaryController implements Initializable
         //netExpense.setText(String.format("$%.2f", tot));
     }
 
-    private void calculateAvgAnnualExpense()
+    private void calculateAverages()
     {
-        double avg = 0;
+        if(!(ExpenseMap.filteredMap == null || ExpenseMap.filteredMap.isEmpty())){
+            double avg = 0;
+            double debitAvg = 0;
+            double creditAvg = 0;
+            int dayCnt = 0;
+            Long pastDay = Long.MIN_VALUE;
+            for(Map.Entry<Long, Expense> entry : ExpenseMap.filteredMap.entrySet()){
+                Expense e = entry.getValue();
+                double a = e.getAmount();
+                Long currentDay = e.getUID()/dayInMils;
+                expenseType eType = e.getExpType();
+                avg += (eType == expenseType.Debit) ? a:-1*a;
+                if(eType == expenseType.Debit){
+                    debitAvg += a;
+                }
+                else{
+                    creditAvg += a;
+                }
+                dayCnt += !pastDay.equals(currentDay) ? 1:0;
+            }
+            double netCredit = creditAvg;
+            double netDebit = debitAvg;
+
+            avg = avg / dayCnt;
+            creditAvg = creditAvg / dayCnt;
+            debitAvg = debitAvg /dayCnt;
+
+            double avgAnnualExpense = avg * 365;
+            double avgMonthlyExpense = avg * 30;
+            double avgWeeklyExpense = avg * 7;
+            double avgDailyExpense = avg;
+
+            double avgAnnualCredit = creditAvg * 365;
+            double avgMonthlyCredit = creditAvg * 30;
+            double avgWeeklyCredit = creditAvg * 7;
+            double avgDailyCredit = creditAvg;
+
+            double avgAnnualDebit = debitAvg * 365;
+            double avgMonthlyDebit = debitAvg * 30;
+            double avgWeeklyDebit = debitAvg * 7;
+            double avgDailyDebit = debitAvg;
+        }
+        else{
+            double avgAnnualExpense = 0;
+            double avgMonthlyExpense = 0;
+            double avgWeeklyExpense = 0;
+            double avgDailyExpense = 0;
+
+            double avgAnnualCredit = 0;
+            double avgMonthlyCredit = 0;
+            double avgWeeklyCredit = 0;
+            double avgDailyCredit = 0;
+    
+            double avgAnnualDebit = 0;
+            double avgMonthlyDebit = 0;
+            double avgWeeklyDebit = 0;
+            double avgDailyDebit = 0;
+
+            double netCredit = 0;
+            double netDebit = 0;
+        }
          
     }
 
-    //Projected expense for the year
+    //Calculator (interest rates)
 
-    private void calculateAvgMonthlyExpense() 
-    {
+    //Wishlist
 
-    }
-
-    private void calculateAvgWeeklyExpense()
-    {
-
-    }
-
-    private void calculateAvgDailyExpense() 
-    {
-
-    }
-
-    private void calculateNetEarning()
-    {
-
-    }
-
-    private void calculateTotalProfit()
-    {
-
-    }
 }

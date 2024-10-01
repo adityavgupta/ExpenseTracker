@@ -7,14 +7,14 @@ Expense Tracker made by Aditya and Brandon
 - Direction for Plot View
     - Plot the net for each day within the filtered range
 - Summary tab
-	- avg savings
-		- day avg
-		- week avg
-		- month avg
-		- year avg
-	- net earning
-	- net spent
-	- net savings
+	- avg savings x
+		- day avg x
+		- week avg x
+		- month avg x
+		- year avg x
+	- net earning x
+	- net spent x
+	- net savings x
 	- wishlist
 		- Estimated time to achieve
 		- time to accumulate certain amount
