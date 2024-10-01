@@ -27,28 +27,6 @@ bin/
 
 ### Mac OS ###
 .DS_Store
-*.class
-*.class
-*.class
-target/classes/com/expensetracker/controllers/MainViewController$1.class
-*.class
-target/classes/com/expensetracker/controllers/MainViewController$1.class
-target/classes/com/expensetracker/controllers/MainViewController.class
-target/classes/com/expensetracker/Expense$expenseType.class
-target/classes/com/expensetracker/Expense.class
-target/classes/com/expensetracker/ExpenseMap.class
-.idea/runConfigurations/ExpenseTracker.xml
-.idea/runConfigurations/ExpenseTracker.xml
-target/classes/com/expensetracker/controllers/MainViewController.class
-target/classes/com/expensetracker/Expense$expenseType.class
-target/classes/com/expensetracker/ExpenseMap.class
-target/classes/com/expensetracker/Expense.class
-target/classes/fxml/MainView.fxml
-target/expensetracker-1.0-SNAPSHOT.jar
-target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst
-target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst
-target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/createdFiles.lst
-target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/inputFiles.lst
-target/expensetracker-1.0-SNAPSHOT.jar
+.idea/
 
 target/
