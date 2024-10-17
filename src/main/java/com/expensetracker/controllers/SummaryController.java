@@ -27,27 +27,28 @@ import java.util.Map;
 
 public class SummaryController implements Initializable
 {
-    /* 
-    @FXML
-    private Label netExpense;
 
     @FXML
-    private Label avgAnnualExpense;
+    private ChoiceBox<String> averageType;
 
     @FXML
-    private Label avgMonthlyExpense;
+    private Label dailyVal;
 
     @FXML
-    private Label avgWeeklyExpense;
+    private Label monthlyVal;
 
     @FXML
-    private Label avgDailyExpense;
+    private Label yearlyVal;
 
     @FXML
-    private Label netEarning;
+    private Label netEarningsVal;
 
     @FXML
-    private Label totalProfit;*/
+    private Label netExpensesVal;
+
+    @FXML
+    private Label netProfitVal;
+
 
     private long dayInMils = 86400000;
 

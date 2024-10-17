@@ -91,11 +91,23 @@
           </Tab>
           <Tab fx:id="YahooTab" text="Yahoo view">
             <content>
-              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+              <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="0.0" minWidth="0.0" prefHeight="573.0" prefWidth="1313.0">
                      <children>
-                        <fx:include fx:id="lineGraphAnchorPane" source="LineGraphView.fxml" />
-                     </children>
-                  </AnchorPane>
+                        <HBox prefHeight="576.0" prefWidth="1307.0">
+                           <children>
+                              <AnchorPane prefHeight="576.0" prefWidth="1250.0">
+                                 <children>
+                                    <fx:include fx:id="lineGraphAnchorPane" source="LineGraphView.fxml" />
+                                 </children>
+                              </AnchorPane>
+                              <AnchorPane prefHeight="576.0" prefWidth="663.0">
+                                 <children>
+                                    <fx:include fx:id="summaryAnchorPane" source="SummaryView.fxml" />
+                                 </children>
+                              </AnchorPane>
+                           </children>
+                        </HBox>
+                     </children></AnchorPane>
             </content>
           </Tab>
         </tabs>
