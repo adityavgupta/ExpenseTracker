@@ -46,6 +46,7 @@ Expense Tracker made by Aditya and Brandon
 ## Next Time
 - More summary calculations
 - Add summary to the right of the plot that shows current savings etc etc.
+- Fix fxml labels for summary (consitency)
 - Continue the above
 
 ## Maybe feature

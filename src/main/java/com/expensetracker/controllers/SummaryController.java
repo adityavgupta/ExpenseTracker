@@ -19,6 +19,7 @@ import javafx.scene.control.TextFormatter.Change;
 import javafx.scene.layout.VBox;
 
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.Date;
 import java.util.ResourceBundle;
 import java.util.function.UnaryOperator;
@@ -30,6 +31,7 @@ public class SummaryController implements Initializable
 
     @FXML
     private ChoiceBox<String> averageType;
+    private String[] averageTypeDropdown = {"Gross", "Credit", "Debit" };
 
     @FXML
     private Label dailyVal;
@@ -41,21 +43,21 @@ public class SummaryController implements Initializable
     private Label yearlyVal;
 
     @FXML
-    private Label netEarningsVal;
+    private Label netCreditVal;
 
     @FXML
-    private Label netExpensesVal;
+    private Label netDebitVal;
 
     @FXML
-    private Label netProfitVal;
+    private Label netGrossVal;
 
 
     private long dayInMils = 86400000;
 
-    private double avgAnnualExpense = 0;
-    private double avgMonthlyExpense = 0;
-    private double avgWeeklyExpense = 0;
-    private double avgDailyExpense = 0;
+    private double avgAnnualGross = 0;
+    private double avgMonthlyGross = 0;
+    private double avgWeeklyGross = 0;
+    private double avgDailyGross = 0;
 
     private double avgAnnualCredit = 0;
     private double avgMonthlyCredit = 0;
@@ -73,6 +75,21 @@ public class SummaryController implements Initializable
     @Override
     public void initialize(URL location, ResourceBundle resources)
     {
+        averageType.getItems().addAll(averageTypeDropdown);
+        averageType.setValue("Gross");
+        averageType.setStyle("-fx-font-size: 1em");
+
+        averageType.valueProperty().addListener(new ChangeListener<String>() 
+        {
+            @Override
+            public void changed(ObservableValue<? extends String> ov, String oldValue, String newValue)
+            {
+                if(!oldValue.equals(newValue))
+                {
+                    calculateAverages();
+                }
+            }
+        });
     }
 
     //------- for all the functions below add Map<Long, Expense> as argument --------//
@@ -83,15 +100,25 @@ public class SummaryController implements Initializable
     }
     private void calculateNetExpense(Map<Long, Expense> data)
     {
-        double tot = 0;
+        double creditTotal = 0;
+        double debitTotal = 0;
         for(Map.Entry<Long, Expense> entry: data.entrySet())
         {
             Expense e = entry.getValue();
             double a = e.getAmount();
             expenseType eType = e.getExpType();
-            tot += (eType == expenseType.Debit) ? a:-1*a;
+            if(eType == expenseType.Debit) 
+            { 
+                debitTotal += a;
+            }
+            else{
+                creditTotal += a;
+            }
         }
-        //netExpense.setText(String.format("$%.2f", tot));
+        double grossTotal = -1 * creditTotal + debitTotal;
+        netGrossVal.setText(String.format(": $%.2f", grossTotal));
+        netCreditVal.setText(String.format(": $%.2f", creditTotal));
+        netDebitVal.setText(String.format(": $%.2f", debitTotal));
     }
 
     private void calculateAverages()
@@ -101,11 +128,12 @@ public class SummaryController implements Initializable
             double debitAvg = 0;
             double creditAvg = 0;
             int dayCnt = 0;
-            Long pastDay = Long.MIN_VALUE;
+            Long firstDay = 0L;
+            Long lastDay = 0L;
+            Boolean firstFlag = true;
             for(Map.Entry<Long, Expense> entry : ExpenseMap.filteredMap.entrySet()){
                 Expense e = entry.getValue();
                 double a = e.getAmount();
-                Long currentDay = e.getUID()/dayInMils;
                 expenseType eType = e.getExpType();
                 avg += (eType == expenseType.Debit) ? a:-1*a;
                 if(eType == expenseType.Debit){
@@ -114,50 +142,81 @@ public class SummaryController implements Initializable
                 else{
                     creditAvg += a;
                 }
-                dayCnt += !pastDay.equals(currentDay) ? 1:0;
+
+                if(firstFlag == true){
+                    firstDay = e.getUID()/dayInMils;
+                    firstFlag = false;
+                }
+                lastDay = e.getUID()/dayInMils;
             }
-            double netCredit = creditAvg;
-            double netDebit = debitAvg;
+            dayCnt = (int)(lastDay - firstDay) + 1;
+
+            netCredit = creditAvg;
+            netDebit = debitAvg;
 
             avg = avg / dayCnt;
             creditAvg = creditAvg / dayCnt;
             debitAvg = debitAvg /dayCnt;
 
-            double avgAnnualExpense = avg * 365;
-            double avgMonthlyExpense = avg * 30;
-            double avgWeeklyExpense = avg * 7;
-            double avgDailyExpense = avg;
+            avgAnnualGross = avg * 365;
+            avgMonthlyGross = avg * 30;
+            avgWeeklyGross = avg * 7;
+            avgDailyGross = avg;
 
-            double avgAnnualCredit = creditAvg * 365;
-            double avgMonthlyCredit = creditAvg * 30;
-            double avgWeeklyCredit = creditAvg * 7;
-            double avgDailyCredit = creditAvg;
+            avgAnnualCredit = creditAvg * 365;
+            avgMonthlyCredit = creditAvg * 30;
+            avgWeeklyCredit = creditAvg * 7;
+            avgDailyCredit = creditAvg;
 
-            double avgAnnualDebit = debitAvg * 365;
-            double avgMonthlyDebit = debitAvg * 30;
-            double avgWeeklyDebit = debitAvg * 7;
-            double avgDailyDebit = debitAvg;
+            avgAnnualDebit = debitAvg * 365;
+            avgMonthlyDebit = debitAvg * 30;
+            avgWeeklyDebit = debitAvg * 7;
+            avgDailyDebit = debitAvg;
+            setAvgLabels();
+            calculateAll();
         }
         else{
-            double avgAnnualExpense = 0;
-            double avgMonthlyExpense = 0;
-            double avgWeeklyExpense = 0;
-            double avgDailyExpense = 0;
+            avgAnnualGross = 0;
+            avgMonthlyGross = 0;
+            avgWeeklyGross = 0;
+            avgDailyGross = 0;
 
-            double avgAnnualCredit = 0;
-            double avgMonthlyCredit = 0;
-            double avgWeeklyCredit = 0;
-            double avgDailyCredit = 0;
+            avgAnnualCredit = 0;
+            avgMonthlyCredit = 0;
+            avgWeeklyCredit = 0;
+            avgDailyCredit = 0;
     
-            double avgAnnualDebit = 0;
-            double avgMonthlyDebit = 0;
-            double avgWeeklyDebit = 0;
-            double avgDailyDebit = 0;
+            avgAnnualDebit = 0;
+            avgMonthlyDebit = 0;
+            avgWeeklyDebit = 0;
+            avgDailyDebit = 0;
 
-            double netCredit = 0;
-            double netDebit = 0;
+            netCredit = 0;
+            netDebit = 0;
+            setAvgLabels();
+            calculateAll();
         }
          
+    }
+
+    private void setAvgLabels()
+    {
+        String type = averageType.getValue();
+        if(type.equals("Gross")){
+            dailyVal.setText("$" + String.format("%.2f",avgDailyGross));
+            monthlyVal.setText("$" + String.format("%.2f",avgMonthlyGross));
+            yearlyVal.setText("$" + String.format("%.2f",avgAnnualGross));
+        }
+        else if(type.equals("Credit")){
+            dailyVal.setText("$" + String.format("%.2f",avgDailyCredit));
+            monthlyVal.setText("$" + String.format("%.2f",avgMonthlyCredit));
+            yearlyVal.setText("$" + String.format("%.2f",avgAnnualCredit));
+        }
+        else{
+            dailyVal.setText("$" + String.format("%.2f",avgDailyDebit));
+            monthlyVal.setText("$" + String.format("%.2f",avgMonthlyDebit));
+            yearlyVal.setText("$" + String.format("%.2f",avgAnnualDebit));
+        }
     }
 
     //Calculator (interest rates)
