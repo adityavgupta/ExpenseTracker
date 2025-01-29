@@ -264,6 +264,7 @@ public class FilterController implements Initializable
                 Tooltip.install(warningButton, t);
             }
         }
+        ControllerMediator.getInstance().calculateAll();
     }
 
     //Remove red borders from input fields

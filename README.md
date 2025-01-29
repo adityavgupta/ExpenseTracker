@@ -2,19 +2,8 @@
 Expense Tracker made by Aditya and Brandon
 
 ## Features to Implement
-- Direction for Summary view
-    - part of the plot view and see the summary for the selected filter with the plot itself.
-- Direction for Plot View
-    - Plot the net for each day within the filtered range
+
 - Summary tab
-	- avg savings x
-		- day avg x
-		- week avg x
-		- month avg x
-		- year avg x
-	- net earning x
-	- net spent x
-	- net savings x
 	- wishlist
 		- Estimated time to achieve
 		- time to accumulate certain amount
@@ -31,10 +20,11 @@ Expense Tracker made by Aditya and Brandon
 - Edit expenses from within the table
 - Deselect amount and date box with escape
 - Customizable date format
+- Edit existing expenses in table
 
 
 ## Bugs
-- Table coloring on startup
+- Table coloring on startup (scroll)
 
 
 ## FAQ
@@ -44,11 +34,7 @@ Expense Tracker made by Aditya and Brandon
 		- or click search bar at the top of VS Code. Select run task then Java build
 
 ## Next Time
-- More summary calculations
-- Add summary to the right of the plot that shows current savings etc etc.
-- Fix fxml labels for summary (consitency)
-- Fix triggers for summary calc 
-- Edit existing expenses in table
+- Calculator and Wishlist
 
 ## Maybe feature
 - Add Category to expenses

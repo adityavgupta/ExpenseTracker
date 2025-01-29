@@ -119,6 +119,7 @@ public class SummaryController implements Initializable
         netGrossVal.setText(String.format(": $%.2f", grossTotal));
         netCreditVal.setText(String.format(": $%.2f", creditTotal));
         netDebitVal.setText(String.format(": $%.2f", debitTotal));
+        calculateAverages();
     }
 
     private void calculateAverages()
@@ -173,7 +174,6 @@ public class SummaryController implements Initializable
             avgWeeklyDebit = debitAvg * 7;
             avgDailyDebit = debitAvg;
             setAvgLabels();
-            calculateAll();
         }
         else{
             avgAnnualGross = 0;
@@ -194,7 +194,6 @@ public class SummaryController implements Initializable
             netCredit = 0;
             netDebit = 0;
             setAvgLabels();
-            calculateAll();
         }
          
     }
@@ -203,19 +202,19 @@ public class SummaryController implements Initializable
     {
         String type = averageType.getValue();
         if(type.equals("Gross")){
-            dailyVal.setText("$" + String.format("%.2f",avgDailyGross));
-            monthlyVal.setText("$" + String.format("%.2f",avgMonthlyGross));
-            yearlyVal.setText("$" + String.format("%.2f",avgAnnualGross));
+            dailyVal.setText(": $" + String.format("%.2f",avgDailyGross));
+            monthlyVal.setText(": $" + String.format("%.2f",avgMonthlyGross));
+            yearlyVal.setText(": $" + String.format("%.2f",avgAnnualGross));
         }
         else if(type.equals("Credit")){
-            dailyVal.setText("$" + String.format("%.2f",avgDailyCredit));
-            monthlyVal.setText("$" + String.format("%.2f",avgMonthlyCredit));
-            yearlyVal.setText("$" + String.format("%.2f",avgAnnualCredit));
+            dailyVal.setText(": $" + String.format("%.2f",avgDailyCredit));
+            monthlyVal.setText(": $" + String.format("%.2f",avgMonthlyCredit));
+            yearlyVal.setText(": $" + String.format("%.2f",avgAnnualCredit));
         }
         else{
-            dailyVal.setText("$" + String.format("%.2f",avgDailyDebit));
-            monthlyVal.setText("$" + String.format("%.2f",avgMonthlyDebit));
-            yearlyVal.setText("$" + String.format("%.2f",avgAnnualDebit));
+            dailyVal.setText(": $" + String.format("%.2f",avgDailyDebit));
+            monthlyVal.setText(": $" + String.format("%.2f",avgMonthlyDebit));
+            yearlyVal.setText(": $" + String.format("%.2f",avgAnnualDebit));
         }
     }
 

@@ -54,6 +54,11 @@ public class MainViewController implements Initializable {
     private LineGraphController lineGraphAnchorPaneController;
 
     @FXML
+    private AnchorPane summaryAnchorPane;
+    @FXML
+    private SummaryController summaryAnchorPaneController;
+
+    @FXML
     private TabPane MainTabPane;
 
     @FXML
@@ -71,6 +76,7 @@ public class MainViewController implements Initializable {
         ControllerMediator.getInstance().registerTableController(tableAnchorPaneController);
         ControllerMediator.getInstance().registerLineGraphController(lineGraphAnchorPaneController);
         ControllerMediator.getInstance().registerFilterController(filterAnchorPaneController);
+        ControllerMediator.getInstance().registerSummaryController(summaryAnchorPaneController);
         
         //Save the table values when cntrl + s is pressed anywhere in the app
         baseWindow.setOnKeyPressed(event -> {
@@ -112,6 +118,7 @@ public class MainViewController implements Initializable {
                 if(newTab.equals(YahooTab)) {
                     try {
                         ControllerMediator.getInstance().setEditablePropertyMinAndMaxAmount(false);
+                        ControllerMediator.getInstance().calculateAll();
                     } catch (Exception e) {
                         throw new RuntimeException(e);
                     }
