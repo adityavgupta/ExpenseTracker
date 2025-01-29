@@ -2,7 +2,7 @@ package com.expensetracker.controllers;
 
 import com.expensetracker.Expense;
 
-public class ControllerMediator implements ControllerInterface {
+public class ControllerMediator {
     
     private FilterController filterController;
     private AddExpenseController addExpenseController;
