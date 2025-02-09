@@ -9,7 +9,6 @@ import java.util.regex.Pattern;
 
 import com.expensetracker.Expense;
 import com.expensetracker.ExpenseMap;
-import com.expensetracker.Main;
 import com.expensetracker.Expense.expenseType;
 
 import javafx.fxml.FXML;
