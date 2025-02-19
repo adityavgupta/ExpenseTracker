@@ -25,6 +25,7 @@ Expense Tracker made by Aditya and Brandon
 
 ## Bugs
 - Table coloring on startup (scroll)
+- Deleting is not working as expected. If I delete an expense from the table, the expense shows up again on clicking refresh. It is also showing up again when I reload the app somehow...
 
 
 ## FAQ
