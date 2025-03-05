@@ -16,10 +16,6 @@ public class ExpenseMap {
     public static TreeMap<Long, Expense> expenseMap;
     public static Map<Long, Expense> filteredMap = new HashMap<>();
     private static final String filePath = System.getProperty("user.dir") + "\\data.bin";
-    //Constructor
-    public ExpenseMap()
-    {  
-    }
 
     //Load Binary
     public static void loadBinary()
@@ -53,6 +49,13 @@ public class ExpenseMap {
         try {
             FileOutputStream myFileOutStream = new FileOutputStream(filePath);
             ObjectOutputStream myObjectOutStream = new ObjectOutputStream(myFileOutStream);
+
+            // TreeMap<Long, Expense> tempMap = new TreeMap<>();
+            // for(Map.Entry<Long, Expense> entry : expenseMap.entrySet())
+            // {
+            //     tempMap.put(entry.getKey()+1,entry.getValue());
+            // }
+
             myObjectOutStream.writeObject(expenseMap);
             myObjectOutStream.close();
             myFileOutStream.close();
@@ -63,7 +66,7 @@ public class ExpenseMap {
     }
 
     //Add Expense
-    public void addExpense(Expense expense)
+    public static void addExpense(Expense expense)
     {
         if(expenseMap == null || expenseMap.isEmpty())
         {
@@ -87,9 +90,9 @@ public class ExpenseMap {
         }
         else
         {
-            long UID = ExpenseMap.generateUID(expense.getDate());
-            expense.setUID(UID);
-            filteredMap.put(UID,expense);
+            // long UID = ExpenseMap.generateUID(expense.getDate());
+            // expense.setUID(UID);
+            filteredMap.put(expense.getUID(),expense);
         }
     }
 
@@ -105,7 +108,7 @@ public class ExpenseMap {
     }
 
     //Remove Expense
-    public void removeExpense(Long UID)
+    public static void removeExpense(Long UID)
     {
         expenseMap.remove(UID);
     }

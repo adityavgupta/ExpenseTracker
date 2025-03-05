@@ -27,8 +27,6 @@ import java.util.Map;
 
 public class AddExpenseController implements Initializable {
 
-    private ExpenseMap expenseTable = new ExpenseMap();
-
     /* Links to FXML elements and variables related to them
      * See resources\MainViewFxml for declerations and how they connect to gui
      */
@@ -178,7 +176,7 @@ public class AddExpenseController implements Initializable {
         if (executeSubmit)
         {
             Expense expense = new Expense(amount, Expense.expenseType.valueOf(creditOrDebitSelection), date, paymentMethod, comment);
-            expenseTable.addExpense(expense);
+            ExpenseMap.addExpense(expense);
             ControllerMediator.getInstance().addTableExpense(expense);
             ControllerMediator.getInstance().updateData();
         }

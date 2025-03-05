@@ -31,7 +31,6 @@ import java.util.Map;
 
 public class TableController implements Initializable{
 
-    private ExpenseMap expenseTable = new ExpenseMap();
     private Boolean iniTableFlag = true;
     
     @FXML
@@ -65,7 +64,7 @@ public class TableController implements Initializable{
                 ObservableList<Expense> selectedRows = mainTable.getSelectionModel().getSelectedItems();
 
                 for(Expense e : selectedRows) {
-                    expenseTable.removeExpense(e.getUID());
+                    ExpenseMap.removeExpense(e.getUID());
                 }
                 mainTable.getItems().removeAll(selectedRows);
             }
