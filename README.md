@@ -4,16 +4,15 @@ Expense Tracker made by Aditya and Brandon
 ## Features to Implement
 
 - Summary tab
-	- wishlist
-		- Estimated time to achieve
-		- time to accumulate certain amount
+	- import/export csv
 	- Calculator
 		- time to accumulate certain amount (with or without intrest)
 		- Want to hit amount by date, what do earnings need to look like (can use spending history)
 		- interest rate on input amount
 			- if you allocate part of savings, intrest rate projections
-	- naive calculations with only slope
-	- look at 551 notes for better curve fitting solutions
+	- wishlist
+		- Estimated time to achieve
+		- time to accumulate certain amount
 
 ## QOL
 - Implement converter for date input field
@@ -25,7 +24,6 @@ Expense Tracker made by Aditya and Brandon
 
 ## Bugs
 - Table coloring on startup (scroll)
-- Deleting is not working as expected. If I delete an expense from the table, the expense shows up again on clicking refresh. It is also showing up again when I reload the app somehow...
 
 
 ## FAQ
