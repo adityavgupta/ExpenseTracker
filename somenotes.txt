@@ -1,0 +1,16 @@
+Notes on packaging this application as a jar file to be used anywhere
+
+1) In VS Code using maven package I can package this application into an executable jar. This requires modifying the pom though which I have already done.
+    Specifically, it only involved adding one category for maven jar plugin and manifest setting. The manifiest file is what the jvm looks for when we run
+    the jar file using the command >java [vm-args] -jar /path/to/jar. The manifest file gets packaged into the jar.
+
+2) Icon viewing on linux (GNOME Fedora in my case) may not be working. Since the eventual goal is to install the app as a standalone application and not
+   launch from vs code, I created a .desktop file and placed it in the ~/.local/share/applications dir.
+
+3) Since I want the jar to be executable and not type the full command, I put it into an sh file and for now have placed it into Desktop/ETTest. Eventually,
+   I imagine this will go along in a dir along with the jar file and the .desktop should get execute this sh file from that location. Once I determine which 
+   location on linux to install this jar, then it should be more clear how to structure this all.
+
+4) Since I am able to run this as a standalone desktop appplication, I noticed that the data.bin file moves to the user home dir, whatever that is defined for
+   an OS. This should be eventually changed to use the install dir location of this application. TBD on how to do this or at least rename it to ExpenseTrackerData.bin
+   so that a user knows it is not a suspicious file.
