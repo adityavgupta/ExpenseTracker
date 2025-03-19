@@ -2,30 +2,22 @@ package com.expensetracker.controllers;
 
 import com.expensetracker.ExpenseMap;
 
-import eu.hansolo.tilesfx.tools.DoubleExponentialSmoothingForLinearSeries.Model;
-
 import com.expensetracker.Expense;
 
-import javafx.application.Application;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyCode;
-import javafx.stage.Stage;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.scene.control.TextFormatter.Change;
-import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
 
 import java.net.URL;
 import java.util.Date;
 import java.util.ResourceBundle;
-import java.util.function.UnaryOperator;
-import java.util.regex.Pattern;
 import java.util.Map;
 
 
@@ -104,6 +96,22 @@ public class TableController implements Initializable{
             }
         });
 
+        commentsColumn.setCellFactory(tc -> new TableCell<Expense, String>() {
+        @Override
+        protected void updateItem(String comment, boolean empty) {
+            super.updateItem(comment, empty);
+            setWrapText(true);
+            if (empty) {
+                //setText(null);
+                setGraphic(null);
+            } else {
+                Text text = new Text(comment);
+                text.wrappingWidthProperty().bind(commentsColumn.widthProperty());
+                setGraphic(text);
+            }
+        }
+        });
+
         mainTable.setRowFactory(row->new TableRow<Expense>() {
             @Override
             public void updateItem(Expense item, boolean empty)
@@ -112,35 +120,24 @@ public class TableController implements Initializable{
 
                 if (item == null || empty)
                 {
-                    for (int i = 0; i<getChildren().size(); i++)
-                    {
-                        ((Labeled)getChildren().get(i)).setStyle("-fx-background-color: transparent");
-                    }
+                    // restore the default row style
+                    setStyle("");
                 }
                 else {
                     if (item.getExpType().equals(Expense.expenseType.Credit))
                     {
                         // Credit is red
-                        for (int i = 0; i<getChildren().size(); i++)
-                        {
-                            ((Labeled)getChildren().get(i)).setStyle("-fx-background-color: #FF9090");
-                        }
+                        setStyle("-fx-background-color: #FF9090");
                     }
                     else if (item.getExpType().equals(Expense.expenseType.Debit))
                     {
                         // Debit is green
-                        for (int i = 0; i<getChildren().size(); i++)
-                        {
-                            ((Labeled)getChildren().get(i)).setStyle("-fx-background-color: #B5E981");
-                        }
+                        setStyle("-fx-background-color: #B5E981");
                     }
                     else
                     {
-                        // Transparent for all other cases.
-                        for (int i = 0; i<getChildren().size(); i++)
-                        {
-                            ((Labeled)getChildren().get(i)).setStyle("-fx-background-color: transparent");
-                        }
+                        // use the default row style
+                        setStyle("");
                     }
                 }
             }
@@ -152,7 +149,6 @@ public class TableController implements Initializable{
     private void initializeTable() {
         mainTable.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
         if(!(ExpenseMap.expenseMap == null || ExpenseMap.expenseMap.isEmpty())){
-            mainTable.getItems();
             ObservableList<Expense> tableElements = mainTable.getItems();
             for(Map.Entry<Long,Expense> entry : ExpenseMap.expenseMap.entrySet()) {
                 tableElements.add(entry.getValue());
@@ -171,7 +167,7 @@ public class TableController implements Initializable{
 
     public void filterTable() {
         if(!(ExpenseMap.filteredMap == null || ExpenseMap.filteredMap.isEmpty())){
-            mainTable.getItems().removeAll();
+            mainTable.getItems().clear();
             ObservableList<Expense> tableElements = FXCollections.observableArrayList();
             for(Map.Entry<Long,Expense> entry : ExpenseMap.filteredMap.entrySet()) {
                 tableElements.add(entry.getValue());

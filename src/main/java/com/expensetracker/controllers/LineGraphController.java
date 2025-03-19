@@ -1,38 +1,21 @@
 package com.expensetracker.controllers;
-import javafx.application.Application;
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.Cursor;
-import javafx.scene.Scene;
 import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
 import javafx.scene.chart.XYChart.Data;
-import javafx.scene.control.Label;
 import javafx.scene.control.Tooltip;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.StackPane;
-import javafx.scene.paint.Color;
-import javafx.stage.Stage;
 
 import java.net.URL;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
-import java.util.GregorianCalendar;
-import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 import java.util.ResourceBundle;
-import java.util.Set;
-import java.util.TreeMap;
-
-import javax.sound.midi.SysexMessage;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -40,15 +23,13 @@ import com.expensetracker.Expense;
 import com.expensetracker.Expense.expenseType;
 import com.expensetracker.ExpenseMap;
 
-import javafx.event.EventHandler;
-import javafx.scene.input.MouseEvent;
 import javafx.util.Duration;
 
 
 public class LineGraphController implements Initializable {
 
     private XYChart.Series<String,Number> series;
-    private long dayInMils = 86400000;
+    private static final long DAY_IN_MILLIS = 86400000;
     @FXML
     private AnchorPane lineGraphAnchorPane;
 
@@ -63,14 +44,12 @@ public class LineGraphController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources)
     {
-        //lineGraph.setTitle("Title");
         lineGraph.setLegendVisible(false);
-        series = new XYChart.Series();
+        series = new XYChart.Series<>();
         yAxis.setLabel("$ Total expense");
         xAxis.setLabel("Date");
         lineGraph.getData().addAll(series);
         lineGraph.setAnimated(false);
-        //lineGraph.setCreateSymbols(false);
         lineGraph.setCursor(Cursor.CROSSHAIR);
         updateData();
     }
@@ -91,7 +70,7 @@ public class LineGraphController implements Initializable {
             for(Map.Entry<Long, Expense> entry: data.entrySet())
             {
                 e = entry.getValue();
-                Long currentDay = e.getUID()/dayInMils;
+                Long currentDay = e.getUID()/DAY_IN_MILLIS;
                 double a = e.getAmount();
                 expenseType eType = e.getExpType();
 
@@ -113,7 +92,7 @@ public class LineGraphController implements Initializable {
                     series.getData().add(new XYChart.Data(strDate, tot));
                 }
                 firstDay = false;
-                pastDay = e.getUID()/dayInMils;
+                pastDay = e.getUID()/DAY_IN_MILLIS;
                 pastE = entry.getValue();
                 tot += (eType == expenseType.Debit) ? a:-1*a;
             }
