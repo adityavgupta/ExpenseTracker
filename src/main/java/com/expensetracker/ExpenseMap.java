@@ -6,6 +6,7 @@ import java.util.TreeMap;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.ObjectInputStream;
 import java.util.Date;
@@ -15,7 +16,7 @@ public class ExpenseMap {
     //Fields
     public static TreeMap<Long, Expense> expenseMap;
     public static Map<Long, Expense> filteredMap = new HashMap<>();
-    private static final String filePath = System.getProperty("user.dir") + "\\data.bin";
+    private static final String filePath = System.getProperty("user.dir") + File.separator + "data.bin";
 
     //Load Binary
     public static void loadBinary()
