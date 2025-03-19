@@ -1,8 +1,6 @@
 package com.expensetracker;
 
-import javafx.animation.PauseTransition;
 import javafx.application.Application;
-import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -10,9 +8,6 @@ import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
-import javafx.util.Duration;
-import java.util.Objects;
 
 import com.expensetracker.controllers.MainViewController;
 
@@ -45,11 +40,10 @@ public class ExpenseTrackerApp extends Application {
         scene.setFill(Color.TRANSPARENT);
 
         primaryStage.setScene(scene);
-//        primaryStage.initStyle(StageStyle.TRANSPARENT);
 
         primaryStage.getIcons().add(new Image(getClass().getResourceAsStream("/img/logo.png")));
 
-        primaryStage.setScene(scene);
+        // primaryStage.setScene(scene);
         primaryStage.show();
     }
 

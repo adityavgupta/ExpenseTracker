@@ -1,10 +1,27 @@
 # ExpenseTracker
 Expense Tracker made by Aditya and Brandon
 
-## Features to Implement
+## QOL
+- Customizable date format
 
+
+## Bugs
+- On startup, if there is no data.bin file, we are currently throwing the exception instead of creating the file or doing proper error handling.
+
+## FAQ
+- How do you clean cache in VSCode?
+	- Make sure settings.json has the following setting set to false "java.debug.settings.onBuildFailureProceed": false
+	- When build fails, click fix, then clear cache
+		- or click search bar at the top of VS Code. Select run task then Java build
+
+## Features in Order of Priority
+- import/export csv
+- Edit expenses from within the table
+- Add investing to expense type
+	- integrate with plot
+
+## Maybe Features
 - Summary tab
-	- import/export csv
 	- Calculator
 		- time to accumulate certain amount (with or without intrest)
 		- Want to hit amount by date, what do earnings need to look like (can use spending history)
@@ -13,27 +30,3 @@ Expense Tracker made by Aditya and Brandon
 	- wishlist
 		- Estimated time to achieve
 		- time to accumulate certain amount
-
-## QOL
-- Implement converter for date input field
-- Edit expenses from within the table
-- Deselect amount and date box with escape
-- Customizable date format
-- Edit existing expenses in table
-
-
-## Bugs
-- Table coloring on startup (scroll)
-
-
-## FAQ
-- How do you clean cache in VSCode?
-	- Make sure settings.json has the following setting set to false "java.debug.settings.onBuildFailureProceed": false
-	- When build fails, click fix, then clear cache
-		- or click search bar at the top of VS Code. Select run task then Java build
-
-## Next Time
-- Calculator and Wishlist
-
-## Maybe feature
-- Add Category to expenses
