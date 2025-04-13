@@ -14,5 +14,3 @@ Notes on packaging this application as a jar file to be used anywhere
 4) Since I am able to run this as a standalone desktop appplication, I noticed that the data.bin file moves to the user home dir, whatever that is defined for
    an OS. This should be eventually changed to use the install dir location of this application. TBD on how to do this or at least rename it to ExpenseTrackerData.bin
    so that a user knows it is not a suspicious file.
-
-5) this is some garbage change I am making to test cli git on linux.
