@@ -128,7 +128,7 @@ public class ExpenseMap {
         return temp.subMap(start.getTime(),end.getTime());
     }
 
-    public static void writeDataLineByLine(String filePath) 
+    public static void writeCSV(String filePath) 
     { 
         // first create file object for file placed at location 
         // specified by filepath 
@@ -141,19 +141,20 @@ public class ExpenseMap {
             CSVWriter writer = new CSVWriter(outputfile); 
     
             // adding header to csv 
-            String[] header = { "UID", "amount", "creditOrDebit", "date" }; 
+            String[] header = { "date", "amount", "paymentMethod", "comment" }; 
             writer.writeNext(header); 
     
 
             if(!(ExpenseMap.expenseMap == null || ExpenseMap.expenseMap.isEmpty())){
                 for(Map.Entry<Long,Expense> entry : ExpenseMap.expenseMap.entrySet()) {
                     Expense e = entry.getValue();
-                    String UID = Long.toString(entry.getKey());
-                    String amount = Double.toString(e.getAmount());
-                    String creditOrDebit = e.getExpType().toString();
-                    String date = e.getDate().toString();
 
-                    String[] data = {UID, amount, creditOrDebit, date};
+                    String amount = Double.toString(e.getAmount() * (e.getExpType() == Expense.expenseType.Debit ? 1 : -1));
+                    String date = e.getDate().toString();
+                    String paymentMethod = e.getPaymentMethod();
+                    String comment = e.getComment();
+
+                    String[] data = {date, amount, paymentMethod, comment};
                     writer.writeNext(data);
                 }
             }

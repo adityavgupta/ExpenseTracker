@@ -7,15 +7,18 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.input.KeyCode;
 import javafx.stage.Stage;
+import javafx.stage.DirectoryChooser;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.io.File;
 
 public class MainViewController implements Initializable {
 
@@ -58,12 +61,19 @@ public class MainViewController implements Initializable {
     @FXML
     private Tab YahooTab;
 
+    @FXML
+    private MenuItem saveAs;
+
+    private static Stage primaryStage;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
         //initializeExpenseMap();
-        ControllerMediator.getInstance().registerAddExpenseController(addExpenseAnchorPaneController);
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/AddExpenseView.fxml"));
+        AddExpenseController addExpenseController = loader.getController();
+        ControllerMediator.getInstance().registerAddExpenseController(addExpenseController);
+
         ControllerMediator.getInstance().registerTableController(tableAnchorPaneController);
         ControllerMediator.getInstance().registerLineGraphController(lineGraphAnchorPaneController);
         ControllerMediator.getInstance().registerFilterController(filterAnchorPaneController);
@@ -139,9 +149,27 @@ public class MainViewController implements Initializable {
         event.consume();
     }
 
+    //Handler for the save as button
+    @FXML
+    private void saveAsButtonClicked(ActionEvent event)
+    {
+        DirectoryChooser directoryChooser = new DirectoryChooser();
+        directoryChooser.setTitle("Choose Save Directory");
+        directoryChooser.setInitialDirectory(new File("."));
+        File selectedDirectory = directoryChooser.showDialog(this.primaryStage); // 'window' is the parent window
+        if (selectedDirectory != null) {
+                String directoryPath = selectedDirectory.getAbsolutePath();
+                System.out.println("Selected directory: " + directoryPath);
+        }
+    }
+
     // Load saved binary data from previous sessions into expenseMap
     public static void initializeExpenseMap() {
         ExpenseMap.loadBinary();
+    }
+
+    public void setStage(Stage stage) throws Exception{
+        this.primaryStage = stage;
     }
 
 }

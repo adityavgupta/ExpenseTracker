@@ -20,7 +20,10 @@ public class ExpenseTrackerApp extends Application {
     public void start(Stage primaryStage) throws Exception{
         MainViewController.initializeExpenseMap();
 
-        Parent root = FXMLLoader.load(getClass().getResource("/fxml/MainView.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/MainView.fxml"));
+        Parent root = loader.load();
+        MainViewController mainController = loader.getController();
+        mainController.setStage(primaryStage);
 
         root.setOnMousePressed(event ->
                 {

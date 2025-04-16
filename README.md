@@ -16,6 +16,8 @@ Expense Tracker made by Aditya and Brandon
 
 ## Features in Order of Priority
 - import/export csv
+	- link save as to writeCsv in ExpenseMap
+	- Update save as to do file selection, not directory
 - Edit expenses from within the table
 - Add investing to expense type
 	- integrate with plot
