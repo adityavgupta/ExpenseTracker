@@ -3,7 +3,14 @@ package com.expensetracker;
 import java.util.Map;
 import java.util.HashMap;
 import java.util.TreeMap;
+
+import com.opencsv.CSVWriter;
+
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+
 import java.io.FileOutputStream;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.io.File;
@@ -120,5 +127,43 @@ public class ExpenseMap {
         TreeMap<Long,Expense> temp = new TreeMap<Long,Expense>(expenseMap);
         return temp.subMap(start.getTime(),end.getTime());
     }
+
+    public static void writeDataLineByLine(String filePath) 
+    { 
+        // first create file object for file placed at location 
+        // specified by filepath 
+        File file = new File(filePath); 
+        try { 
+            // create FileWriter object with file as parameter 
+            FileWriter outputfile = new FileWriter(file); 
+    
+            // create CSVWriter object filewriter object as parameter 
+            CSVWriter writer = new CSVWriter(outputfile); 
+    
+            // adding header to csv 
+            String[] header = { "UID", "amount", "creditOrDebit", "date" }; 
+            writer.writeNext(header); 
+    
+
+            if(!(ExpenseMap.expenseMap == null || ExpenseMap.expenseMap.isEmpty())){
+                for(Map.Entry<Long,Expense> entry : ExpenseMap.expenseMap.entrySet()) {
+                    Expense e = entry.getValue();
+                    String UID = Long.toString(entry.getKey());
+                    String amount = Double.toString(e.getAmount());
+                    String creditOrDebit = e.getExpType().toString();
+                    String date = e.getDate().toString();
+
+                    String[] data = {UID, amount, creditOrDebit, date};
+                    writer.writeNext(data);
+                }
+            }
+    
+            // closing writer connection 
+            writer.close(); 
+        } 
+        catch (IOException e) { 
+            e.printStackTrace(); 
+        } 
+    } 
 
 }
