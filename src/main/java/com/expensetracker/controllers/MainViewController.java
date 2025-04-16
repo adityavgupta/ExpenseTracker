@@ -70,10 +70,7 @@ public class MainViewController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
 
         //initializeExpenseMap();
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/AddExpenseView.fxml"));
-        AddExpenseController addExpenseController = loader.getController();
-        ControllerMediator.getInstance().registerAddExpenseController(addExpenseController);
-
+        ControllerMediator.getInstance().registerAddExpenseController(addExpenseAnchorPaneController);
         ControllerMediator.getInstance().registerTableController(tableAnchorPaneController);
         ControllerMediator.getInstance().registerLineGraphController(lineGraphAnchorPaneController);
         ControllerMediator.getInstance().registerFilterController(filterAnchorPaneController);
